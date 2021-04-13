@@ -23,6 +23,14 @@ namespace Prototype
         public MainWindow()
         {
             InitializeComponent();
+
+            passwordTextBox.Initialized += PasswordTextBox_Initialized;
+        }
+
+        private void PasswordTextBox_Initialized(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+            
         }
     }
 }
