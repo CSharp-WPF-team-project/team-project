@@ -13,7 +13,8 @@
             <ColumnDefinition Width="1.5*"/>
         </Grid.ColumnDefinitions>
 
-        <Image x:Name="loginImage" Grid.Column="0" Source="C:\Users\구성재\Desktop\test.jfif" Stretch="Fill"></Image>
+        <Image x:Name="loginImage" Grid.Column="0" Source="/img/test.png" Stretch="Fill"/>
+
 
         <!--login화면 오른쪽-->
         <Grid Grid.Column="1">
@@ -24,7 +25,7 @@
             <!--로고-->
             <Border BorderBrush="Gray"
                     BorderThickness="0 0 0 1">
-                <Image Grid.Row="0" Source="C:\Users\구성재\Desktop\전북대.png" Width="100px"></Image>
+                <Image Grid.Row="0" Source="/img/전북대.png" Width="100px"/>
             </Border>
             
             <StackPanel Grid.Row="1">
