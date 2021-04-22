@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Prototype.views
+namespace Prototype
 {
     /// <summary>
-    /// UserControl1.xaml에 대한 상호 작용 논리
+    /// Window1.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class UserControl1 : UserControl
+    public partial class Window1 : Window
     {
-        public UserControl1()
+        public Window1()
         {
             InitializeComponent();
         }
