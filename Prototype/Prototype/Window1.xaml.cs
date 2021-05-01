@@ -23,5 +23,28 @@ namespace Prototype
         {
             InitializeComponent();
         }
+
+        private void ListViewItem_MouseEnter(object sender, MouseEventArgs e)
+        {
+            // Set tooltip visibility / Enter를 누르면 tooltip이 보이게 되는 기능
+            if(nav_panel_toggleButton.IsChecked == true)
+            {
+                tt_home.Visibility = Visibility.Collapsed;
+                tt_calendar.Visibility = Visibility.Collapsed;
+                tt_alert.Visibility = Visibility.Collapsed;
+                tt_link.Visibility = Visibility.Collapsed;
+                tt_setting.Visibility = Visibility.Collapsed;
+                tt_signOut.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                tt_home.Visibility = Visibility.Visible;
+                tt_calendar.Visibility = Visibility.Visible;
+                tt_alert.Visibility = Visibility.Visible;
+                tt_link.Visibility = Visibility.Visible;
+                tt_setting.Visibility = Visibility.Visible;
+                tt_signOut.Visibility = Visibility.Visible;
+            }
+        }
     }
 }
