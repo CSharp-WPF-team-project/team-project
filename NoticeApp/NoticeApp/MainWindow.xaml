@@ -1,0 +1,56 @@
+﻿<Window x:Class="NoticeApp.MainWindow"
+        
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NoticeApp"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="670" Width="965" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen" FontFamily="Segoe UI Emoji">
+    <Grid>
+        <!-- 화면 위에 보라색 글라데이션 부분-->
+        <Rectangle Height="335" VerticalAlignment="Top">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Purple"/>
+                    <GradientStop Color="MediumPurple" Offset="0.6"/>
+                    <GradientStop Color="PeachPuff" Offset="2"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <!--화면 중간 로그인창을 위한 네모 부분-->
+        <Rectangle Width="400" Height="300" VerticalAlignment="Bottom" Margin="0,120" RadiusX="10" RadiusY="10" Fill="White">
+            <Rectangle.Effect>
+                <DropShadowEffect BlurRadius="15" Direction="0" RenderingBias="Quality" ShadowDepth="1" Color="Gray"/>
+            </Rectangle.Effect>
+        </Rectangle>
+        <!--Login 부분 내용물-->
+        <Grid VerticalAlignment="Bottom" Margin="300,130" Height="270">
+            <Label Content="Log In" HorizontalAlignment="Center" Foreground="Gray" FontSize="30" FontWeight="Bold"/>
+            <StackPanel>
+                <TextBox Margin="60,50" 
+                         materialDesign:HintAssist.Hint="ID.." Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="25"/>
+                <PasswordBox Margin="60,-30" 
+                         materialDesign:HintAssist.Hint="Password.. " Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontSize="25"/>
+            </StackPanel>
+        </Grid>
+
+        <!--Sign In 버튼-->
+        <Button Content="Sign In" Width="170" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,123" Height="40" Foreground="White" Cursor="Hand" Background="MediumPurple" BorderBrush="MediumPurple"
+                Click="SignInButton_Click"/>
+        <!--Logo 부분-->
+        <Image Source="Images/JBLogo_NOBackground.png" Width="170" Height="170" VerticalAlignment="Top" Margin="0,46"/>
+        <!--Exit 버튼 부분-->
+        <Button Background="{x:Null}" Cursor="Hand" Width="35" Height="35" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="25" BorderBrush="{x:Null}"
+                Click="ExitButton_Click">
+            <materialDesign:PackIcon Kind="Power"  Width="35" Height="35"  Margin="-15,-10">
+                <materialDesign:PackIcon.Foreground>
+                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox">
+                        <GradientStop Color="White"/>
+                    </LinearGradientBrush>
+                </materialDesign:PackIcon.Foreground>
+            </materialDesign:PackIcon>
+        </Button>
+    </Grid>
+</Window>
