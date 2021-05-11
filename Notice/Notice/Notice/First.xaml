@@ -21,13 +21,28 @@
                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="60"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
+        <!--pageControl 창 Size up & Down 효과-->
+        <Storyboard x:Key="PageControlSizeUp">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="pageControl">
+                <EasingDoubleKeyFrame KeyTime="0" Value="757"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="897"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="PageControlSizeDown">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="pageControl">
+                <EasingDoubleKeyFrame KeyTime="0" Value="897"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="757"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </Window.Resources>
     <Window.Triggers>
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="OpenMenuButton">
             <BeginStoryboard Storyboard="{StaticResource MenuOpen}"/>
+            <BeginStoryboard Storyboard="{StaticResource PageControlSizeDown}"/>
         </EventTrigger>
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="CloseMenuButton">
             <BeginStoryboard Storyboard="{StaticResource MenuClose}"/>
+            <BeginStoryboard Storyboard="{StaticResource PageControlSizeUp}"/>
         </EventTrigger>
     </Window.Triggers>
     
@@ -51,40 +66,40 @@
 
                 <!--ListView로 상세 메뉴들 넣기-->
                 <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Foreground="Beige">
-                    <ListViewItem Height="60" >
+                    <ListViewItem x:Name="HomeItem" Height="60" Selected="ListViewItem_Selected" >
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Home" Height="40" Width="40" VerticalAlignment="Center"/>
                             <TextBlock Text="Home" VerticalAlignment="Center" Margin="20, 10" FontSize="20"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Height="60" >
+                    <ListViewItem x:Name="CalenadarItem" Height="60" Selected="ListViewItem_Selected">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Calendar" Height="40" Width="40" VerticalAlignment="Center"/>
                             <TextBlock Text="Calendar" VerticalAlignment="Center" Margin="20, 10" FontSize="20"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Height="60" >
+                    <ListViewItem x:Name="NoticeItem" Height="60" Selected="ListViewItem_Selected" >
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Bell" Height="40" Width="40" VerticalAlignment="Center"/>
                             <TextBlock Text="Notice" VerticalAlignment="Center" Margin="20, 10" FontSize="20"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Height="60" >
+                    <ListViewItem x:Name="BindingItem" Height="60" Selected="ListViewItem_Selected">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="TransitConnectionHorizontal" Height="40" Width="40" VerticalAlignment="Center"/>
                             <TextBlock Text="Binding" VerticalAlignment="Center" Margin="20, 10" FontSize="20"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Height="60" >
+                    <ListViewItem x:Name="SettingsItem" Height="60" Selected="ListViewItem_Selected">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Settings" Height="40" Width="40" VerticalAlignment="Center"/>
                             <TextBlock Text="Settings" VerticalAlignment="Center" Margin="20, 10" FontSize="20"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Height="60">
+                    <ListViewItem x:Name="SignOutItem" Height="60" Selected="ListViewItem_Selected">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="DoorOpen" Height="40" Width="40" VerticalAlignment="Center"/>
-                            <TextBlock Text="Sing Out" VerticalAlignment="Center" Margin="20, 10" FontSize="20"/>
+                            <TextBlock Text="Sign Out" VerticalAlignment="Center" Margin="20, 10" FontSize="20"/>
                         </StackPanel>
                     </ListViewItem>
                 </ListView>
@@ -92,10 +107,9 @@
 
 
         </Grid>
-        <Frame x:Name="pageControl" Margin="5" Width="880" Height="660" HorizontalAlignment="Right" VerticalAlignment="Center">
 
-        </Frame>
-
+        <Frame x:Name="pageControl" Margin="5" Width="897" Height="655" HorizontalAlignment="Right" VerticalAlignment="Center"
+               NavigationUIVisibility="Hidden"/>
 
     </Grid>
 </Window>
