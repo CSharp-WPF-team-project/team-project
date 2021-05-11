@@ -33,9 +33,10 @@ namespace Notice
         private void SignInButton_Click(object sender, RoutedEventArgs e)
         {
             //임의로 창 실행용 차원에서 넣은 코드.
+            var home = new Pages.Home();
             First first = new First();
             first.Show();
-
+            first.pageControl.NavigationService.Navigate(home);
         }
     }
 }
