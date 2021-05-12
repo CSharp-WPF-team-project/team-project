@@ -62,9 +62,11 @@
                          Padding="7px"
                          FontSize="15"
                          FontWeight="Bold" RenderTransformOrigin="0.5,0.5">
-           
+
 
             </TextBox>
+
+
             <TextBlock Text="password.." IsHitTestVisible="False" VerticalAlignment="Center"
                            Margin="70,-60,10,10" HorizontalAlignment="Left"
                            FontSize="15"
@@ -83,7 +85,17 @@
 
             </TextBlock>
 
-            <!--Sign in 버튼-->
+            <GroupBox Header="학점 선택(전진설 포함)" VerticalAlignment="Top" Height="60">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="StackPanelGroup1" VerticalAlignment="Top">
+                        <CheckBox Content="21.5학점"/>
+                        <CheckBox Content="18.5학점"/>
+                        <CheckBox Content="15.5학점"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </GroupBox>
+
+                <!--Sign in 버튼-->
 
             <Button x:Name="button1"
                         Content="lms검색"

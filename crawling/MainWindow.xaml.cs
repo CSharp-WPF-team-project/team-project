@@ -37,7 +37,7 @@ namespace crawling
 			InitializeComponent();
 
 			button1.Click += button1_Initialized;
-			button2.Click += button2_Initialized;
+			//button2.Click += button2_Initialized;
 
 			_driverService = ChromeDriverService.CreateDefaultService();
 			_driverService.HideCommandPromptWindow = true;
@@ -71,114 +71,81 @@ namespace crawling
 			element = _driver.FindElementByXPath("//*[@id='loginform']/table/tbody/tr[1]/td[2]/input");
 			element.Click();
 
-			element = _driver.FindElementByXPath("//*[@id='boardAbox']/form/table/tbody/tr[1]/td[2]/div/table/tbody/tr/td[2]/div[1]");
-			element.Click();
-			textUpLoad();
-			_driver.Navigate().Back();
-			_driver.Navigate().Back();
-
-			Thread.Sleep(50);
-			element = _driver.FindElementByXPath("//*[@id='boardAbox']/form/table/tbody/tr[1]/td[3]/div/table/tbody/tr/td[2]/div[1]");
-			element.Click();
-			textUpLoad();
-			_driver.Navigate().Back();
-			_driver.Navigate().Back();
-
-			Thread.Sleep(50);
-			element = _driver.FindElementByXPath("//*[@id='boardAbox']/form/table/tbody/tr[1]/td[4]/div/table/tbody/tr/td[2]/div[1]");
-			element.Click();
-			textUpLoad();
-			_driver.Navigate().Back();
-			_driver.Navigate().Back();
-
-			Thread.Sleep(50);
-			element = _driver.FindElementByXPath("//*[@id='boardAbox']/form/table/tbody/tr[2]/td[1]/div/table/tbody/tr/td[2]/div[1]");
-			element.Click();
-			textUpLoad();
-			_driver.Navigate().Back();
-			_driver.Navigate().Back();
-
-			Thread.Sleep(50);
-			element = _driver.FindElementByXPath("//*[@id='boardAbox']/form/table/tbody/tr[2]/td[2]/div/table/tbody/tr/td[2]/div[1]");
-			element.Click();
-			textUpLoad();
-			_driver.Navigate().Back();
-			_driver.Navigate().Back();
-
-			Thread.Sleep(50);
-			element = _driver.FindElementByXPath("//*[@id='boardAbox']/form/table/tbody/tr[2]/td[3]/div/table/tbody/tr/td[2]/div[1]");
-			element.Click();
-			textUpLoad();
-			_driver.Navigate().Back();
-			_driver.Navigate().Back();
-
-			Thread.Sleep(50);
-			element = _driver.FindElementByXPath("//*[@id='boardAbox']/form/table/tbody/tr[2]/td[4]/div/table/tbody/tr/td[2]/div[1]");
-			element.Click();
-			textUpLoad();
-			_driver.Navigate().Back();
-			_driver.Navigate().Back();
-
-			_driver.Close();
-		}
-
-		public void textUpLoad()
-        {
-			var element = _driver.FindElementByXPath("//*[@id='nav']/li[3]/a");
-			element.Click();
-
-
-			var tex1 = _driver.FindElement(By.XPath("//*[@id='borderB']/tbody[2]/tr[1]"));
-			crawlingData.Items.Add(tex1.Text);
-		}
-
-			/*
-			var table = _driver.FindElementByXPath("//*[@id='borderB']/tbody[2]");
-			var trs = table.FindElements(By.TagName("tr"));
-
-			foreach (var tr in trs)
-			{
-				var tds = tr.FindElements(By.TagName("td"));
-				foreach (var td in tds)
-				{
-					var classN = td.FindElement(By.XPath("//*[@id='borderB']/tbody[2]/tr[1]"));
-					crawlingData.Items.Add(classN.Text);
-				   
-			    }
-			}
-
-			/*
-			element = _driver.FindElementByXPath("//*[@id='boardAbox']/form/table/tbody/tr[2]/td[1]/div/table/tbody/tr/td[2]/div[1]");
+			element = _driver.FindElementByXPath("//*[@id='boardAbox']/form/table/tbody/tr[1]/td[2]");
 			element.Click();
 
 			element = _driver.FindElementByXPath("//*[@id='nav']/li[3]/a");
 			element.Click();
 
-			element = _driver.FindElement(By.XPath("//*[@id='borderB']/tbody[2]/tr[1]"));
-			crawlingData.Items.Add(element.Text);
-			*/
-
-			/*
-			var table = _driver.FindElementByXPath("//*[@id='borderB']/tbody[2]");
-			var trs = table.FindElements(By.TagName("tr"));
-
-			foreach (var tr in trs)
+			// 학점선택 체크박스
+			IEnumerable<CheckBox> ChkBoxes = from checkbox in this.StackPanelGroup1.Children.OfType<CheckBox>()
+												 // where checkbox.IsChecked.Value 체크된 Checkbox 만 선택할때
+											 select checkbox;
+			// 체크된 content 값 가져오기
+			foreach (CheckBox Chkbox in ChkBoxes)
 			{
-				var tds = tr.FindElements(By.TagName("td"));
-				foreach (var td in tds)
+				if (Chkbox.IsChecked == true)
 				{
-					var classN = td.FindElement(By.XPath("//*[@id='borderB']/tbody[2]/tr[1]"));
-					crawlingData.Items.Add(classN.Text);
-				   
-			    }
+					if (Chkbox.Content.ToString() == "21.5학점")
+					{
+						textUpLoad();
+						for (int i = 3; i < 10; i++)
+						{
+                            element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
+						    element.Click();
+							string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
+							string url = string.Format(BASE_Path, i);
+				            string BASE_value = url;
+							element = _driver.FindElementByXPath(BASE_value);
+							element.Click();
+							textUpLoad();
+						}
+					}
+					if (Chkbox.Content.ToString() == "18.5학점")
+					{
+						textUpLoad();
+						for (int i = 3; i < 9; i++)
+						{
+							element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
+							element.Click();
+							string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
+							string url = string.Format(BASE_Path, i);
+							string BASE_value = url;
+							element = _driver.FindElementByXPath(BASE_value);
+							element.Click();
+							textUpLoad();
+						}
+					}
+					if (Chkbox.Content.ToString() == "15.5학점")
+					{
+						textUpLoad();
+						for (int i = 3; i < 8; i++)
+						{
+							element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
+							element.Click();
+							string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
+							string url = string.Format(BASE_Path, i);
+							string BASE_value = url;
+							element = _driver.FindElementByXPath(BASE_value);
+							element.Click();
+							textUpLoad();
+						}
+					}
+				}
 			}
-			*/
-			//*[@id="borderB"]/tbody[2]/tr[1]/td[2]/a
-			//*[@id="borderB"]/tbody[2]/tr[2]/td[2]/a
-			//*[@id="borderB"]/tbody[2]/tr[9]/td[2]/a
 
+			// 전체 체크해제하기
+			foreach (CheckBox Chkbox in ChkBoxes)
+			{
+				Chkbox.IsChecked = false;
+			}
+		}
+		public void textUpLoad()
+		{
+			var tex1 = _driver.FindElement(By.XPath("//*[@id='borderB']/tbody[2]/tr[1]"));
+			crawlingData.Items.Add(tex1.Text);
+		}
 
-		
 		private void button2_Initialized(object sender, EventArgs e)
 		{
 			_driver = new ChromeDriver(_driverService, _options);
@@ -189,17 +156,18 @@ namespace crawling
 
 
 
-			var table = _driver.FindElementByXPath("//*[@id='menu3586_obj176']/div[2]/form[2]/table");
-			var tbody = table.FindElement(By.TagName("tbody"));
-			var trs = tbody.FindElements(By.TagName("tr"));
-			foreach (var tr in trs)
+			var table2 = _driver.FindElementByXPath("//*[@id='menu3586_obj176']/div[2]/form[2]/table");
+			var tbody2 = table2.FindElement(By.TagName("tbody"));
+			var trs2 = tbody2.FindElements(By.TagName("tr"));
+			foreach (var tr2 in trs2)
 			{
-			
-						crawlingData.Items.Add(tr.Text);
-					
+
+				crawlingData.Items.Add(tr2.Text);
+
 			}
+
+
 		}
+
 	}
 }
-
-
