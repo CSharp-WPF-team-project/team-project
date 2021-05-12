@@ -32,10 +32,13 @@ namespace Notice
 
         private void SignInButton_Click(object sender, RoutedEventArgs e)
         {
-            //임의로 창 실행용 차원에서 넣은 코드.
+            //First 창 키고 현재 창 종료.
             First first = new First();
             first.Show();
-
+            this.Close();
+            //First 창 첫 페이지 설정 
+            var home = new Pages.Home();
+            first.pageControl.NavigationService.Navigate(home);
         }
     }
 }

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Navigation;
 
 namespace Notice
 {
@@ -31,6 +32,40 @@ namespace Notice
         {
             OpenMenuButton.Visibility = Visibility.Visible;
             CloseMenuButton.Visibility = Visibility.Collapsed;
+        }
+
+        //ListViewItem 클릭시 Page 전환 기능 
+        private void ListViewItem_Selected(object sender, RoutedEventArgs e)
+        {
+            if (sender == HomeItem) 
+            {
+                var home = new Pages.Home();
+                pageControl.NavigationService.Navigate(home);
+            }
+            if (sender == CalenadarItem)
+            {
+                var calenadar = new Pages.Calendar();
+                pageControl.NavigationService.Navigate(calenadar);
+            }
+            if (sender == NoticeItem)
+            {
+                var notice = new Pages.Notice();
+                pageControl.NavigationService.Navigate(notice);
+            }
+            if (sender == BindingItem)
+            {
+                var binding = new Pages.Binding();
+                pageControl.NavigationService.Navigate(binding);
+            }
+            if (sender == SettingsItem)
+            {
+                var settings = new Pages.Settings();
+                pageControl.NavigationService.Navigate(settings);
+            }
+            if (sender == SignOutItem)
+            {
+                Application.Current.Shutdown();
+            }
         }
     }
 }
