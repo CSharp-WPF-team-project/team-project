@@ -37,7 +37,7 @@ namespace crawling
 			InitializeComponent();
 
 			button1.Click += button1_Initialized;
-			//button2.Click += button2_Initialized;
+			button2.Click += button2_Initialized;
 
 			_driverService = ChromeDriverService.CreateDefaultService();
 			_driverService.HideCommandPromptWindow = true;
@@ -71,8 +71,16 @@ namespace crawling
 			element = _driver.FindElementByXPath("//*[@id='loginform']/table/tbody/tr[1]/td[2]/input");
 			element.Click();
 
-			element = _driver.FindElementByXPath("//*[@id='boardAbox']/form/table/tbody/tr[1]/td[2]");
-			element.Click();
+			try
+			{
+				element = _driver.FindElementByXPath("//*[@id='boardAbox']/form/table/tbody/tr[1]/td[2]");
+				element.Click();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("ID,PW를 확인해주세요.");
+				return;
+			}
 
 			element = _driver.FindElementByXPath("//*[@id='nav']/li[3]/a");
 			element.Click();
