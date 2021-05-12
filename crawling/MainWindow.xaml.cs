@@ -60,23 +60,22 @@ namespace crawling
 
 			_driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
 
-
-
-			var element = _driver.FindElementByXPath("//*[@id='id']");
-			element.SendKeys(id);
-
-			element = _driver.FindElementByXPath("//*[@id='passwd']");
-			element.SendKeys(pw);
-
-			element = _driver.FindElementByXPath("//*[@id='loginform']/table/tbody/tr[1]/td[2]/input");
-			element.Click();
-
+			IWebElement element;
 			try
 			{
+				element= _driver.FindElementByXPath("//*[@id='id']");
+				element.SendKeys(id);
+
+				element = _driver.FindElementByXPath("//*[@id='passwd']");
+				element.SendKeys(pw);
+
+				element = _driver.FindElementByXPath("//*[@id='loginform']/table/tbody/tr[1]/td[2]/input");
+				element.Click();
+
 				element = _driver.FindElementByXPath("//*[@id='boardAbox']/form/table/tbody/tr[1]/td[2]");
 				element.Click();
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
 				MessageBox.Show("ID,PW를 확인해주세요.");
 				return;
@@ -140,13 +139,14 @@ namespace crawling
 						}
 					}
 				}
-			}
 
+			}
 			// 전체 체크해제하기
 			foreach (CheckBox Chkbox in ChkBoxes)
 			{
 				Chkbox.IsChecked = false;
 			}
+			_driver.Close();
 		}
 		public void textUpLoad()
 		{
@@ -173,9 +173,7 @@ namespace crawling
 				crawlingData.Items.Add(tr2.Text);
 
 			}
-
-
-		}
+       	}
 
 	}
 }
