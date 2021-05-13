@@ -15,16 +15,84 @@
         </Grid.ColumnDefinitions>
         
         <!--왼쪽 학과 공지 부분-->
-        <Border BorderBrush="LightGray" BorderThickness="0.5" Margin="3" Padding="5">
-            <TextBlock Text="학과공지test" FontSize="30"/>
-        </Border>
-        
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Border  Padding="5" CornerRadius="15" Background="#C9E8EB" Margin="0,0,5,10">
+                <TextBlock Text="학과 공지" VerticalAlignment="Center" Margin="10,0,20,0" 
+                               FontSize="30" FontWeight="DemiBold" Foreground="#619196" FontFamily="/Fonts/AppleSDGothicNeoR.ttf"/>
+            </Border>
+            <Border Grid.Row="1" Padding="5" CornerRadius="15" BorderBrush="#d7d7d7" BorderThickness="3" Margin="0,0,5,10">
+                <ListBox>
+                    <ListBoxItem Content="It's ListBoxItem for Test" FontSize="20" FontFamily="/Fonts/KoPubWorld Dotum Bold.ttf"/>
+                </ListBox>
+            </Border>
+        </Grid>
+
         <!--오른쪽 내용 부분-->
         <Grid Grid.Column="1">
-            <Border BorderBrush="LightGray" BorderThickness="0.5" Margin="3" Padding="5">
-                
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+                <!--위에 과목 관련 부분-->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.1*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <!--왼쪽-->
+                    <Grid Margin="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="50"/>
+                        </Grid.RowDefinitions>
+                        <Border BorderBrush="#d7d7d7" CornerRadius="15" BorderThickness="3">
+                            
+                        </Border>
 
-            </Border>
+                        <TextBlock Grid.Row="1" Text="과목명" FontSize="15" FontFamily="KoPubWorld Dotum Bold.ttf"
+                                   VerticalAlignment="Center" Margin="3"/>
+                    </Grid>
+                    <!--오른쪽-->
+                    <Border Grid.Column="1" BorderBrush="#d7d7d7" BorderThickness="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="공지사항" FontSize="23" FontFamily="/Fonts/AppleSDGothicNeoR.ttf"
+                                       VerticalAlignment="Center" Margin="10,10,10,5"/>
+
+                            <ListBox Grid.Row="1" Margin="10,5,10,5">
+                                <ListBoxItem Content=" 과목 클릭시 ListBoxItem 추가 기능."/>
+                            </ListBox>
+                        </Grid>
+                    </Border>
+
+                </Grid>
+                
+                <!--아래쪽 수강과목 부분-->
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="75"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Border  Padding="5" CornerRadius="15" Background="#C9E8EB" Margin="5,5,10,5">
+                        <TextBlock Text="수강과목" VerticalAlignment="Center" Margin="10,0,20,0" 
+                               FontSize="30" FontWeight="DemiBold" Foreground="#619196" FontFamily="/Fonts/AppleSDGothicNeoR.ttf"/>
+                    </Border>
+                    <Border Grid.Row="1" CornerRadius="15" BorderBrush="#d7d7d7" BorderThickness="3" Margin="5,5,10,20">
+
+                    </Border>
+
+                </Grid>
+                    
+            </Grid>
         </Grid>
         
     </Grid>

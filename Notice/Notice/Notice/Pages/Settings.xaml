@@ -5,8 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Notice.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="655" d:DesignWidth="897"
-      Title="Settings">
+      d:DesignHeight="655" d:DesignWidth="897" Margin="5"
+      Title="Settings" Background="White">
 
     <Grid>
         <TextBlock Text="Setting" FontSize="30"/>
