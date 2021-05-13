@@ -23,14 +23,13 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <!--위 과목 부분-->
-                <TextBlock Text="과목" Foreground="#619196" FontSize="30" FontFamily="Fonts/KoPubWorld Dotum Bold.ttf #KoPubWorld돋움체 Bold"
+                <TextBlock Text="Subject" Foreground="#619196" FontSize="30" FontFamily="Fonts/KoPubWorld Dotum Bold.ttf #KoPubWorld돋움체 Bold"
                            VerticalAlignment="Center" Margin="20"/>
                 <!--아래쪽-->
-                <Border Grid.Row="1" Margin="10" BorderBrush="#d7d7d7" BorderThickness="1">
-                    <ListBox>
-                        <ListBoxItem Content="아무 설정 안함."/>
-                    </ListBox>
-                </Border>
+                <ListBox Grid.Row="1" Margin="20,0">
+                    <ListBoxItem Content="아무 설정 안함."/>
+                </ListBox>
+               
             </Grid>
         </Border>
         
@@ -56,7 +55,7 @@
             <!--오른쪽 아래 공지 부분-->
             <Border Grid.Row="1" BorderBrush="#d7d7d7" BorderThickness="3" CornerRadius="15" Margin="10">
                 <StackPanel Orientation="Vertical">
-                    <ListBox>
+                    <ListBox Margin="20,10">
                         <ListBoxItem Content="과목 클릭시 공지 떠야함+ 글씨체, 글씨 크기 적용x"/>
                     </ListBox>
                 </StackPanel>
