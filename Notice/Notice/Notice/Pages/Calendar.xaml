@@ -3,7 +3,8 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Notice.Pages" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:Notice.Pages" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="655" d:DesignWidth="897" Margin="5"
       Title="Calendar">
@@ -17,12 +18,17 @@
         
         <!--위에 CALENDAR 이름 부분-->
         <Grid>
-            <Border Margin="20" Padding="5" CornerRadius="15" Background="#C9E8EB">
-                <Grid VerticalAlignment="Center" >
-                    <TextBlock Text="Jeonbuk University" FontSize="20" Margin="20" Foreground="#619196" FontFamily="Fonts/AppleSDGothicNeoR.ttf"/>
-                    <TextBlock Text="CALENDAR" FontSize="35" FontWeight="DemiBold" Margin="20,40,0,0" Foreground="#619196" FontFamily="AppleSDGothicNeoR.ttf"/>
-                </Grid>
-            </Border>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+            <materialDesign:PackIcon Kind="Calendar" Height="120" Width="120"
+                                     Foreground="#5c9bcd" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Grid Grid.Column="1" VerticalAlignment="Center">
+                <TextBlock Text="Jeonbuk University" FontSize="20" Margin="20" Foreground="#619196" FontFamily="Fonts/KoPubWorld Dotum Bold.ttf #Montserrat SemiBold"/>
+                <TextBlock Text="CALENDAR" FontSize="35"  Margin="20,40,0,0" Foreground="#619196" FontFamily="Fonts/KoPubWorld Dotum Bold.ttf #KoPubWorld돋움체 Bold" />
+            </Grid>
+
         </Grid>
         
         <!--아랫 부분-->
@@ -52,8 +58,8 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
 
-                        <TextBlock Text="Check List" FontSize="23" FontFamily="Fonts/AppleSDGothicNeoR.ttf" VerticalAlignment="Center"
-                                   Foreground="#619196" Margin="10"/>
+                        <TextBlock Text="Check List" FontSize="23" FontFamily="Fonts/AppleSDGothicNeoR.ttf #AppleSDGothicNeoR00" VerticalAlignment="Center"
+                                   Foreground="#5c9bcd" Margin="10"/>
                         <Button x:Name="CheckListPlus" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Right"
                                 Height="40" Width="50">
                             <materialDesign:PackIcon Kind="Plus" Height="30" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center"  Foreground="DimGray"/>
@@ -72,8 +78,8 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
 
-                        <TextBlock Text="MEMO" FontSize="23" FontFamily="Fonts/AppleSDGothicNeoR.ttf" VerticalAlignment="Center"
-                                   Foreground="#619196" Margin="10"/>
+                        <TextBlock Text="MEMO" FontSize="23" FontFamily="Fonts/#AppleSDGothicNeoR00" VerticalAlignment="Center"
+                                   Foreground="#5c9bcd" Margin="10"/>
                         <Button x:Name="memoPlus" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Right"
                                 Height="40" Width="50">
                             <materialDesign:PackIcon Kind="Plus" Height="30" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center"  Foreground="DimGray"/>

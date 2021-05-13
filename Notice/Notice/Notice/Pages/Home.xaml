@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Notice.Pages"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="655" d:DesignWidth="897" Margin="5"
       Title="Home">
@@ -21,15 +22,34 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <Border  Padding="5" CornerRadius="15" Background="#C9E8EB" Margin="0,0,5,10">
-                <TextBlock Text="학과 공지" VerticalAlignment="Center" Margin="10,0,20,0" 
-                               FontSize="30" FontWeight="DemiBold" Foreground="#619196" FontFamily="/Fonts/AppleSDGothicNeoR.ttf"/>
-            </Border>
-            <Border Grid.Row="1" Padding="5" CornerRadius="15" BorderBrush="#d7d7d7" BorderThickness="3" Margin="0,0,5,10">
-                <ListBox>
-                    <ListBoxItem Content="It's ListBoxItem for Test" FontSize="20" FontFamily="/Fonts/KoPubWorld Dotum Bold.ttf"/>
-                </ListBox>
-            </Border>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <materialDesign:PackIcon Kind="Home" Height="50" Width="50" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#5c9bcd"/>
+                <TextBlock Grid.Column="1" FontFamily="Fonts/KoPubWorld Dotum Bold.ttf #KoPubWorld돋움체 Bold"
+                           Text="Home" FontSize="30" Foreground="#619196" 
+                           VerticalAlignment="Center" Margin="10"/>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Border BorderBrush="#d7d7d7" BorderThickness="3" CornerRadius="15" Margin="10,5,3,10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0"
+                                   Text="Major Notice" FontSize="23" Foreground="#619196" FontFamily="Fonts/KoPubWorld Dotum Bold.ttf #KoPubWorld돋움체 Bold"
+                                   VerticalAlignment="Center" Margin="20,0"/>
+                        <ListBox Grid.Row="1" Margin="5">
+                            <ListBoxItem Content="테스트용 아무것도 설정 안함."/>
+                        </ListBox>
+                    </Grid>
+                </Border>
+                
+            </Grid>
         </Grid>
 
         <!--오른쪽 내용 부분-->
@@ -42,7 +62,7 @@
                 <!--위에 과목 관련 부분-->
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1.1*"/>
+                        <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
                     <!--왼쪽-->
@@ -65,7 +85,7 @@
                                 <RowDefinition Height="50"/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <TextBlock Text="공지사항" FontSize="23" FontFamily="/Fonts/AppleSDGothicNeoR.ttf"
+                            <TextBlock Text="Subject Notice" FontSize="23" Foreground="#619196" FontFamily="/Fonts/AppleSDGothicNeoR.ttf"
                                        VerticalAlignment="Center" Margin="10,10,10,5"/>
 
                             <ListBox Grid.Row="1" Margin="10,5,10,5">
@@ -82,10 +102,11 @@
                         <RowDefinition Height="75"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <Border  Padding="5" CornerRadius="15" Background="#C9E8EB" Margin="5,5,10,5">
-                        <TextBlock Text="수강과목" VerticalAlignment="Center" Margin="10,0,20,0" 
-                               FontSize="30" FontWeight="DemiBold" Foreground="#619196" FontFamily="/Fonts/AppleSDGothicNeoR.ttf"/>
-                    </Border>
+                    
+                    <TextBlock Text="Subjects" 
+                               VerticalAlignment="Bottom"  Margin="5,5,30,5" 
+                               FontSize="30"  Foreground="#619196" FontFamily="Fonts/KoPubWorld Dotum Bold.ttf #KoPubWorld돋움체 Bold"/>
+                   
                     <Border Grid.Row="1" CornerRadius="15" BorderBrush="#d7d7d7" BorderThickness="3" Margin="5,5,10,20">
 
                     </Border>

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Notice"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="670" Width="965" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen" FontFamily="Segoe UI Emoji">
+        Title="MainWindow" Height="670" Width="965" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen" FontFamily="/Fonts/Montserrat-SemiBold.ttf #Montserrat SemiBold">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
@@ -14,7 +14,7 @@
         </Grid.ColumnDefinitions>
 
         <!--왼쪽 이미지-->
-        <Border BorderBrush="LightGray" BorderThickness="0,0,2,0">
+        <Border BorderBrush="LightGray" BorderThickness="0,0,2,0"> 
             <Image Source="Images/test.png" Stretch="Fill"/>
         </Border>
 
@@ -43,14 +43,14 @@
             </Border>
             <!--Log In부분-->
             <StackPanel Grid.Row="1" >
-                <Label Content="JB calendar" Foreground="Gray" FontSize="30"  Grid.Row="1" Height="70"/>
+                <Label Content="JB calendar" Foreground="#004771" FontSize="30"  Grid.Row="1" Height="70"/>
                 <TextBox x:Name="userID" Margin="60,30" 
                          materialDesign:HintAssist.Hint="ID.." Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="25"/>
                 <PasswordBox x:Name="userPW" Margin="60,-25" 
                             materialDesign:HintAssist.Hint="Password.. " Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontSize="25" Cursor="IBeam"/>
                 <!--Sign In 버튼-->
                 <Button Content="Sign In" Width="170" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
-                        Margin="0,60" Height="40" Foreground="White" Cursor="Hand" Background="#C9E8EB" BorderBrush="{x:Null}"
+                        Margin="0,60" Height="40" Foreground="White" Cursor="Hand" Background="#91CCF1" BorderBrush="{x:Null}"
                         Click="SignInButton_Click"/>
             </StackPanel>
         </Grid>

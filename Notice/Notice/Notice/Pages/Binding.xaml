@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Notice.Pages"
+      xmlns:local="clr-namespace:Notice.Pages" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="655" d:DesignWidth="897"
       Title="Binding">
@@ -27,17 +27,24 @@
         </Grid>
         
         <!--오른쪽-->
-        <Border Grid.Column="1" BorderBrush="#d7d7d7" BorderThickness="3" CornerRadius="15" Margin="10">
-            <Grid>
+        
+            <Grid Grid.Column="1" Margin="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="70"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <Border Grid.Row="0" Background="#C9E8EB" CornerRadius="15">
-                    <TextBlock Text="Binding" FontSize="30" FontFamily="Fonts/KoPubWorld Dotum Bold.ttf" 
-                               VerticalAlignment="Center" Foreground="#619196" Margin="10"/>    
-                </Border>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="6*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <materialDesign:PackIcon Kind="TransitConnectionHorizontal" Height="60" Width="60" 
+                                             VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#5c9bcd"/>
+                <TextBlock Grid.Column="1" Text="Binding" FontSize="35" Foreground="#619196" FontFamily="Fonts/KoPubWorld Dotum Bold.ttf #KoPubWorld돋움체 Bold" 
+                               VerticalAlignment="Center" Margin="5"/>
+                </Grid>
                 
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
@@ -45,7 +52,7 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <!--네이버-->
-                    <Border BorderBrush="#d7d7d7" BorderThickness="0.5" >
+                    <Border BorderBrush="#d7d7d7" BorderThickness="3" CornerRadius="15" Margin="0,0,3,0" >
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="260"/>
@@ -55,12 +62,12 @@
                                    Height="150" Width="150"/>
                             <Button Grid.Row="1" Margin="40,0,40,150" Background="#2DB400" BorderBrush="{x:Null}"
                                     Height="40"
-                                    Content="네이버 메일 연동" FontFamily="/Fonts/AppleSDGothicNeoR.ttf"/>
+                                    Content="네이버 메일 연동" FontFamily="/Fonts/Montserrat-SemiBold.ttf #Montserrat SemiBold"/>
                         </Grid>
                     </Border>
                     
                     <!--카카오톡-->
-                    <Border Grid.Column="1" BorderBrush="#d7d7d7" BorderThickness="0.5" >
+                    <Border Grid.Column="1" BorderBrush="#d7d7d7" BorderThickness="3" CornerRadius="15" Margin="3,0,0,0" >
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="260"/>
@@ -70,13 +77,13 @@
                                    Height="150" Width="150"/>
                             <Button Grid.Row="1" Margin="40,0,40,150" Background="#F7E600" BorderBrush="{x:Null}" Foreground="#3A1D1D" 
                                     Height="40"
-                                    Content="카카오톡 연동" FontFamily="/Fonts/AppleSDGothicNeoR.ttf"/>
+                                    Content="카카오톡 연동" FontFamily="/Fonts/Montserrat-SemiBold.ttf #Montserrat SemiBold"/>
                         </Grid>
                     </Border>
                 </Grid>
                 
                 
             </Grid>
-        </Border>
+        
     </Grid>
 </Page>
