@@ -13,5 +13,70 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
+        
+        <!--왼쪽-->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="300"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Border BorderBrush="#d7d7d7" CornerRadius="15" BorderThickness="3" Margin="20,15,10,15">
+                
+            </Border>
+            
+        </Grid>
+        
+        <!--오른쪽-->
+        <Border Grid.Column="1" BorderBrush="#d7d7d7" BorderThickness="3" CornerRadius="15" Margin="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" Background="#C9E8EB" CornerRadius="15">
+                    <TextBlock Text="Binding" FontSize="30" FontFamily="Fonts/KoPubWorld Dotum Bold.ttf" 
+                               VerticalAlignment="Center" Foreground="#619196" Margin="10"/>    
+                </Border>
+                
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <!--네이버-->
+                    <Border BorderBrush="#d7d7d7" BorderThickness="0.5" >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="260"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="0" Source="/Images/naverMail.PNG" 
+                                   Height="150" Width="150"/>
+                            <Button Grid.Row="1" Margin="40,0,40,150" Background="#2DB400" BorderBrush="{x:Null}"
+                                    Height="40"
+                                    Content="네이버 메일 연동" FontFamily="/Fonts/AppleSDGothicNeoR.ttf"/>
+                        </Grid>
+                    </Border>
+                    
+                    <!--카카오톡-->
+                    <Border Grid.Column="1" BorderBrush="#d7d7d7" BorderThickness="0.5" >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="260"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="0" Source="/Images/kakaoTalk.PNG" 
+                                   Height="150" Width="150"/>
+                            <Button Grid.Row="1" Margin="40,0,40,150" Background="#F7E600" BorderBrush="{x:Null}" Foreground="#3A1D1D" 
+                                    Height="40"
+                                    Content="카카오톡 연동" FontFamily="/Fonts/AppleSDGothicNeoR.ttf"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+                
+                
+            </Grid>
+        </Border>
     </Grid>
 </Page>

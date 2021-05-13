@@ -5,10 +5,48 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Notice.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="Notice">
+      d:DesignHeight="655" d:DesignWidth="897" Margin="5"
+      Title="Notice" Background="White">
 
     <Grid>
-        <TextBlock Text="Notice" FontSize="30"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        
+        <!--왼쪽-->
+        <Border BorderBrush="#d7d7d7" BorderThickness="1" Margin="20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="과목" Foreground="DimGray" FontSize="30" 
+                           VerticalAlignment="Center" Margin="10"/>
+
+                <Border Grid.Row="1" Margin="10" BorderBrush="#d7d7d7" BorderThickness="1">
+                    <ListBox>
+                        <ListBoxItem Content="임시"/>
+                    </ListBox>
+                </Border>
+            </Grid>
+        </Border>
+        
+        <!--오른쪽-->
+        <Border BorderBrush="#d7d7d7" BorderThickness="3" Grid.Column="1" Margin="0,20,10,20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Alert!!" Foreground="DimGray" FontSize="30"
+                           VerticalAlignment="Center" Margin="10"/>
+
+                <ListBox Grid.Row="1" Margin="10">
+                    <ListBoxItem Content="Test"/>
+                </ListBox>
+            </Grid>            
+        </Border>
     </Grid>
 </Page>

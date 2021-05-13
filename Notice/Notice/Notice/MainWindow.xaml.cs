@@ -12,6 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+//Selenium Library
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
 
 namespace Notice
 {
@@ -20,6 +24,12 @@ namespace Notice
     /// </summary>
     public partial class MainWindow : Window
     {
+        // Selenium
+        protected ChromeDriverService _driverService = null;
+        protected ChromeOptions _options = null;
+        protected ChromeDriver _driver = null;
+
+        //메인 윈도우
         public MainWindow()
         {
             InitializeComponent();
@@ -32,13 +42,15 @@ namespace Notice
 
         private void SignInButton_Click(object sender, RoutedEventArgs e)
         {
-            //First 창 키고 현재 창 종료.
+            
             First first = new First();
+            Pages.Home home = new Pages.Home();
             first.Show();
             this.Close();
-            //First 창 첫 페이지 설정 
-            var home = new Pages.Home();
             first.pageControl.NavigationService.Navigate(home);
+
+
+
         }
     }
 }

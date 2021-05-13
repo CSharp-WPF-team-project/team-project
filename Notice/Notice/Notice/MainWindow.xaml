@@ -49,7 +49,8 @@
                 <PasswordBox x:Name="userPW" Margin="60,-25" 
                             materialDesign:HintAssist.Hint="Password.. " Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontSize="25" Cursor="IBeam"/>
                 <!--Sign In 버튼-->
-                <Button Content="Sign In" Width="170" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,60" Height="40" Foreground="White" Cursor="Hand" Background="LightSkyBlue"
+                <Button Content="Sign In" Width="170" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
+                        Margin="0,60" Height="40" Foreground="White" Cursor="Hand" Background="#C9E8EB" BorderBrush="{x:Null}"
                         Click="SignInButton_Click"/>
             </StackPanel>
         </Grid>
