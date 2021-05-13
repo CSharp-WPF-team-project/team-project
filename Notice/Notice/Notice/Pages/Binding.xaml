@@ -9,81 +9,98 @@
       Title="Binding">
 
     <Grid Background="White">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="2*"/>
-        </Grid.ColumnDefinitions>
-        
-        <!--왼쪽-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <!--위쪽-->
         <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="300"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Border BorderBrush="#d7d7d7" CornerRadius="15" BorderThickness="3" Margin="20,15,10,15">
-                
-            </Border>
-            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="7*"/>
+            </Grid.ColumnDefinitions>
+
+            <materialDesign:PackIcon Kind="TransitConnectionHorizontal" Height="60" Width="60" 
+                                     VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#5c9bcd"/>
+            <TextBlock Grid.Column="1" Text="Binding" FontSize="35" Foreground="#619196" FontFamily="Fonts/KoPubWorld Dotum Bold.ttf #KoPubWorld돋움체 Bold" 
+                               VerticalAlignment="Center" Margin="5"/>
         </Grid>
-        
-        <!--오른쪽-->
-        
-            <Grid Grid.Column="1" Margin="10">
+        <!--아래쪽-->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            
+            <!--왼쪽-->
+            <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="70"/>
+                    <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-
+                <!--유저 이미지-->
+                <Border>
+                    <Border BorderBrush="#d7d7d7" CornerRadius="15" BorderThickness="3"
+                            Width="180" Height="230">
+                        <Image Source="/Images/nerd.png" Margin="10"/>
+                    </Border>
+                </Border>
+                <!--유저 정보-->
+                <Grid Grid.Row="1" Margin="40,0">
+                    <StackPanel>
+                        <TextBlock x:Name="major" Text="Major" FontSize="23" Margin="15"
+                               Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               FontFamily="/Fonts/AppleSDGothicNeoR.ttf #AppleSDGothicNeoR00"/>
+                        <TextBlock x:Name="studentNumber" Text="Studnet Number" FontSize="23" Margin="15"
+                               Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               FontFamily="/Fonts/AppleSDGothicNeoR.ttf #AppleSDGothicNeoR00"/>
+                        <TextBlock x:Name="studnetName" Text="Studnet Name" FontSize="23" Margin="15"
+                               Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               FontFamily="/Fonts/AppleSDGothicNeoR.ttf #AppleSDGothicNeoR00"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+            <!--오른쪽-->
+            <Grid Grid.Column="1">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="6*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <materialDesign:PackIcon Kind="TransitConnectionHorizontal" Height="60" Width="60" 
-                                             VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#5c9bcd"/>
-                <TextBlock Grid.Column="1" Text="Binding" FontSize="35" Foreground="#619196" FontFamily="Fonts/KoPubWorld Dotum Bold.ttf #KoPubWorld돋움체 Bold" 
-                               VerticalAlignment="Center" Margin="5"/>
-                </Grid>
-                
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <!--네이버-->
-                    <Border BorderBrush="#d7d7d7" BorderThickness="3" CornerRadius="15" Margin="0,0,3,0" >
+                    <!--Naver-->
+                    <Border BorderBrush="#d7d7d7" BorderThickness="3" CornerRadius="15" Margin="0,0,5,0">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="260"/>
+                                <RowDefinition/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <Image Grid.Row="0" Source="/Images/naverMail.PNG" 
                                    Height="150" Width="150"/>
-                            <Button Grid.Row="1" Margin="40,0,40,150" Background="#2DB400" BorderBrush="{x:Null}"
-                                    Height="40"
+                            <Button Grid.Row="1" Margin="40,0,40,220" Height="40" 
+                                    Background="#2DB400" BorderBrush="{x:Null}"
                                     Content="네이버 메일 연동" FontFamily="/Fonts/Montserrat-SemiBold.ttf #Montserrat SemiBold"/>
                         </Grid>
                     </Border>
-                    
-                    <!--카카오톡-->
-                    <Border Grid.Column="1" BorderBrush="#d7d7d7" BorderThickness="3" CornerRadius="15" Margin="3,0,0,0" >
+                    <!--KaKao-->
+                    <Border Grid.Column="1" BorderBrush="#d7d7d7" BorderThickness="3" CornerRadius="15" Margin="0,0,5,0">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="260"/>
+                                <RowDefinition/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <Image Grid.Row="0" Source="/Images/kakaoTalk.PNG" 
+                            <Image Grid.Row="0" Source="/Images/kakaoTalk.PNG"
                                    Height="150" Width="150"/>
-                            <Button Grid.Row="1" Margin="40,0,40,150" Background="#F7E600" BorderBrush="{x:Null}" Foreground="#3A1D1D" 
-                                    Height="40"
+
+                            <Button Grid.Row="1" Margin="40,0,40,220" Height="40" 
+                                    Background="#F7E600" BorderBrush="{x:Null}" Foreground="#3A1D1D"
                                     Content="카카오톡 연동" FontFamily="/Fonts/Montserrat-SemiBold.ttf #Montserrat SemiBold"/>
+
                         </Grid>
                     </Border>
+
                 </Grid>
-                
-                
             </Grid>
-        
+        </Grid>
+
     </Grid>
 </Page>

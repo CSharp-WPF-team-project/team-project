@@ -64,7 +64,7 @@
 
                     <Border BorderBrush="#d7d7d7" BorderThickness="3" CornerRadius="15"
                             Margin="5,25,5,5" Height="155" Width="130">
-                        
+                        <Image Source="/images/professor.png" Margin="10"/>
                     </Border>
 
                     <TextBlock Grid.Row="1" Margin="25,0,10,0" VerticalAlignment="Top"
