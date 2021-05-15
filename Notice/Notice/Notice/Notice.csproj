@@ -85,6 +85,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Classes\DepartmentData.cs" />
+    <Compile Include="Classes\LoginViewModel.cs" />
     <Compile Include="First.xaml.cs">
       <DependentUpon>First.xaml</DependentUpon>
     </Compile>

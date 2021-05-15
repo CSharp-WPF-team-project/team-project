@@ -30,7 +30,7 @@
         <!--하단-->
         <Grid Grid.Row="1">
             <Border BorderBrush="#d7d7d7" BorderThickness="3" CornerRadius="15"
-                    Margin="15">
+                    Margin="15"> 
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="55"/>
@@ -41,55 +41,32 @@
                     <Button Content="Searching" 
                             Width="100" Height="30" HorizontalAlignment="Right"
                             Margin="50,0"
-                            Click="searcingButton_Click"/>
+                            Click="Button_Click"/>
                     <TextBlock Text="학과 공지" FontSize="25"
                                Margin="20,15,200,15" VerticalAlignment="Center"
                                FontFamily="/Fonts/AppleSDGothicNeoR.ttf #AppleSDGothicNeoR00" Foreground="#619196"/>
                     <TextBlock Grid.Row="1" 
-                               Text="최신 5개의 정보만 보입니다." FontSize="15"
+                               Text="첫 페이지의 정보들이 보입니다." FontSize="15"
                                Margin="20,0" VerticalAlignment="Center"
                                FontFamily="/Fonts/AppleSDGothicNeoR.ttf #AppleSDGothicNeoR00" Foreground="#619196"/>
 
                     <Grid Grid.Row="2" Margin="20,5">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="25"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition />
-                                <ColumnDefinition Width="120"/>
-                            </Grid.ColumnDefinitions>
-                            <!--표 제목-->
-                            <TextBlock Grid.Column="0" Text="번호"
-                                       Foreground="Black" FontSize="15"
-                                       VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <TextBlock Grid.Column="1" Text="제목"
-                                       Foreground="Black" FontSize="15"
-                                       VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <TextBlock Grid.Column="2" Text="날짜"
-                                       Foreground="Black" FontSize="15"
-                                       VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        </Grid>
-                        <!--표 내용-->
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="120"/>
-                            </Grid.ColumnDefinitions>
-
-                            <ListView x:Name="number" Grid.Column="0">
-                                
-                            </ListView>
-                            <ListView x:Name="title" Grid.Column="1">
-
-                            </ListView>
-                            <ListView x:Name="date" Grid.Column="2">
-
-                            </ListView>
-                        </Grid>
+                        <ListView x:Name="DepartmentCrawlingData"
+                                      BorderBrush="Gray">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="번호" 
+                                                    DisplayMemberBinding="{Binding D_Num}" 
+                                                    Width="120"/>
+                                    <GridViewColumn Header="제목" 
+                                                    DisplayMemberBinding="{Binding D_Title}" 
+                                                    Width="550"/>
+                                    <GridViewColumn Header="작성일" 
+                                                    DisplayMemberBinding="{Binding D_Rdate}"
+                                                    Width="120"/>
+                                </GridView>
+                            </ListView.View>  
+                        </ListView>
                     </Grid>
                 </Grid>
             </Border>
