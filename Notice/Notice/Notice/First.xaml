@@ -72,28 +72,22 @@
                             <TextBlock Text="Home" VerticalAlignment="Center" Margin="20, 10" FontSize="20"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem x:Name="CalenadarItem" Height="60" Selected="ListViewItem_Selected">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Calendar" Height="40" Width="40" VerticalAlignment="Center"/>
-                            <TextBlock Text="Calendar" VerticalAlignment="Center" Margin="20, 10" FontSize="20"/>
-                        </StackPanel>
-                    </ListViewItem>
                     <ListViewItem x:Name="NoticeItem" Height="60" Selected="ListViewItem_Selected" >
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Bell" Height="40" Width="40" VerticalAlignment="Center"/>
                             <TextBlock Text="Notice" VerticalAlignment="Center" Margin="20, 10" FontSize="20"/>
                         </StackPanel>
                     </ListViewItem>
+                    <ListViewItem x:Name="CalenadarItem" Height="60" Selected="ListViewItem_Selected">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Calendar" Height="40" Width="40" VerticalAlignment="Center"/>
+                            <TextBlock Text="Calendar" VerticalAlignment="Center" Margin="20, 10" FontSize="20"/>
+                        </StackPanel>
+                    </ListViewItem>
                     <ListViewItem x:Name="BindingItem" Height="60" Selected="ListViewItem_Selected">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="TransitConnectionHorizontal" Height="40" Width="40" VerticalAlignment="Center"/>
                             <TextBlock Text="Binding" VerticalAlignment="Center" Margin="20, 10" FontSize="20"/>
-                        </StackPanel>
-                    </ListViewItem>
-                    <ListViewItem x:Name="SettingsItem" Height="60" Selected="ListViewItem_Selected">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Settings" Height="40" Width="40" VerticalAlignment="Center"/>
-                            <TextBlock Text="Settings" VerticalAlignment="Center" Margin="20, 10" FontSize="20"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem x:Name="SignOutItem" Height="60" Selected="ListViewItem_Selected">

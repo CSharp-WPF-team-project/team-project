@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
+using crawling.Classes;
 //Selenium Library
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -27,10 +30,13 @@ namespace crawling
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-
+		List<DepartmentData> D_Data = new List<DepartmentData>();
+		List<LmsData> L_Data = new List<LmsData>();
 		protected ChromeDriverService _driverService = null;
 		protected ChromeOptions _options = null;
 		protected ChromeDriver _driver = null;
+
+		int countBtn2 = 0; // 처음 실행이 아님을 확인
 
 		public MainWindow()
 		{
@@ -45,14 +51,15 @@ namespace crawling
 			_options = new ChromeOptions();
 			_options.AddArgument("headless");
 			_options.AddArgument("disable-gpu");
+
+			this.DataContext = new LoginViewModel();
+
 		}
 
-		private void button1_Initialized(object sender, EventArgs e)
+		public void button1_Initialized(object sender, EventArgs e)
+
 		{
-
-			string id = loginTextBox.Text;
-			string pw = passwordTextBox.Text;
-
+			var viewModel = this.DataContext as LoginViewModel;
 
 			_driver = new ChromeDriver(_driverService, _options);
 
@@ -63,11 +70,11 @@ namespace crawling
 			IWebElement element;
 			try
 			{
-				element= _driver.FindElementByXPath("//*[@id='id']");
-				element.SendKeys(id);
+				element = _driver.FindElementByXPath("//*[@id='id']");
+				element.SendKeys(viewModel.LoginID);
 
 				element = _driver.FindElementByXPath("//*[@id='passwd']");
-				element.SendKeys(pw);
+				element.SendKeys(viewModel.LoginPasswd);
 
 				element = _driver.FindElementByXPath("//*[@id='loginform']/table/tbody/tr[1]/td[2]/input");
 				element.Click();
@@ -95,23 +102,22 @@ namespace crawling
 				{
 					if (Chkbox.Content.ToString() == "21.5학점")
 					{
-						textUpLoad();
-						for (int i = 3; i < 10; i++)
+						for (int i = 2; i < 10; i++)
 						{
-                            element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
-						    element.Click();
+							element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
+							element.Click();
 							string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
 							string url = string.Format(BASE_Path, i);
-				            string BASE_value = url;
+							string BASE_value = url;
 							element = _driver.FindElementByXPath(BASE_value);
 							element.Click();
-							textUpLoad();
+							TextUpLoad();
 						}
+						LmsCrawlingData.ItemsSource = L_Data;
 					}
 					if (Chkbox.Content.ToString() == "18.5학점")
 					{
-						textUpLoad();
-						for (int i = 3; i < 9; i++)
+						for (int i = 2; i < 9; i++)
 						{
 							element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
 							element.Click();
@@ -120,13 +126,13 @@ namespace crawling
 							string BASE_value = url;
 							element = _driver.FindElementByXPath(BASE_value);
 							element.Click();
-							textUpLoad();
+							TextUpLoad();
 						}
+						LmsCrawlingData.ItemsSource = L_Data;
 					}
 					if (Chkbox.Content.ToString() == "15.5학점")
 					{
-						textUpLoad();
-						for (int i = 3; i < 8; i++)
+						for (int i = 2; i < 8; i++)
 						{
 							element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
 							element.Click();
@@ -135,26 +141,64 @@ namespace crawling
 							string BASE_value = url;
 							element = _driver.FindElementByXPath(BASE_value);
 							element.Click();
-							textUpLoad();
+							TextUpLoad();
 						}
+						LmsCrawlingData.ItemsSource = L_Data;
+
 					}
 				}
-
 			}
 			// 전체 체크해제하기
 			foreach (CheckBox Chkbox in ChkBoxes)
 			{
 				Chkbox.IsChecked = false;
 			}
+
 			_driver.Close();
 		}
-		public void textUpLoad()
+
+		public void TextUpLoad()
 		{
-			var tex1 = _driver.FindElement(By.XPath("//*[@id='borderB']/tbody[2]/tr[1]"));
-			crawlingData.Items.Add(tex1.Text);
+			try
+			{
+				L_Data.Add(new LmsData()
+				{
+					LmsSubject = _driver.FindElementByXPath("//*[@id='center']/div/div[1]/div[1]/div[1]").Text.Substring(9),
+					LmsTitle = _driver.FindElementByXPath("//*[@id='borderB']/tbody[2]/tr[1]/td[2]").Text,
+					LmsWriter = _driver.FindElementByXPath("//*[@id='borderB']/tbody[2]/tr[1]/td[3]").Text,
+					LmsRdate = _driver.FindElementByXPath("//*[@id='borderB']/tbody[2]/tr[1]/td[4]").Text,
+
+				});
+			}
+			catch (Exception)
+			{
+				L_Data.Add(new LmsData()
+				{
+					LmsSubject = _driver.FindElementByXPath("//*[@id='center']/div/div[1]/div[1]/div[1]").Text.Substring(9),
+					LmsTitle = "업로드된 자료가 없습니다."
+				});
+				return;
+
+			}
 		}
 
 		private void button2_Initialized(object sender, EventArgs e)
+		{
+			if (countBtn2 != 0)
+			{
+				D_Data.Clear();
+			}
+			Start2();
+			countBtn2++;
+		}
+
+		private async void Start2()
+		{
+			var task2 = Task.Run(() => SubjectCrawling());
+			await task2;
+			DepartmentCrawlingData.ItemsSource = D_Data;
+		}
+		private void SubjectCrawling()
 		{
 			_driver = new ChromeDriver(_driverService, _options);
 
@@ -162,18 +206,21 @@ namespace crawling
 
 			_driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
 
-
-
-			var table2 = _driver.FindElementByXPath("//*[@id='menu3586_obj176']/div[2]/form[2]/table");
-			var tbody2 = table2.FindElement(By.TagName("tbody"));
-			var trs2 = tbody2.FindElements(By.TagName("tr"));
-			foreach (var tr2 in trs2)
+			string BASE_Path1 = "//*[@id='menu3586_obj176']/div[2]/form[2]/table/tbody/tr[{0}]/";
+			for (int i = 1; i < 15; i++)
 			{
+				string url1 = string.Format(BASE_Path1, i);
+				string Base_value1 = url1;
+				D_Data.Add(new DepartmentData()
+				{
+					D_Num = _driver.FindElementByXPath(Base_value1 + "td[@class='_artclTdNum']").Text,
+					D_Title = _driver.FindElementByXPath(Base_value1 + "td[@class='_artclTdTitle']").Text,
+					D_Writer = _driver.FindElementByXPath(Base_value1 + "td[@class='_artclTdWriter']").Text,
+					D_Rdate = _driver.FindElementByXPath(Base_value1 + "td[@class='_artclTdRdate']").Text,
 
-				crawlingData.Items.Add(tr2.Text);
-
+				});
 			}
-       	}
-
+			_driver.Close();
+		}
 	}
 }

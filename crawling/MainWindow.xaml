@@ -5,21 +5,67 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:crawling"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700 " Width="700">
-    <Grid>
-        <Grid.RowDefinitions>
-            
-        </Grid.RowDefinitions>
-        
-        <StackPanel Grid.Row="1">
+        Title="MainWindow" Height="720 " Width="900">
 
-            <ListView x:Name="crawlingData"
-                      Height="200px"
-                      BorderBrush="Gray">
-            </ListView>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="521*"/>
+            <ColumnDefinition Width="173*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.ColumnSpan="2" Margin="0,0,-0.4,0.4">
             
+            <ListView x:Name="LmsCrawlingData"
+                      Height="110 px"
+                      BorderBrush="Gray">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="강의명" 
+                                        DisplayMemberBinding="{Binding LmsSubject}" 
+                                        Width="170"/>
+                        <GridViewColumn Header="제목" 
+                                        DisplayMemberBinding="{Binding LmsTitle}" 
+                                        Width="480 "/>
+                        <GridViewColumn Header="작성자" 
+                                        DisplayMemberBinding="{Binding LmsWriter}"
+                                        Width="100"/>
+                        <GridViewColumn Header="작성일" 
+                                        DisplayMemberBinding="{Binding LmsRdate}"
+                                        Width="130"/>
+                    </GridView>
+                </ListView.View>
+
+            </ListView>
+
+            <ListView x:Name="DepartmentCrawlingData"
+                      Height="110px"
+                      BorderBrush="Gray"
+                      >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="번호" 
+                                        DisplayMemberBinding="{Binding D_Num}" 
+                                        Width="65"/>
+                        <GridViewColumn Header="제목" 
+                                        DisplayMemberBinding="{Binding D_Title}" 
+                                        Width="600"/>
+                        <GridViewColumn Header="작성자" 
+                                        DisplayMemberBinding="{Binding D_Writer}"
+                                        Width="100"/>
+                        <GridViewColumn Header="작성일" 
+                                        DisplayMemberBinding="{Binding D_Rdate}"
+                                        Width="110"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
             <!--로그인-->
-            <TextBox x:Name="loginTextBox"
+            <TextBox x:Name="ID"
+                      Text="{Binding LoginID, UpdateSourceTrigger=PropertyChanged}"
                          Height="50px"
                          Width="200px"
                          Margin="10px 80px 10px 10px"
@@ -51,7 +97,8 @@
 
             <!--password-->
 
-            <TextBox x:Name="passwordTextBox"
+            <TextBox x:Name="Passwd"
+                     Text="{Binding LoginPasswd, UpdateSourceTrigger=PropertyChanged}"
                          Height="50px"
                          Width="200px"
                          Margin="10px 40px 10px 10px"
@@ -95,7 +142,7 @@
                 </ScrollViewer>
             </GroupBox>
 
-                <!--Sign in 버튼-->
+            <!--Sign in 버튼-->
 
             <Button x:Name="button1"
                         Content="lms검색"
@@ -123,5 +170,5 @@
 
         </StackPanel>
 
-        </Grid>
+    </Grid>
 </Window>
