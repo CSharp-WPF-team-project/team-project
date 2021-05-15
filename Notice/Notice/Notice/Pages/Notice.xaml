@@ -51,7 +51,8 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <TextBlock Text="수강 과목" 
-                               FontSize="25" VerticalAlignment="Center" Margin="20,0"/>
+                               FontSize="25" VerticalAlignment="Center" Margin="20,0"
+                               Foreground="#619196" FontFamily="Fonts/KoPubWorld Dotum Bold.ttf #KoPubWorld돋움체 Bold"/>
                     <Button Content="Searching" 
                             Width="100" HorizontalAlignment="Right" Margin="20,0"/>
                     <ListView Grid.Row="1" Margin="20,5">
@@ -69,7 +70,8 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <TextBlock Text="공지사항" 
-                               FontSize="25" VerticalAlignment="Center" Margin="20,0"/>
+                               FontSize="25" VerticalAlignment="Center" Margin="20,0"
+                               Foreground="#619196" FontFamily="Fonts/KoPubWorld Dotum Bold.ttf #KoPubWorld돋움체 Bold"/>
                     <Button Content="Searching" 
                             Width="100" HorizontalAlignment="Right" Margin="20,0"/>
                     <ListView Grid.Row="1" Margin="20,5">
@@ -95,7 +97,8 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <TextBlock Text="강의 자료" 
-                               FontSize="25" VerticalAlignment="Center" Margin="20,0"/>
+                               FontSize="25" VerticalAlignment="Center" Margin="20,0"
+                               Foreground="#619196" FontFamily="Fonts/KoPubWorld Dotum Bold.ttf #KoPubWorld돋움체 Bold"/>
                     <Button Content="Searching" 
                             Width="100" HorizontalAlignment="Right" Margin="20,0"/>
                     <ListView Grid.Row="1" Margin="20,5">
@@ -113,7 +116,8 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <TextBlock Text="강의 레포트" 
-                               FontSize="25" VerticalAlignment="Center" Margin="20,0"/>
+                               FontSize="25" VerticalAlignment="Center" Margin="20,0"
+                               Foreground="#619196" FontFamily="Fonts/KoPubWorld Dotum Bold.ttf #KoPubWorld돋움체 Bold"/>
                     <Button Content="Searching" 
                             Width="100" HorizontalAlignment="Right" Margin="20,0"/>
                     <ListView Grid.Row="1" Margin="20,5">
