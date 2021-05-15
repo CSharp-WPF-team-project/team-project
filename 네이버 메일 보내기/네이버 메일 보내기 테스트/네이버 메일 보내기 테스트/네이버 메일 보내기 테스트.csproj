@@ -55,7 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Class\Binding.cs" />
+    <Compile Include="Model\Binding.cs" />
     <Compile Include="View\Main.xaml.cs">
       <DependentUpon>Main.xaml</DependentUpon>
     </Compile>
