@@ -163,7 +163,6 @@ namespace crawling
 							element.Click();
 							TextUpLoad2();
 						}
-						Lms2CrawlingData.ItemsSource = L_Data;
 					}
 					if (Chkbox.Content.ToString() == "18.5학점")
 					{
@@ -178,7 +177,6 @@ namespace crawling
 							element.Click();
 							TextUpLoad2();
 						}
-						Lms2CrawlingData.ItemsSource = L_Data;
 					}
 					if (Chkbox.Content.ToString() == "15.5학점")
 					{
@@ -193,36 +191,16 @@ namespace crawling
 							element.Click();
 							TextUpLoad2();
 						}
-						Lms2CrawlingData.ItemsSource = L_Data;
 
 					}
 				}
 			}
 			_driver.Close();
 		}
-
 		public void TextUpLoad2()
 		{
-			try
-			{
-				L_Data.Add(new LmsData()
-				{
-					LmsSubject = _driver.FindElementByXPath("//*[@id='center']/div/div[1]/div[1]/div[1]").Text.Substring(9),
-					LmsTitle = _driver.FindElementByXPath("//*[@id='borderB']/tbody[2]/tr[1]/td[2]").Text,
-					LmsRdate = _driver.FindElementByXPath("//*[@id='borderB']/tbody[2]/tr[1]/td[4]").Text,
-
-				});
-			}
-			catch (Exception)
-			{
-				L_Data.Add(new LmsData()
-				{
-					LmsSubject = _driver.FindElementByXPath("//*[@id='center']/div/div[1]/div[1]/div[1]").Text.Substring(9),
-					LmsTitle = "업로드된 자료가 없습니다."
-				});
-				return;
-
-			}
+			var tex2 = _driver.FindElement(By.XPath("//*[@id='borderB']/tbody[2]/tr[1]"));
+			Lms2CrawlingData.Items.Add(tex2.Text);
 		}
 
 		// ------------------강의레포트 긁어오기--------------------------
@@ -288,7 +266,6 @@ namespace crawling
 							element.Click();
 							TextUpLoad3();
 						}
-						Lms3CrawlingData.ItemsSource = L_Data;
 					}
 					if (Chkbox.Content.ToString() == "18.5학점")
 					{
@@ -303,7 +280,6 @@ namespace crawling
 							element.Click();
 							TextUpLoad3();
 						}
-						Lms3CrawlingData.ItemsSource = L_Data;
 					}
 					if (Chkbox.Content.ToString() == "15.5학점")
 					{
@@ -318,36 +294,15 @@ namespace crawling
 							element.Click();
 							TextUpLoad3();
 						}
-						Lms3CrawlingData.ItemsSource = L_Data;
-
 					}
 				}
 			}
 			_driver.Close();
 		}
-
 		public void TextUpLoad3()
 		{
-			try
-			{
-				L_Data.Add(new LmsData()
-				{
-					LmsSubject = _driver.FindElementByXPath("//*[@id='center']/div/div[1]/div[1]/div[1]").Text.Substring(9),
-					LmsTitle = _driver.FindElementByXPath("//*[@id='borderB']/tbody/tr[2]/td[2]").Text,
-					LmsRdate = _driver.FindElementByXPath("//*[@id='borderB']/tbody/tr[2]/td[6]").Text
-
-				});
-			}
-			catch (Exception)
-			{
-				L_Data.Add(new LmsData()
-				{
-					LmsSubject = _driver.FindElementByXPath("//*[@id='center']/div/div[1]/div[1]/div[1]").Text.Substring(9),
-					LmsTitle = "업로드된 레포트가 없습니다."
-				});
-				return;
-
-			}
+			var tex3 = _driver.FindElement(By.XPath("//*[@id='borderB']/tbody/tr[2]"));
+			Lms3CrawlingData.Items.Add(tex3.Text);
 		}
 
 
@@ -413,7 +368,6 @@ namespace crawling
 							Thread.Sleep(300);
 							TextUpLoad4();
 						}
-						Lms4CrawlingData.ItemsSource = L_Data;
 					}
 					if (Chkbox.Content.ToString() == "18.5학점")
 					{
@@ -427,7 +381,6 @@ namespace crawling
 							Thread.Sleep(300);
 							TextUpLoad4();
 						}
-						Lms4CrawlingData.ItemsSource = L_Data;
 					}
 					if (Chkbox.Content.ToString() == "15.5학점")
 					{
@@ -441,36 +394,17 @@ namespace crawling
 							Thread.Sleep(300);
 							TextUpLoad4();
 						}
-						Lms4CrawlingData.ItemsSource = L_Data;
 					}
 				}
 			}
 			_driver.Close();
 		}
-
 		public void TextUpLoad4()
 		{
-			try
-			{
-				L_Data.Add(new LmsData()
-				{
-					LmsSubject = _driver.FindElementByXPath("//*[@id='gname']").Text.Substring(9),
-					LmsTitle = _driver.FindElementByXPath("//*[@id='board']/tbody/tr[2]/td[2]/a").Text,
-					LmsRdate = _driver.FindElementByXPath("//*[@id='board']/tbody/tr[2]/td[3]").Text,
-
-				});
-			}
-			catch (Exception)
-			{
-				L_Data.Add(new LmsData()
-				{
-					LmsSubject = _driver.FindElementByXPath("//*[@id='gname']").Text.Substring(9),
-					LmsTitle = "업로드된 공지가 없습니다."
-				});
-			}
+				var tex4 = _driver.FindElement(By.XPath("//*[@id='board']/tbody/tr[2]"));
+				Lms4CrawlingData.Items.Add(tex4.Text);
+      
 		}
-
-
 
 
 		// ------------------학과공지 긁어오기--------------------------
