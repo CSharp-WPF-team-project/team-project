@@ -57,11 +57,6 @@ namespace Notice
                 var binding = new Pages.Binding();
                 pageControl.NavigationService.Navigate(binding);
             }
-            if (sender == SettingsItem)
-            {
-                var settings = new Pages.Settings();
-                pageControl.NavigationService.Navigate(settings);
-            }
             if (sender == SignOutItem)
             {
                 Application.Current.Shutdown();

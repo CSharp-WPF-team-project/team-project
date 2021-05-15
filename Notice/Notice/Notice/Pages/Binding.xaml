@@ -33,33 +33,19 @@
             </Grid.ColumnDefinitions>
             
             <!--왼쪽-->
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <!--유저 이미지-->
-                <Border>
-                    <Border BorderBrush="#d7d7d7" CornerRadius="15" BorderThickness="3"
-                            Width="180" Height="230">
-                        <Image Source="/Images/nerd.png" Margin="10"/>
-                    </Border>
-                </Border>
-                <!--유저 정보-->
-                <Grid Grid.Row="1" Margin="40,0">
-                    <StackPanel>
-                        <TextBlock x:Name="major" Text="Major" FontSize="23" Margin="15"
-                               Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"
-                               FontFamily="/Fonts/AppleSDGothicNeoR.ttf #AppleSDGothicNeoR00"/>
-                        <TextBlock x:Name="studentNumber" Text="Studnet Number" FontSize="23" Margin="15"
-                               Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"
-                               FontFamily="/Fonts/AppleSDGothicNeoR.ttf #AppleSDGothicNeoR00"/>
-                        <TextBlock x:Name="studnetName" Text="Studnet Name" FontSize="23" Margin="15"
-                               Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"
-                               FontFamily="/Fonts/AppleSDGothicNeoR.ttf #AppleSDGothicNeoR00"/>
-                    </StackPanel>
-                </Grid>
+            <Grid Grid.Column="0">
+                <Button x:Name="oasis" Content="OASIS 3.0" 
+                        Margin="50,0,50,300"
+                        Click="Button_Click"/>
+                <Button x:Name="newLMS" Content="New LMS"
+                        Margin="50,0,50,180"
+                        Click="Button_Click"/>
+                <Button x:Name="oldLMS" Content="Old LMS"
+                        Margin="50,0,50,60"
+                        Click="Button_Click"/>
+
             </Grid>
+
             <!--오른쪽-->
             <Grid Grid.Column="1">
                 <Grid>

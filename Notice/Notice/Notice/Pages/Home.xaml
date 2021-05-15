@@ -10,112 +10,89 @@
       Title="Home">
 
     <Grid Background="White">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="2*"/>
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
         
-        <!--왼쪽-->
-        <Grid Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="100"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
-                <materialDesign:PackIcon Kind="Home" Height="60" Width="60" VerticalAlignment="Center"
-                                         Foreground="#5c9bcd" Margin="10"/>
-                <TextBlock Text="Home" FontSize="40" Margin="80,0,0,0" VerticalAlignment="Center" 
-                           Foreground="#619196" FontFamily="Fonts/KoPubWorld Dotum Bold.ttf #KoPubWorld돋움체 Bold"/>
-            </Grid>
-            <Border Grid.Row="1" BorderBrush="#d7d7d7" BorderThickness="3" CornerRadius="15" Margin="10,10,5,10">
+        <!--제목 부분-->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="7*"/>
+            </Grid.ColumnDefinitions>
+            <materialDesign:PackIcon Kind="Home" Height="60" Width="60" 
+                                     VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#5c9bcd"/>
+            <TextBlock Grid.Column="1" Text="Home" FontSize="35" Foreground="#619196" FontFamily="Fonts/KoPubWorld Dotum Bold.ttf #KoPubWorld돋움체 Bold" 
+                               VerticalAlignment="Center" Margin="5"/>
+        </Grid>
+
+        <!--하단-->
+        <Grid Grid.Row="1">
+            <Border BorderBrush="#d7d7d7" BorderThickness="3" CornerRadius="15"
+                    Margin="15">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="55"/>
+                        <RowDefinition Height="30"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" VerticalAlignment="Center" Margin="20,20,0,0"
-                               Text="Major Notice" FontSize="25"
-                               Foreground="#619196" FontFamily="Fonts/KoPubWorld Dotum Bold.ttf #KoPubWorld돋움체 Bold"/>
-                    <ListBox Grid.Row="1" Margin="20,10">
-                        <ListBoxItem Content="Test"/>
-                    </ListBox>
+                    <!--학과 공지-->
+                    <Button Content="Searching" 
+                            Width="100" Height="30" HorizontalAlignment="Right"
+                            Margin="50,0"
+                            Click="searcingButton_Click"/>
+                    <TextBlock Text="학과 공지" FontSize="25"
+                               Margin="20,15,200,15" VerticalAlignment="Center"
+                               FontFamily="/Fonts/AppleSDGothicNeoR.ttf #AppleSDGothicNeoR00" Foreground="#619196"/>
+                    <TextBlock Grid.Row="1" 
+                               Text="최신 5개의 정보만 보입니다." FontSize="15"
+                               Margin="20,0" VerticalAlignment="Center"
+                               FontFamily="/Fonts/AppleSDGothicNeoR.ttf #AppleSDGothicNeoR00" Foreground="#619196"/>
+
+                    <Grid Grid.Row="2" Margin="20,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="120"/>
+                            </Grid.ColumnDefinitions>
+                            <!--표 제목-->
+                            <TextBlock Grid.Column="0" Text="번호"
+                                       Foreground="Black" FontSize="15"
+                                       VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Column="1" Text="제목"
+                                       Foreground="Black" FontSize="15"
+                                       VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Column="2" Text="날짜"
+                                       Foreground="Black" FontSize="15"
+                                       VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Grid>
+                        <!--표 내용-->
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="120"/>
+                            </Grid.ColumnDefinitions>
+
+                            <ListView x:Name="number" Grid.Column="0">
+                                
+                            </ListView>
+                            <ListView x:Name="title" Grid.Column="1">
+
+                            </ListView>
+                            <ListView x:Name="date" Grid.Column="2">
+
+                            </ListView>
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Border>
         </Grid>
-        
-        <!--오른쪽-->
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1.85*"/>
-                <RowDefinition Height="3*"/>
-            </Grid.RowDefinitions>
-            <!--오른쪽 위-->
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="2.3*"/>
-                </Grid.ColumnDefinitions>
-
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition Height="40"/>
-                    </Grid.RowDefinitions>
-
-                    <Border BorderBrush="#d7d7d7" BorderThickness="3" CornerRadius="15"
-                            Margin="5,25,5,5" Height="155" Width="130">
-                        <Image Source="/images/professor.png" Margin="10"/>
-                    </Border>
-
-                    <TextBlock Grid.Row="1" Margin="25,0,10,0" VerticalAlignment="Top"
-                               FontSize="15" Foreground="#619196" FontFamily="Fonts/KoPubWorld Dotum Bold.ttf #KoPubWorld돋움체 Bold"
-                               Text="과목명"/>
-                </Grid>
-
-                <Grid Grid.Column="1">
-                    <Border BorderBrush="#d7d7d7" BorderThickness="3" CornerRadius="15"
-                            Margin="5,35,10,15">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="55"/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <TextBlock Text="Subject Notice" FontSize="24" VerticalAlignment="Center"
-                                       Foreground="#619196" FontFamily="Fonts/KoPubWorld Dotum Bold.ttf #KoPubWorld돋움체 Bold"
-                                       Margin="20,10"/>
-                            <ListBox Grid.Row="1" Margin="20,0">
-                                <ListBoxItem Content="Test"/>
-                            </ListBox>
-                        </Grid>
-                        
-                    </Border>
-                </Grid>
-            </Grid>
-            
-            <!--오른쪽 아래-->
-            <Grid Grid.Row="1">
-                <Border BorderBrush="#d7d7d7" BorderThickness="3" CornerRadius="15" 
-                        Margin="25,5,10,10">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="55"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <TextBlock Text="Subjects" FontSize="24" VerticalAlignment="Center"
-                                       Foreground="#619196" FontFamily="Fonts/KoPubWorld Dotum Bold.ttf #KoPubWorld돋움체 Bold"
-                                       Margin="20,10"/>
-                        <ListBox Grid.Row="1" Margin="20,0">
-                            <ListBoxItem Content="Test용"/>
-
-                        </ListBox>
-                        
-                    </Grid>
-                    
-                </Border>
-                
-            </Grid>
-            
-        </Grid>
-        
     </Grid>
 </Page>
