@@ -12,6 +12,8 @@ namespace 카카오톡_메시지_API_test.Scripts
 
     class KakaoManager
     {
+        public KakaoManager()
+        { }
 
         public bool GetUserToKen(WebBrowser webBrowser)
         {

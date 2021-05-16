@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:카카오톡_메시지_API_test"
         mc:Ignorable="d"
         Title="KakaoLoginPage" Height="500" Width="700">
-    <WebBrowser>
+    <WebBrowser x:Name="WebBrowser1">
         
     </WebBrowser>
 </Window>

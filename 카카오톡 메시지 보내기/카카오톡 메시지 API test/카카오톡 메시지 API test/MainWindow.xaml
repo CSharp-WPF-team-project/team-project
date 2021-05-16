@@ -53,10 +53,11 @@
                 FontSize="20"
                 Margin="10"
                 Click="userData_Click"/>
-        <Image Grid.Column="0"
+        <Image x:Name="PictureBox_UserImg" Grid.Column="0"
                Grid.Row="2"
-               Stretch="Fill"/>
-        <Label Grid.Column="1"
+               Stretch="Fill"
+               />
+        <Label x:Name="Label_UserName" Grid.Column="1"
                Grid.Row="2"
                Content="이름"
                FontSize="50"
