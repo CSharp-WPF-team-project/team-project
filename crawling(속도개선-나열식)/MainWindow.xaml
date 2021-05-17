@@ -22,16 +22,46 @@
             <ListView x:Name="Lms2CrawlingData"
                       Height="90 px"
                       BorderBrush="Gray">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="강의명" 
+                                        DisplayMemberBinding="{Binding LmsSubject}" 
+                                        Width="200"/>
+                        <GridViewColumn Header="데이터" 
+                                        DisplayMemberBinding="{Binding LmsTitle}"
+                                        Width="700"/>
+                    </GridView>
+                </ListView.View>
             </ListView>
 
             <ListView x:Name="Lms3CrawlingData"
                       Height="90 px"
                       BorderBrush="Gray">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="강의명" 
+                                        DisplayMemberBinding="{Binding LmsSubject}" 
+                                        Width="200"/>
+                        <GridViewColumn Header="데이터" 
+                                        DisplayMemberBinding="{Binding LmsTitle}"
+                                        Width="700"/>
+                    </GridView>
+                </ListView.View>
             </ListView>
 
             <ListView x:Name="Lms4CrawlingData"
                       Height="80 px"
                       BorderBrush="Gray">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="강의명" 
+                                        DisplayMemberBinding="{Binding LmsSubject}" 
+                                        Width="200"/>
+                        <GridViewColumn Header="데이터" 
+                                        DisplayMemberBinding="{Binding LmsTitle}"
+                                        Width="700"/>
+                    </GridView>
+                </ListView.View>
             </ListView>
 
 
@@ -54,7 +84,7 @@
                         <GridViewColumn Header="작성일" 
                                         DisplayMemberBinding="{Binding D_Rdate}"
                                         Width="110"/>
-                    </GridView>
+                    </GridView> 
                 </ListView.View>
             </ListView>
 

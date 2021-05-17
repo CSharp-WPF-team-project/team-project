@@ -163,6 +163,7 @@ namespace crawling
 							element.Click();
 							TextUpLoad2();
 						}
+						Lms2CrawlingData.ItemsSource = L_Data;
 					}
 					if (Chkbox.Content.ToString() == "18.5학점")
 					{
@@ -177,6 +178,7 @@ namespace crawling
 							element.Click();
 							TextUpLoad2();
 						}
+						Lms2CrawlingData.ItemsSource = L_Data;
 					}
 					if (Chkbox.Content.ToString() == "15.5학점")
 					{
@@ -191,16 +193,24 @@ namespace crawling
 							element.Click();
 							TextUpLoad2();
 						}
+						Lms2CrawlingData.ItemsSource = L_Data;
 
 					}
 				}
 			}
 			_driver.Close();
 		}
+
 		public void TextUpLoad2()
 		{
-			var tex2 = _driver.FindElement(By.XPath("//*[@id='borderB']/tbody[2]/tr[1]"));
-			Lms2CrawlingData.Items.Add(tex2.Text);
+			L_Data.Add(new LmsData()
+			{
+				LmsSubject = _driver.FindElementByXPath("//*[@id='center']/div/div[1]/div[1]/div[1]").Text.Substring(9),
+				LmsTitle = _driver.FindElementByXPath("//*[@id='borderB']/tbody[2]/tr").Text
+			});//*[@id="borderB"]/tbody[2]/tr
+			   //*[@id="borderB"]/tbody[2]/tr[1]/td[2]
+			   //var tex2 = _driver.FindElement(By.XPath("//*[@id='borderB']/tbody/tr[2]"));
+			   //Lms2CrawlingData.Items.Add(tex2.Text);
 		}
 
 		// ------------------강의레포트 긁어오기--------------------------
@@ -266,6 +276,7 @@ namespace crawling
 							element.Click();
 							TextUpLoad3();
 						}
+						Lms3CrawlingData.ItemsSource = L_Data;
 					}
 					if (Chkbox.Content.ToString() == "18.5학점")
 					{
@@ -280,6 +291,7 @@ namespace crawling
 							element.Click();
 							TextUpLoad3();
 						}
+						Lms3CrawlingData.ItemsSource = L_Data;
 					}
 					if (Chkbox.Content.ToString() == "15.5학점")
 					{
@@ -294,6 +306,7 @@ namespace crawling
 							element.Click();
 							TextUpLoad3();
 						}
+						Lms3CrawlingData.ItemsSource = L_Data;
 					}
 				}
 			}
@@ -301,8 +314,13 @@ namespace crawling
 		}
 		public void TextUpLoad3()
 		{
-			var tex3 = _driver.FindElement(By.XPath("//*[@id='borderB']/tbody/tr[2]"));
-			Lms3CrawlingData.Items.Add(tex3.Text);
+			L_Data.Add(new LmsData()
+			{
+				LmsSubject = _driver.FindElementByXPath("//*[@id='center']/div/div[1]/div[1]/div[1]").Text.Substring(9),
+				LmsTitle = _driver.FindElementByXPath("//*[@id='borderB']/tbody/tr[2]").Text
+		});
+			//var tex3 = _driver.FindElement(By.XPath("//*[@id='borderB']/tbody/tr[2]"));
+			//Lms3CrawlingData.Items.Add(tex3.Text);
 		}
 
 
@@ -368,6 +386,7 @@ namespace crawling
 							Thread.Sleep(300);
 							TextUpLoad4();
 						}
+						Lms4CrawlingData.ItemsSource = L_Data;
 					}
 					if (Chkbox.Content.ToString() == "18.5학점")
 					{
@@ -381,6 +400,7 @@ namespace crawling
 							Thread.Sleep(300);
 							TextUpLoad4();
 						}
+						Lms4CrawlingData.ItemsSource = L_Data;
 					}
 					if (Chkbox.Content.ToString() == "15.5학점")
 					{
@@ -394,6 +414,7 @@ namespace crawling
 							Thread.Sleep(300);
 							TextUpLoad4();
 						}
+						Lms4CrawlingData.ItemsSource = L_Data;
 					}
 				}
 			}
@@ -401,11 +422,14 @@ namespace crawling
 		}
 		public void TextUpLoad4()
 		{
-				var tex4 = _driver.FindElement(By.XPath("//*[@id='board']/tbody/tr[2]"));
-				Lms4CrawlingData.Items.Add(tex4.Text);
-      
+			L_Data.Add(new LmsData()
+			{
+				LmsSubject = _driver.FindElementByXPath("//*[@id='gname']").Text.Substring(9),
+				LmsTitle = _driver.FindElementByXPath("//*[@id='board']/tbody/tr[2]").Text,
+			});
+			//var tex4 = _driver.FindElement(By.XPath("//*[@id='borderB']/tbody/tr[2]"));
+			//Lms4CrawlingData.Items.Add(tex4.Text);
 		}
-
 
 		// ------------------학과공지 긁어오기--------------------------
 		private void button5_Initialized(object sender, EventArgs e)
