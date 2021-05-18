@@ -157,15 +157,15 @@
 
             </TextBlock>
 
-            <GroupBox Header="학점 선택(전진설 포함)" VerticalAlignment="Top" Height="60">
-                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                    <StackPanel x:Name="StackPanelGroup1" VerticalAlignment="Top">
-                        <CheckBox Content="21.5학점"/>
-                        <CheckBox Content="18.5학점"/>
-                        <CheckBox Content="15.5학점"/>
-                    </StackPanel>
-                </ScrollViewer>
-            </GroupBox>
+            <StackPanel x:Name ="stp" Grid.Row="1" Orientation="Horizontal">
+                <CheckBox x:Name="학점21"
+                    Content="21.5학점(대진설O)" Margin="20,0"
+                         />
+                <CheckBox  x:Name="학점18"
+                    Content="18.5학점(대진설O)" Margin="20,0"/>
+                <CheckBox x:Name="학점15"
+                    Content="15.5학점(대진설O)" Margin="20,0"/>
+            </StackPanel>
 
             <!--Sign in 버튼-->
 

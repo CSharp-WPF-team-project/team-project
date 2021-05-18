@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace crawling.Classes
 {
-    class LoginViewModel : INotifyPropertyChanged
+    public class LoginViewModel : INotifyPropertyChanged
     {
         private string _loginId;
         public string LoginID

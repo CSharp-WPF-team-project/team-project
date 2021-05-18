@@ -68,6 +68,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\CheckViewModel.cs" />
     <Compile Include="Classes\DepartmentData.cs" />
     <Compile Include="Classes\LmsData.cs" />
     <Compile Include="Classes\LoginViewModel.cs" />
