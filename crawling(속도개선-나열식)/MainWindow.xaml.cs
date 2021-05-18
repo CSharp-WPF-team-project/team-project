@@ -23,6 +23,10 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 
 
+
+//학점 체크 이후부터 비동기 해결해야 함.
+/// ///////////////////
+/// 
 namespace crawling
 {
 	/// <summary>
