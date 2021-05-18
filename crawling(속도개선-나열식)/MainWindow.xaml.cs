@@ -39,6 +39,9 @@ namespace crawling
 		int countBtn1 = 0; // 처음 실행이 아님을 확인
 		int countBtn2 = 0; // 처음 실행이 아님을 확인
 
+		static string id;
+		static string pw;
+
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -53,7 +56,7 @@ namespace crawling
 			_driverService.HideCommandPromptWindow = true;
 
 			_options = new ChromeOptions();
-			_options.AddArgument("headless");
+		    _options.AddArgument("headless");
 			_options.AddArgument("disable-gpu");
 
 			this.DataContext = new LoginViewModel();
@@ -78,9 +81,11 @@ namespace crawling
 			{
 				element = _driver.FindElementByXPath("//*[@id='id']");
 				element.SendKeys(viewModel.LoginID);
+				id = viewModel.LoginID;
 
 				element = _driver.FindElementByXPath("//*[@id='passwd']");
 				element.SendKeys(viewModel.LoginPasswd);
+				pw = (viewModel.LoginPasswd);
 
 				element = _driver.FindElementByXPath("//*[@id='loginform']/table/tbody/tr[1]/td[2]/input");
 				element.Click();
@@ -107,10 +112,19 @@ namespace crawling
 			{
 				L_Data.Clear();
 			}
+			Start2();
 			countBtn1++;
+		}
+		private async void Start2()
+		{
+			var task2 = Task.Run(() => DataCrawling());
+			await task2;
+			Lms2CrawlingData.ItemsSource = L_Data;
 
-			var viewModel = this.DataContext as LoginViewModel;
+		}
 
+		public void DataCrawling()
+		{
 			_driver = new ChromeDriver(_driverService, _options);
 
 			_driver.Navigate().GoToUrl("https://ieilms.jbnu.ac.kr/"); // 웹 사이트에 접속합니다.
@@ -121,10 +135,10 @@ namespace crawling
 			try
 			{
 				element = _driver.FindElementByXPath("//*[@id='id']");
-				element.SendKeys(viewModel.LoginID);
+				element.SendKeys(id);
 
 				element = _driver.FindElementByXPath("//*[@id='passwd']");
-				element.SendKeys(viewModel.LoginPasswd);
+				element.SendKeys(pw);
 
 				element = _driver.FindElementByXPath("//*[@id='loginform']/table/tbody/tr[1]/td[2]/input");
 				element.Click();
@@ -141,66 +155,66 @@ namespace crawling
 			element = _driver.FindElementByXPath("//*[@id='nav']/li[3]/a");
 			element.Click();
 
-			// 학점선택 체크박스
-			IEnumerable<CheckBox> ChkBoxes = from checkbox in this.StackPanelGroup1.Children.OfType<CheckBox>()
-												 // where checkbox.IsChecked.Value 체크된 Checkbox 만 선택할때
-											 select checkbox;
-			// 체크된 content 값 가져오기
-			foreach (CheckBox Chkbox in ChkBoxes)
+			Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
 			{
-				if (Chkbox.IsChecked == true)
+				// 학점선택 체크박스
+				IEnumerable<CheckBox> ChkBoxes = from checkbox in this.StackPanelGroup1.Children.OfType<CheckBox>()
+													 // where checkbox.IsChecked.Value 체크된 Checkbox 만 선택할때
+												 select checkbox;
+				// 체크된 content 값 가져오기
+				foreach (CheckBox Chkbox in ChkBoxes)
 				{
-					if (Chkbox.Content.ToString() == "21.5학점")
+					if (Chkbox.IsChecked == true)
 					{
-						for (int i = 2; i < 10; i++)
+						if (Chkbox.Content.ToString() == "21.5학점")
 						{
-							element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
-							element.Click();
-							string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
-							string url = string.Format(BASE_Path, i);
-							string BASE_value = url;
-							element = _driver.FindElementByXPath(BASE_value);
-							element.Click();
-							TextUpLoad2();
+							for (int i = 2; i < 10; i++)
+							{
+								element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
+								element.Click();
+								string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
+								string url = string.Format(BASE_Path, i);
+								string BASE_value = url;
+								element = _driver.FindElementByXPath(BASE_value);
+								element.Click();
+								TextUpLoad2();
+							}
 						}
-						Lms2CrawlingData.ItemsSource = L_Data;
-					}
-					if (Chkbox.Content.ToString() == "18.5학점")
-					{
-						for (int i = 2; i < 9; i++)
+						if (Chkbox.Content.ToString() == "18.5학점")
 						{
-							element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
-							element.Click();
-							string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
-							string url = string.Format(BASE_Path, i);
-							string BASE_value = url;
-							element = _driver.FindElementByXPath(BASE_value);
-							element.Click();
-							TextUpLoad2();
+							for (int i = 2; i < 9; i++)
+							{
+								element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
+								element.Click();
+								string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
+								string url = string.Format(BASE_Path, i);
+								string BASE_value = url;
+								element = _driver.FindElementByXPath(BASE_value);
+								element.Click();
+								TextUpLoad2();
+							}
 						}
-						Lms2CrawlingData.ItemsSource = L_Data;
-					}
-					if (Chkbox.Content.ToString() == "15.5학점")
-					{
-						for (int i = 2; i < 8; i++)
+						if (Chkbox.Content.ToString() == "15.5학점")
 						{
-							element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
-							element.Click();
-							string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
-							string url = string.Format(BASE_Path, i);
-							string BASE_value = url;
-							element = _driver.FindElementByXPath(BASE_value);
-							element.Click();
-							TextUpLoad2();
+							for (int i = 2; i < 8; i++)
+							{
+								element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
+								element.Click();
+								string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
+								string url = string.Format(BASE_Path, i);
+								string BASE_value = url;
+								element = _driver.FindElementByXPath(BASE_value);
+								element.Click();
+								TextUpLoad2();
+							}
 						}
-						Lms2CrawlingData.ItemsSource = L_Data;
-
 					}
 				}
-			}
-			_driver.Close();
+				_driver.Close();
+			}));
 		}
-
+	
+			
 		public void TextUpLoad2()
 		{
 			L_Data.Add(new LmsData()
@@ -214,16 +228,26 @@ namespace crawling
 		}
 
 		// ------------------강의레포트 긁어오기--------------------------
+
 		public void button3_Initialized(object sender, EventArgs e)
 		{
 			if (countBtn1 != 0)
 			{
 				L_Data.Clear();
 			}
+			Start3();
 			countBtn1++;
+		}
+		private async void Start3()
+		{
+			var task3 = Task.Run(() => ReportCrawling());
+			await task3;
+			Lms3CrawlingData.ItemsSource = L_Data;
 
-			var viewModel = this.DataContext as LoginViewModel;
+		}
 
+		public void ReportCrawling()
+		{
 			_driver = new ChromeDriver(_driverService, _options);
 
 			_driver.Navigate().GoToUrl("https://ieilms.jbnu.ac.kr/"); // 웹 사이트에 접속합니다.
@@ -234,10 +258,10 @@ namespace crawling
 			try
 			{
 				element = _driver.FindElementByXPath("//*[@id='id']");
-				element.SendKeys(viewModel.LoginID);
+				element.SendKeys(id);
 
 				element = _driver.FindElementByXPath("//*[@id='passwd']");
-				element.SendKeys(viewModel.LoginPasswd);
+				element.SendKeys(pw);
 
 				element = _driver.FindElementByXPath("//*[@id='loginform']/table/tbody/tr[1]/td[2]/input");
 				element.Click();
@@ -254,64 +278,65 @@ namespace crawling
 			element = _driver.FindElementByXPath("//*[@id='nav']/li[4]/a");
 			element.Click();
 
-			// 학점선택 체크박스
-			IEnumerable<CheckBox> ChkBoxes = from checkbox in this.StackPanelGroup1.Children.OfType<CheckBox>()
-												 // where checkbox.IsChecked.Value 체크된 Checkbox 만 선택할때
-											 select checkbox;
-			// 체크된 content 값 가져오기
-			foreach (CheckBox Chkbox in ChkBoxes)
+			Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
 			{
-				if (Chkbox.IsChecked == true)
+				// 학점선택 체크박스
+				IEnumerable<CheckBox> ChkBoxes = from checkbox in this.StackPanelGroup1.Children.OfType<CheckBox>()
+													 // where checkbox.IsChecked.Value 체크된 Checkbox 만 선택할때
+												 select checkbox;
+				// 체크된 content 값 가져오기
+				foreach (CheckBox Chkbox in ChkBoxes)
 				{
-					if (Chkbox.Content.ToString() == "21.5학점")
+					if (Chkbox.IsChecked == true)
 					{
-						for (int i = 2; i < 10; i++)
+						if (Chkbox.Content.ToString() == "21.5학점")
 						{
-							element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
-							element.Click();
-							string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
-							string url = string.Format(BASE_Path, i);
-							string BASE_value = url;
-							element = _driver.FindElementByXPath(BASE_value);
-							element.Click();
-							TextUpLoad3();
+							for (int i = 2; i < 10; i++)
+							{
+								element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
+								element.Click();
+								string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
+								string url = string.Format(BASE_Path, i);
+								string BASE_value = url;
+								element = _driver.FindElementByXPath(BASE_value);
+								element.Click();
+								TextUpLoad3();
+							}
 						}
-						Lms3CrawlingData.ItemsSource = L_Data;
-					}
-					if (Chkbox.Content.ToString() == "18.5학점")
-					{
-						for (int i = 2; i < 9; i++)
+						if (Chkbox.Content.ToString() == "18.5학점")
 						{
-							element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
-							element.Click();
-							string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
-							string url = string.Format(BASE_Path, i);
-							string BASE_value = url;
-							element = _driver.FindElementByXPath(BASE_value);
-							element.Click();
-							TextUpLoad3();
+							for (int i = 2; i < 9; i++)
+							{
+								element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
+								element.Click();
+								string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
+								string url = string.Format(BASE_Path, i);
+								string BASE_value = url;
+								element = _driver.FindElementByXPath(BASE_value);
+								element.Click();
+								TextUpLoad3();
+							}
 						}
-						Lms3CrawlingData.ItemsSource = L_Data;
-					}
-					if (Chkbox.Content.ToString() == "15.5학점")
-					{
-						for (int i = 2; i < 8; i++)
+						if (Chkbox.Content.ToString() == "15.5학점")
 						{
-							element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
-							element.Click();
-							string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
-							string url = string.Format(BASE_Path, i);
-							string BASE_value = url;
-							element = _driver.FindElementByXPath(BASE_value);
-							element.Click();
-							TextUpLoad3();
+							for (int i = 2; i < 8; i++)
+							{
+								element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
+								element.Click();
+								string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
+								string url = string.Format(BASE_Path, i);
+								string BASE_value = url;
+								element = _driver.FindElementByXPath(BASE_value);
+								element.Click();
+								TextUpLoad3();
+							}
 						}
-						Lms3CrawlingData.ItemsSource = L_Data;
 					}
 				}
-			}
-			_driver.Close();
+				_driver.Close();
+			}));
 		}
+	
 		public void TextUpLoad3()
 		{
 			L_Data.Add(new LmsData()
@@ -331,9 +356,19 @@ namespace crawling
 			{
 				L_Data.Clear();
 			}
+			Start4();
 			countBtn1++;
+		}
+		private async void Start4()
+        {
+			var task4 = Task.Run(() => NoticeCrawling());
+			await task4;
+			Lms4CrawlingData.ItemsSource = L_Data;
 
-			var viewModel = this.DataContext as LoginViewModel;
+		}
+
+		public void NoticeCrawling()
+		{
 
 			_driver = new ChromeDriver(_driverService, _options);
 
@@ -345,10 +380,10 @@ namespace crawling
 			try
 			{
 				element = _driver.FindElementByXPath("//*[@id='id']");
-				element.SendKeys(viewModel.LoginID);
+				element.SendKeys(id);
 
 				element = _driver.FindElementByXPath("//*[@id='passwd']");
-				element.SendKeys(viewModel.LoginPasswd);
+				element.SendKeys(pw);
 
 				element = _driver.FindElementByXPath("//*[@id='loginform']/table/tbody/tr[1]/td[2]/input");
 				element.Click();
@@ -365,61 +400,62 @@ namespace crawling
 			element = _driver.FindElementByXPath("//*[@id='nav']/li[10]/a");
 			element.Click();
 
-			// 학점선택 체크박스
-			IEnumerable<CheckBox> ChkBoxes = from checkbox in this.StackPanelGroup1.Children.OfType<CheckBox>()
-												 // where checkbox.IsChecked.Value 체크된 Checkbox 만 선택할때
-											 select checkbox;
-			// 체크된 content 값 가져오기
-			foreach (CheckBox Chkbox in ChkBoxes)
+			Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
 			{
-				if (Chkbox.IsChecked == true)
+				// 학점선택 체크박스
+				IEnumerable<CheckBox> ChkBoxes = from checkbox in this.StackPanelGroup1.Children.OfType<CheckBox>()
+													 // where checkbox.IsChecked.Value 체크된 Checkbox 만 선택할때
+												 select checkbox;
+				// 체크된 content 값 가져오기
+				foreach (CheckBox Chkbox in ChkBoxes)
 				{
-					if (Chkbox.Content.ToString() == "21.5학점")
+					if (Chkbox.IsChecked == true)
 					{
-						for (int i = 2; i < 10; i++)
+						if (Chkbox.Content.ToString() == "21.5학점")
 						{
-							string BASE_Path = "//*[@id='treebox']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
-							string url = string.Format(BASE_Path, i);
-							string BASE_value = url;
-							element = _driver.FindElementByXPath(BASE_value);
-							element.Click();
-							Thread.Sleep(300);
-							TextUpLoad4();
+							for (int i = 2; i < 10; i++)
+							{
+								string BASE_Path = "//*[@id='treebox']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
+								string url = string.Format(BASE_Path, i);
+								string BASE_value = url;
+								element = _driver.FindElementByXPath(BASE_value);
+								element.Click();
+								Thread.Sleep(300);
+								TextUpLoad4();
+							}
 						}
-						Lms4CrawlingData.ItemsSource = L_Data;
-					}
-					if (Chkbox.Content.ToString() == "18.5학점")
-					{
-						for (int i = 2; i < 9; i++)
+						if (Chkbox.Content.ToString() == "18.5학점")
 						{
-							string BASE_Path = "//*[@id='treebox']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
-							string url = string.Format(BASE_Path, i);
-							string BASE_value = url;
-							element = _driver.FindElementByXPath(BASE_value);
-							element.Click();
-							Thread.Sleep(300);
-							TextUpLoad4();
+							for (int i = 2; i < 9; i++)
+							{
+								string BASE_Path = "//*[@id='treebox']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
+								string url = string.Format(BASE_Path, i);
+								string BASE_value = url;
+								element = _driver.FindElementByXPath(BASE_value);
+								element.Click();
+								Thread.Sleep(300);
+								TextUpLoad4();
+							}
 						}
-						Lms4CrawlingData.ItemsSource = L_Data;
-					}
-					if (Chkbox.Content.ToString() == "15.5학점")
-					{
-						for (int i = 2; i < 8; i++)
+						if (Chkbox.Content.ToString() == "15.5학점")
 						{
-							string BASE_Path = "//*[@id='treebox']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
-							string url = string.Format(BASE_Path, i);
-							string BASE_value = url;
-							element = _driver.FindElementByXPath(BASE_value);
-							element.Click();
-							Thread.Sleep(300);
-							TextUpLoad4();
+							for (int i = 2; i < 8; i++)
+							{
+								string BASE_Path = "//*[@id='treebox']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
+								string url = string.Format(BASE_Path, i);
+								string BASE_value = url;
+								element = _driver.FindElementByXPath(BASE_value);
+								element.Click();
+								Thread.Sleep(300);
+								TextUpLoad4();
+							}
 						}
-						Lms4CrawlingData.ItemsSource = L_Data;
 					}
 				}
-			}
-			_driver.Close();
+				_driver.Close();
+			}));
 		}
+
 		public void TextUpLoad4()
 		{
 			L_Data.Add(new LmsData()
@@ -438,14 +474,14 @@ namespace crawling
 			{
 				D_Data.Clear();
 			}
-			Start2();
+			Start5();
 			countBtn2++;
 		}
 
-		private async void Start2()
+		private async void Start5()
 		{
-			var task2 = Task.Run(() => SubjectCrawling());
-			await task2;
+			var task5 = Task.Run(() => SubjectCrawling());
+			await task5;
 			DepartmentCrawlingData.ItemsSource = D_Data;
 		}
 		private void SubjectCrawling()
