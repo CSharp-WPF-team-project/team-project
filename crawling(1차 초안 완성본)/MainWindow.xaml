@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:crawling"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800 " Width="900">
+        Title="MainWindow" Height="760 " Width="900">
 
 
     <Grid>
@@ -27,9 +27,12 @@
                         <GridViewColumn Header="강의명" 
                                         DisplayMemberBinding="{Binding LmsSubject}" 
                                         Width="200"/>
-                        <GridViewColumn Header="데이터" 
-                                        DisplayMemberBinding="{Binding LmsTitle}"
-                                        Width="700"/>
+                        <GridViewColumn Header="제목" 
+                                        DisplayMemberBinding="{Binding LmsTitle}" 
+                                        Width="500 "/>
+                        <GridViewColumn Header="작성일" 
+                                        DisplayMemberBinding="{Binding LmsRdate}"
+                                        Width="200"/>
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -42,9 +45,12 @@
                         <GridViewColumn Header="강의명" 
                                         DisplayMemberBinding="{Binding LmsSubject}" 
                                         Width="200"/>
-                        <GridViewColumn Header="데이터" 
-                                        DisplayMemberBinding="{Binding LmsTitle}"
-                                        Width="700"/>
+                        <GridViewColumn Header="제목" 
+                                        DisplayMemberBinding="{Binding LmsTitle}" 
+                                        Width="500 "/>
+                        <GridViewColumn Header="작성일" 
+                                        DisplayMemberBinding="{Binding LmsRdate}"
+                                        Width="200"/>
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -57,9 +63,12 @@
                         <GridViewColumn Header="강의명" 
                                         DisplayMemberBinding="{Binding LmsSubject}" 
                                         Width="200"/>
-                        <GridViewColumn Header="데이터" 
-                                        DisplayMemberBinding="{Binding LmsTitle}"
-                                        Width="700"/>
+                        <GridViewColumn Header="제목" 
+                                        DisplayMemberBinding="{Binding LmsTitle}" 
+                                        Width="500 "/>
+                        <GridViewColumn Header="작성일" 
+                                        DisplayMemberBinding="{Binding LmsRdate}"
+                                        Width="200"/>
                     </GridView>
                 </ListView.View>
             </ListView>

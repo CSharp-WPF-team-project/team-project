@@ -220,14 +220,25 @@ namespace crawling
 
 		public void TextUpLoad2()
 		{
-			L_Data.Add(new LmsData()
+			if (_driver.FindElementByXPath("//*[@id='borderB']/tbody[2]/tr").Text == "해당하는 자료 정보가 없습니다.")
 			{
-				LmsSubject = _driver.FindElementByXPath("//*[@id='center']/div/div[1]/div[1]/div[1]").Text.Substring(9),
-				LmsTitle = _driver.FindElementByXPath("//*[@id='borderB']/tbody[2]/tr").Text
-			});//*[@id="borderB"]/tbody[2]/tr
-			   //*[@id="borderB"]/tbody[2]/tr[1]/td[2]
-			   //var tex2 = _driver.FindElement(By.XPath("//*[@id='borderB']/tbody/tr[2]"));
-			   //Lms2CrawlingData.Items.Add(tex2.Text);
+				L_Data.Add(new LmsData()
+				{
+					LmsSubject = _driver.FindElementByXPath("//*[@id='center']/div/div[1]/div[1]/div[1]").Text.Substring(9),
+					LmsTitle = "업로드된 자료가 없습니다."
+				});
+				return;
+			}
+			else
+			{
+				L_Data.Add(new LmsData()
+				{
+					LmsSubject = _driver.FindElementByXPath("//*[@id='center']/div/div[1]/div[1]/div[1]").Text.Substring(9),
+					LmsTitle = _driver.FindElementByXPath("//*[@id='borderB']/tbody[2]/tr[1]/td[2]").Text,
+					LmsRdate = _driver.FindElementByXPath("//*[@id='borderB']/tbody[2]/tr[1]/td[4]").Text,
+
+				});
+			}
 		}
 
 		// ------------------강의레포트 긁어오기--------------------------
@@ -345,11 +356,32 @@ namespace crawling
 	
 		public void TextUpLoad3()
 		{
+			if(_driver.FindElementByXPath("//*[@id='borderB']/tbody/tr[2]").Text == "해당하는 레포트 정보가 없습니다.")
+            {
+				L_Data.Add(new LmsData()
+				{
+					LmsSubject = _driver.FindElementByXPath("//*[@id='center']/div/div[1]/div[1]/div[1]").Text.Substring(9),
+					LmsTitle = "업로드된 레포트가 없습니다."
+				});
+				return;
+			}
+            else
+            {
+				L_Data.Add(new LmsData()
+				{
+					LmsSubject = _driver.FindElementByXPath("//*[@id='center']/div/div[1]/div[1]/div[1]").Text.Substring(9),
+					LmsTitle = _driver.FindElementByXPath("//*[@id='borderB']/tbody/tr[2]/td[2]").Text,
+					LmsRdate = _driver.FindElementByXPath("//*[@id='borderB']/tbody/tr[2]/td[6]").Text
+
+				});
+			}
+			/*
 			L_Data.Add(new LmsData()
 			{
 				LmsSubject = _driver.FindElementByXPath("//*[@id='center']/div/div[1]/div[1]/div[1]").Text.Substring(9),
 				LmsTitle = _driver.FindElementByXPath("//*[@id='borderB']/tbody/tr[2]").Text
 		});
+			*/
 			//var tex3 = _driver.FindElement(By.XPath("//*[@id='borderB']/tbody/tr[2]"));
 			//Lms3CrawlingData.Items.Add(tex3.Text);
 		}
@@ -467,13 +499,25 @@ namespace crawling
 
 		public void TextUpLoad4()
 		{
-			L_Data.Add(new LmsData()
-			{
-				LmsSubject = _driver.FindElementByXPath("//*[@id='gname']").Text.Substring(9),
-				LmsTitle = _driver.FindElementByXPath("//*[@id='board']/tbody/tr[2]").Text,
-			});
-			//var tex4 = _driver.FindElement(By.XPath("//*[@id='borderB']/tbody/tr[2]"));
-			//Lms4CrawlingData.Items.Add(tex4.Text);
+
+			if (_driver.FindElementByXPath("//*[@id='board']/tbody/tr[2]").Text == "2021-1학기 " + _driver.FindElementByXPath("//*[@id='gname']").Text.Substring(9) + "강의에게 공지할 내용이 없습니다.")
+            {
+				L_Data.Add(new LmsData()
+				{
+					LmsSubject = _driver.FindElementByXPath("//*[@id='gname']").Text.Substring(9),
+					LmsTitle = "업로드된 공지가 없습니다."
+				});
+			}
+            else
+            {
+				L_Data.Add(new LmsData()
+				{
+					LmsSubject = _driver.FindElementByXPath("//*[@id='gname']").Text.Substring(9),
+					LmsTitle = _driver.FindElementByXPath("//*[@id='board']/tbody/tr[2]/td[2]").Text,
+					LmsRdate = _driver.FindElementByXPath("//*[@id='board']/tbody/tr[2]/td[3]").Text,
+
+				});
+			}
 		}
 
 

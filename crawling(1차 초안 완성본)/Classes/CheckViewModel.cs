@@ -11,6 +11,7 @@ namespace crawling.Classes
     {
         public bool Grade21 { get; set; }
         public bool Grade18 { get; set; }
+        public bool Grade15 { get; set; }
 
        // public event PropertyChangedEventHandler PropertyChanged;
     }
