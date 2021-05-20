@@ -4,9 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:카카오톡_메시지_API_test"
+        xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
         mc:Ignorable="d"
         Title="KakaoLoginPage" Height="500" Width="700">
     <WebBrowser x:Name="WebBrowser1">
-        
+
     </WebBrowser>
 </Window>

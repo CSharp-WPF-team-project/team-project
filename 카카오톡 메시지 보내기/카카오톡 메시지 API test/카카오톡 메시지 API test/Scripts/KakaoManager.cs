@@ -17,7 +17,7 @@ namespace 카카오톡_메시지_API_test.Scripts
 
         public bool GetUserToKen(WebBrowser webBrowser)
         {
-            string wUrl = webBrowser.ToString();
+            string wUrl = webBrowser.Source.ToString();
             string userToken = wUrl.Substring(wUrl.IndexOf("=") + 1);
 
             if (wUrl.CompareTo(KakaoApiEndPoint.KakaoRedirectUrl + "?code=" + userToken) == 0)
