@@ -16,15 +16,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-using System.IO;
 using crawling.Classes;
 //Selenium Library
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 //excel
-using Excel = Microsoft.Office.Interop.Excel;
 using System.Runtime.InteropServices;
+using Excel = Microsoft.Office.Interop.Excel;
+
+
 
 namespace crawling
 {
@@ -35,7 +36,6 @@ namespace crawling
 	{
 		List<DepartmentData> D_Data = new List<DepartmentData>();
 		List<LmsData> L_Data = new List<LmsData>();
-
 		protected ChromeDriverService _driverService = null;
 		protected ChromeOptions _options = null;
 		protected ChromeDriver _driver = null;
@@ -46,6 +46,12 @@ namespace crawling
 		static string id;
 		static string pw;
 		static int grade;
+
+		//필드
+		static Excel.Application excelApp = null;
+		static Excel.Workbook workBook = null;
+		static Excel.Worksheet workSheet = null;
+
 
 		public MainWindow()
 		{
@@ -61,7 +67,7 @@ namespace crawling
 			_driverService.HideCommandPromptWindow = true;
 
 			_options = new ChromeOptions();
-			_options.AddArgument("headless");
+		    _options.AddArgument("headless");
 			_options.AddArgument("disable-gpu");
 
 			this.DataContext = new LoginViewModel();
@@ -95,7 +101,7 @@ namespace crawling
 				element = _driver.FindElementByXPath("//*[@id='loginform']/table/tbody/tr[1]/td[2]/input");
 				element.Click();
 
-				element = _driver.FindElementByXPath("//*[@id='boardAbox']/form/table/tbody/tr[1]/td[2]");
+				element = _driver.FindElementByXPath("//*[@id='nav']/li[10]/a");
 				element.Click();
 
 				MessageBox.Show("로그인 성공! 원하는 메뉴를 클릭해주세요");
@@ -120,30 +126,28 @@ namespace crawling
 			foreach (CheckBox cbx in stp.Children.OfType<CheckBox>())
 			{
 
-				if (cbx.Content.ToString() == "21.5학점(대진설O)")
-				{
+			      if (cbx.Content.ToString() == "21.5학점(대진설O)")
+			      {
 					grade = 21;
-				}
-				if (cbx.Content.ToString() == "18.5학점(대진설O)")
-				{
+				  }
+				  if (cbx.Content.ToString() == "18.5학점(대진설O)")
+				  {
 					grade = 18;
-				}
-				if (cbx.Content.ToString() == "15.5학점(대진설O)")
-				{
-					grade = 15;
-				}
+				  }
+				  if (cbx.Content.ToString() == "15.5학점(대진설O)")
+				  {
+				 	grade = 15;
+				  }
 			}
 			Start2();
 			countBtn1++;
-			//Test 
-			saveAsExcel();
 		}
 		private async void Start2()
 		{
 			var task2 = Task.Run(() => DataCrawling());
 			await task2;
 			Lms2CrawlingData.ItemsSource = L_Data;
-
+			saveAsExcel();
 		}
 
 		public void DataCrawling()
@@ -178,48 +182,48 @@ namespace crawling
 			element = _driver.FindElementByXPath("//*[@id='nav']/li[3]/a");
 			element.Click();
 
-			if (grade == 21)
-			{
-				for (int i = 2; i < 10; i++)
-				{
-					element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
-					element.Click();
-					string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
-					string url = string.Format(BASE_Path, i);
-					string BASE_value = url;
-					element = _driver.FindElementByXPath(BASE_value);
-					element.Click();
-					TextUpLoad2();
+				if(grade == 21)
+			    { 
+					for (int i = 2; i < 10; i++)
+					{
+						element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
+						element.Click();
+						string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
+						string url = string.Format(BASE_Path, i);
+						string BASE_value = url;
+						element = _driver.FindElementByXPath(BASE_value);
+						element.Click();
+						TextUpLoad2();
+					}
 				}
-			}
-			if (grade == 18)
-			{
-				for (int i = 2; i < 9; i++)
+				if (grade == 18)
 				{
-					element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
-					element.Click();
-					string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
-					string url = string.Format(BASE_Path, i);
-					string BASE_value = url;
-					element = _driver.FindElementByXPath(BASE_value);
-					element.Click();
-					TextUpLoad2();
+					for (int i = 2; i < 9; i++)
+					{
+						element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
+						element.Click();
+						string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
+						string url = string.Format(BASE_Path, i);
+						string BASE_value = url;
+						element = _driver.FindElementByXPath(BASE_value);
+						element.Click();
+						TextUpLoad2();
+					}
 				}
-			}
-			if (grade == 15)
-			{
-				for (int i = 2; i < 8; i++)
+				if (grade == 15)
 				{
-					element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
-					element.Click();
-					string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
-					string url = string.Format(BASE_Path, i);
-					string BASE_value = url;
-					element = _driver.FindElementByXPath(BASE_value);
-					element.Click();
-					TextUpLoad2();
+					for (int i = 2; i < 8; i++)
+					{
+						element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
+						element.Click();
+						string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
+						string url = string.Format(BASE_Path, i);
+						string BASE_value = url;
+						element = _driver.FindElementByXPath(BASE_value);
+						element.Click();
+						TextUpLoad2();
+					}
 				}
-			}
 			_driver.Close();
 		}
 
@@ -317,52 +321,52 @@ namespace crawling
 			if (grade == 21)
 			{
 				for (int i = 2; i < 10; i++)
-				{
-					element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
-					element.Click();
-					string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
-					string url = string.Format(BASE_Path, i);
-					string BASE_value = url;
-					element = _driver.FindElementByXPath(BASE_value);
-					element.Click();
-					TextUpLoad3();
-				}
+							{
+								element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
+								element.Click();
+								string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
+								string url = string.Format(BASE_Path, i);
+								string BASE_value = url;
+								element = _driver.FindElementByXPath(BASE_value);
+								element.Click();
+								TextUpLoad3();
+							}
 			}
 			if (grade == 18)
 			{
 				for (int i = 2; i < 9; i++)
 				{
-					element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
-					element.Click();
-					string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
-					string url = string.Format(BASE_Path, i);
-					string BASE_value = url;
-					element = _driver.FindElementByXPath(BASE_value);
-					element.Click();
-					TextUpLoad3();
+								element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
+								element.Click();
+								string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
+								string url = string.Format(BASE_Path, i);
+								string BASE_value = url;
+								element = _driver.FindElementByXPath(BASE_value);
+								element.Click();
+								TextUpLoad3();
 				}
 			}
 			if (grade == 15)
 			{
 				for (int i = 2; i < 8; i++)
 				{
-					element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
-					element.Click();
-					string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
-					string url = string.Format(BASE_Path, i);
-					string BASE_value = url;
-					element = _driver.FindElementByXPath(BASE_value);
-					element.Click();
-					TextUpLoad3();
+								element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
+								element.Click();
+								string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
+								string url = string.Format(BASE_Path, i);
+								string BASE_value = url;
+								element = _driver.FindElementByXPath(BASE_value);
+								element.Click();
+								TextUpLoad3();
 				}
 			}
 			_driver.Close();
 		}
-
+	
 		public void TextUpLoad3()
 		{
-			if (_driver.FindElementByXPath("//*[@id='borderB']/tbody/tr[2]").Text == "해당하는 레포트 정보가 없습니다.")
-			{
+			if(_driver.FindElementByXPath("//*[@id='borderB']/tbody/tr[2]").Text == "해당하는 레포트 정보가 없습니다.")
+            {
 				L_Data.Add(new LmsData()
 				{
 					LmsSubject = _driver.FindElementByXPath("//*[@id='center']/div/div[1]/div[1]/div[1]").Text.Substring(9),
@@ -370,8 +374,8 @@ namespace crawling
 				});
 				return;
 			}
-			else
-			{
+            else
+            {
 				L_Data.Add(new LmsData()
 				{
 					LmsSubject = _driver.FindElementByXPath("//*[@id='center']/div/div[1]/div[1]/div[1]").Text.Substring(9),
@@ -420,7 +424,7 @@ namespace crawling
 			countBtn1++;
 		}
 		private async void Start4()
-		{
+        {
 			var task4 = Task.Run(() => NoticeCrawling());
 			await task4;
 			Lms4CrawlingData.ItemsSource = L_Data;
@@ -477,26 +481,26 @@ namespace crawling
 			{
 				for (int i = 2; i < 9; i++)
 				{
-					string BASE_Path = "//*[@id='treebox']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
-					string url = string.Format(BASE_Path, i);
-					string BASE_value = url;
-					element = _driver.FindElementByXPath(BASE_value);
-					element.Click();
-					Thread.Sleep(300);
-					TextUpLoad4();
+								string BASE_Path = "//*[@id='treebox']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
+								string url = string.Format(BASE_Path, i);
+								string BASE_value = url;
+								element = _driver.FindElementByXPath(BASE_value);
+								element.Click();
+								Thread.Sleep(300);
+								TextUpLoad4();
 				}
 			}
 			if (grade == 15)
 			{
 				for (int i = 2; i < 8; i++)
 				{
-					string BASE_Path = "//*[@id='treebox']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
-					string url = string.Format(BASE_Path, i);
-					string BASE_value = url;
-					element = _driver.FindElementByXPath(BASE_value);
-					element.Click();
-					Thread.Sleep(300);
-					TextUpLoad4();
+								string BASE_Path = "//*[@id='treebox']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
+								string url = string.Format(BASE_Path, i);
+								string BASE_value = url;
+								element = _driver.FindElementByXPath(BASE_value);
+								element.Click();
+								Thread.Sleep(300);
+								TextUpLoad4();
 				}
 			}
 			_driver.Close();
@@ -506,15 +510,15 @@ namespace crawling
 		{
 
 			if (_driver.FindElementByXPath("//*[@id='board']/tbody/tr[2]").Text == "2021-1학기 " + _driver.FindElementByXPath("//*[@id='gname']").Text.Substring(9) + "강의에게 공지할 내용이 없습니다.")
-			{
+            {
 				L_Data.Add(new LmsData()
 				{
 					LmsSubject = _driver.FindElementByXPath("//*[@id='gname']").Text.Substring(9),
 					LmsTitle = "업로드된 공지가 없습니다."
 				});
 			}
-			else
-			{
+            else
+            {
 				L_Data.Add(new LmsData()
 				{
 					LmsSubject = _driver.FindElementByXPath("//*[@id='gname']").Text.Substring(9),
@@ -568,13 +572,9 @@ namespace crawling
 			_driver.Close();
 		}
 
-		//----엑셀로 저장하기!!!!!!!!!
+		//엑셀 파일 옮기기
 		public void saveAsExcel()
 		{
-			Excel.Application excelApp = null;
-			Excel.Workbook workBook = null;
-			Excel.Worksheet workSheet = null;
-
 			try
 			{
 				string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -590,7 +590,7 @@ namespace crawling
 
 				for (int i = 0; i < Lms2CrawlingData.Items.Count; i++)
 				{
-					
+
 					workSheet.Cells[2 + i, 1] = L_Data.ElementAt(i).LmsSubject;
 					workSheet.Cells[2 + i, 2] = L_Data.ElementAt(i).LmsTitle;
 					workSheet.Cells[2 + i, 3] = L_Data.ElementAt(i).LmsRdate;
@@ -606,7 +606,7 @@ namespace crawling
 				ReleaseObject(workBook);
 				ReleaseObject(excelApp);
 			}
-	}
+		}
 		static void ReleaseObject(object obj)
 		{
 			try
@@ -624,5 +624,8 @@ namespace crawling
 			}
 			finally { GC.Collect(); }
 		}
+
+
+
 	}
 }

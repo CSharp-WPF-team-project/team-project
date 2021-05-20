@@ -21,6 +21,9 @@ using crawling.Classes;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
+//excel
+using System.Runtime.InteropServices;
+using Excel = Microsoft.Office.Interop.Excel;
 
 
 
@@ -43,6 +46,12 @@ namespace crawling
 		static string id;
 		static string pw;
 		static int grade;
+
+		//필드
+		static Excel.Application excelApp = null;
+		static Excel.Workbook workBook = null;
+		static Excel.Worksheet workSheet = null;
+
 
 		public MainWindow()
 		{
@@ -92,8 +101,7 @@ namespace crawling
 				element = _driver.FindElementByXPath("//*[@id='loginform']/table/tbody/tr[1]/td[2]/input");
 				element.Click();
 
-				element = _driver.FindElementByXPath("//*[@id='nav']/li[10]/a");
-				element.Click();
+				element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[2]/ul/li[1]/b");
 
 				MessageBox.Show("로그인 성공! 원하는 메뉴를 클릭해주세요");
 
@@ -138,7 +146,7 @@ namespace crawling
 			var task2 = Task.Run(() => DataCrawling());
 			await task2;
 			Lms2CrawlingData.ItemsSource = L_Data;
-
+			saveAsExcel();
 		}
 
 		public void DataCrawling()
@@ -562,5 +570,60 @@ namespace crawling
 			}
 			_driver.Close();
 		}
+
+		public void saveAsExcel()
+		{
+			try
+			{
+				string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+				string path = System.IO.Path.Combine(desktopPath, "Excel.xlsx");
+
+				excelApp = new Excel.Application();
+				workBook = excelApp.Workbooks.Add();
+				workSheet = workBook.Worksheets.get_Item(1) as Excel.Worksheet;
+
+				workSheet.Cells[1, 1] = c1.Header.ToString();
+				workSheet.Cells[1, 2] = c2.Header.ToString();
+				workSheet.Cells[1, 3] = c3.Header.ToString();
+
+				for (int i = 0; i < Lms2CrawlingData.Items.Count; i++)
+				{
+
+					workSheet.Cells[2 + i, 1] = L_Data.ElementAt(i).LmsSubject;
+					workSheet.Cells[2 + i, 2] = L_Data.ElementAt(i).LmsTitle;
+					workSheet.Cells[2 + i, 3] = L_Data.ElementAt(i).LmsRdate;
+				}
+				workSheet.Columns.AutoFit();
+				workSheet.SaveAs(path, Excel.XlFileFormat.xlWorkbookDefault);
+				workBook.Close(true);
+				excelApp.Quit();
+			}
+			finally
+			{
+				ReleaseObject(workSheet);
+				ReleaseObject(workBook);
+				ReleaseObject(excelApp);
+			}
+		}
+		static void ReleaseObject(object obj)
+		{
+			try
+			{
+				if (obj != null)
+				{
+					Marshal.ReleaseComObject(obj);
+					obj = null;
+				}
+			}
+			catch (Exception ex)
+			{
+				obj = null;
+				throw ex;
+			}
+			finally { GC.Collect(); }
+		}
+
+
+
 	}
 }
