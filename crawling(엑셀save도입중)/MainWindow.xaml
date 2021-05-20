@@ -21,7 +21,7 @@
 
             <ListView x:Name="Lms2CrawlingData"
                       Height="90 px"
-                      BorderBrush="Gray" >
+                      BorderBrush="Gray">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn x:Name="c1" Header="강의명" 

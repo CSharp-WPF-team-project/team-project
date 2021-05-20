@@ -92,7 +92,7 @@ namespace crawling
 				element = _driver.FindElementByXPath("//*[@id='loginform']/table/tbody/tr[1]/td[2]/input");
 				element.Click();
 
-				element = _driver.FindElementByXPath("//*[@id='boardAbox']/form/table/tbody/tr[1]/td[2]");
+				element = _driver.FindElementByXPath("//*[@id='nav']/li[10]/a");
 				element.Click();
 
 				MessageBox.Show("로그인 성공! 원하는 메뉴를 클릭해주세요");
