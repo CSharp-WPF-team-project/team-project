@@ -77,7 +77,7 @@ namespace 카카오톡_메시지_API_test
             LinkJson.Add("mobile_web_url", "https://developers.kakao.com");
 
             SendJson.Add("object_type", "text");
-            SendJson.Add("text", "커스텀 메시지 입니다.\n\n https://jaeho0613.tistory.com/ \n\n");
+            SendJson.Add("text", "커스텀 메시지 입니다. https://github.com/Byuntil \n\n");
             SendJson.Add("link", LinkJson);
             SendJson.Add("button_title", "안녕");
 
