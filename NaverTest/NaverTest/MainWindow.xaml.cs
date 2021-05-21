@@ -26,8 +26,8 @@ namespace NaverTest
 
         private void NaverLogin_Click(object sender, RoutedEventArgs e)
         {
-            String ClientID = "fB9PdAptMEE7HUFSP6Ww";
-            String RedirectURL = "http://localhost:8089/naver/callback.php";
+            String ClientID = "J28A5dcsid19CvRnHrq3";
+            String RedirectURL = "http://google.com";
 
             String State = (new Random()).Next().ToString();
 
