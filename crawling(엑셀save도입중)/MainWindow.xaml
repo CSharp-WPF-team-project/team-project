@@ -81,16 +81,16 @@
                       >
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="번호" 
+                        <GridViewColumn x:Name="majorC1"  Header="번호" 
                                         DisplayMemberBinding="{Binding D_Num}" 
                                         Width="65"/>
-                        <GridViewColumn Header="제목" 
+                        <GridViewColumn x:Name="majorC2" Header="제목" 
                                         DisplayMemberBinding="{Binding D_Title}" 
                                         Width="600"/>
-                        <GridViewColumn Header="작성자" 
+                        <GridViewColumn x:Name="majorC3" Header="작성자" 
                                         DisplayMemberBinding="{Binding D_Writer}"
                                         Width="100"/>
-                        <GridViewColumn Header="작성일" 
+                        <GridViewColumn x:Name="majorC4" Header="작성일" 
                                         DisplayMemberBinding="{Binding D_Rdate}"
                                         Width="110"/>
                     </GridView> 

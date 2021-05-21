@@ -29,9 +29,11 @@ using Excel = Microsoft.Office.Interop.Excel;
 
 namespace crawling
 {
-	/// <summary>
-	/// MainWindow.xaml에 대한 상호 작용 논리
-	/// </summary>
+	public enum WhatButton //어떤 버튼이 클릭되었는 지에 따라서 저장해야하는 excel 파일이 다르게 하기 위해 배열 생성
+    {
+		button2, button3, button4, button5
+    }
+
 	public partial class MainWindow : Window
 	{
 		List<DepartmentData> D_Data = new List<DepartmentData>();
@@ -42,16 +44,17 @@ namespace crawling
 
 		int countBtn1 = 0; // 처음 실행이 아님을 확인
 		int countBtn2 = 0; // 처음 실행이 아님을 확인
+		
 
 		static string id;
 		static string pw;
 		static int grade;
 
-		//필드
+		//엑셀 앱관련  필드
 		static Excel.Application excelApp = null;
 		static Excel.Workbook workBook = null;
 		static Excel.Worksheet workSheet = null;
-
+		WhatButton whatButton;//배열 생성 
 
 		public MainWindow()
 		{
@@ -119,6 +122,7 @@ namespace crawling
 		// ------------------강의자료 긁어오기--------------------------
 		public void button2_Initialized(object sender, EventArgs e)
 		{
+			whatButton = WhatButton.button2;//button2가 기록됨
 			if (countBtn1 != 0)
 			{
 				L_Data.Clear();
@@ -254,6 +258,7 @@ namespace crawling
 
 		public void button3_Initialized(object sender, EventArgs e)
 		{
+			whatButton = WhatButton.button3;//button3가 기록됨
 			if (countBtn1 != 0)
 			{
 				L_Data.Clear();
@@ -283,6 +288,7 @@ namespace crawling
 			var task3 = Task.Run(() => ReportCrawling());
 			await task3;
 			Lms3CrawlingData.ItemsSource = L_Data;
+			saveAsExcel();
 
 		}
 
@@ -399,6 +405,7 @@ namespace crawling
 		// ------------------강의공지 긁어오기--------------------------
 		public void button4_Initialized(object sender, EventArgs e)
 		{
+			whatButton = WhatButton.button4;//button4가 기록됨
 			if (countBtn1 != 0)
 			{
 				L_Data.Clear();
@@ -428,6 +435,7 @@ namespace crawling
 			var task4 = Task.Run(() => NoticeCrawling());
 			await task4;
 			Lms4CrawlingData.ItemsSource = L_Data;
+			saveAsExcel();
 
 		}
 
@@ -533,6 +541,7 @@ namespace crawling
 		// ------------------학과공지 긁어오기--------------------------
 		private void button5_Initialized(object sender, EventArgs e)
 		{
+			whatButton = WhatButton.button5;//button5가 기록됨
 			if (countBtn2 != 0)
 			{
 				D_Data.Clear();
@@ -546,6 +555,7 @@ namespace crawling
 			var task5 = Task.Run(() => SubjectCrawling());
 			await task5;
 			DepartmentCrawlingData.ItemsSource = D_Data;
+			saveAsExcel();
 		}
 		private void SubjectCrawling()
 		{
@@ -578,27 +588,104 @@ namespace crawling
 			try
 			{
 				string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-				string path = System.IO.Path.Combine(desktopPath, "Excel.xlsx");
+				switch (whatButton)
+                {
+					case WhatButton.button2:
+						string path2 = System.IO.Path.Combine(desktopPath, "강의자료.xlsx");
 
-				excelApp = new Excel.Application();
-				workBook = excelApp.Workbooks.Add();
-				workSheet = workBook.Worksheets.get_Item(1) as Excel.Worksheet;
+						excelApp = new Excel.Application();
+						workBook = excelApp.Workbooks.Add();
+						workSheet = workBook.Worksheets.get_Item(1) as Excel.Worksheet;
 
-				workSheet.Cells[1, 1] = c1.Header.ToString();
-				workSheet.Cells[1, 2] = c2.Header.ToString();
-				workSheet.Cells[1, 3] = c3.Header.ToString();
+						workSheet.Cells[1, 1] = c1.Header.ToString();
+						workSheet.Cells[1, 2] = c2.Header.ToString();
+						workSheet.Cells[1, 3] = c3.Header.ToString();
 
-				for (int i = 0; i < Lms2CrawlingData.Items.Count; i++)
-				{
+						for (int i = 0; i < Lms2CrawlingData.Items.Count; i++)
+						{
 
-					workSheet.Cells[2 + i, 1] = L_Data.ElementAt(i).LmsSubject;
-					workSheet.Cells[2 + i, 2] = L_Data.ElementAt(i).LmsTitle;
-					workSheet.Cells[2 + i, 3] = L_Data.ElementAt(i).LmsRdate;
+							workSheet.Cells[2 + i, 1] = L_Data.ElementAt(i).LmsSubject;
+							workSheet.Cells[2 + i, 2] = L_Data.ElementAt(i).LmsTitle;
+							workSheet.Cells[2 + i, 3] = L_Data.ElementAt(i).LmsRdate;
+						}
+						workSheet.Columns.AutoFit();
+						workSheet.SaveAs(path2, Excel.XlFileFormat.xlWorkbookDefault);
+						workBook.Close(true);
+						excelApp.Quit();
+						break;
+
+					case WhatButton.button3:
+						string path3 = System.IO.Path.Combine(desktopPath, "강의레포트.xlsx");
+
+						excelApp = new Excel.Application();
+						workBook = excelApp.Workbooks.Add();
+						workSheet = workBook.Worksheets.get_Item(1) as Excel.Worksheet;
+
+						workSheet.Cells[1, 1] = c1.Header.ToString();
+						workSheet.Cells[1, 2] = c2.Header.ToString();
+						workSheet.Cells[1, 3] = c3.Header.ToString();
+
+						for (int i = 0; i < Lms2CrawlingData.Items.Count; i++)
+						{
+
+							workSheet.Cells[2 + i, 1] = L_Data.ElementAt(i).LmsSubject;
+							workSheet.Cells[2 + i, 2] = L_Data.ElementAt(i).LmsTitle;
+							workSheet.Cells[2 + i, 3] = L_Data.ElementAt(i).LmsRdate;
+						}
+						workSheet.Columns.AutoFit();
+						workSheet.SaveAs(path3, Excel.XlFileFormat.xlWorkbookDefault);
+						workBook.Close(true);
+						excelApp.Quit();
+						break;
+
+					case WhatButton.button4:
+						string path4 = System.IO.Path.Combine(desktopPath, "강의공지.xlsx");
+						excelApp = new Excel.Application();
+						workBook = excelApp.Workbooks.Add();
+						workSheet = workBook.Worksheets.get_Item(1) as Excel.Worksheet;
+
+						workSheet.Cells[1, 1] = c1.Header.ToString();
+						workSheet.Cells[1, 2] = c2.Header.ToString();
+						workSheet.Cells[1, 3] = c3.Header.ToString();
+
+						for (int i = 0; i < Lms2CrawlingData.Items.Count; i++)
+						{
+
+							workSheet.Cells[2 + i, 1] = L_Data.ElementAt(i).LmsSubject;
+							workSheet.Cells[2 + i, 2] = L_Data.ElementAt(i).LmsTitle;
+							workSheet.Cells[2 + i, 3] = L_Data.ElementAt(i).LmsRdate;
+						}
+						workSheet.Columns.AutoFit();
+						workSheet.SaveAs(path4, Excel.XlFileFormat.xlWorkbookDefault);
+						workBook.Close(true);
+						excelApp.Quit();
+						break;
+					case WhatButton.button5:
+						string path5 = System.IO.Path.Combine(desktopPath, "학과공지.xlsx");
+
+						excelApp = new Excel.Application();
+						workBook = excelApp.Workbooks.Add();
+						workSheet = workBook.Worksheets.get_Item(1) as Excel.Worksheet;
+
+						workSheet.Cells[1, 1] = majorC1.Header.ToString();
+						workSheet.Cells[1, 2] = majorC2.Header.ToString();
+						workSheet.Cells[1, 3] = majorC3.Header.ToString();
+						workSheet.Cells[1, 4] = majorC4.Header.ToString();
+
+						for (int i = 0; i < Lms2CrawlingData.Items.Count; i++)
+						{
+
+							workSheet.Cells[2 + i, 1] = D_Data.ElementAt(i).D_Num;
+							workSheet.Cells[2 + i, 2] = D_Data.ElementAt(i).D_Title;
+							workSheet.Cells[2 + i, 3] = D_Data.ElementAt(i).D_Writer;
+							workSheet.Cells[2 + i, 4] = D_Data.ElementAt(i).D_Rdate;
+						}
+						workSheet.Columns.AutoFit();
+						workSheet.SaveAs(path5, Excel.XlFileFormat.xlWorkbookDefault);
+						workBook.Close(true);
+						excelApp.Quit();
+						break;
 				}
-				workSheet.Columns.AutoFit();
-				workSheet.SaveAs(path, Excel.XlFileFormat.xlWorkbookDefault);
-				workBook.Close(true);
-				excelApp.Quit();
 			}
 			finally
 			{
