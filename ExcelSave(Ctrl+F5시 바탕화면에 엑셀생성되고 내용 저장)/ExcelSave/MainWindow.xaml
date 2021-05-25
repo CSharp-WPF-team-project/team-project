@@ -25,6 +25,10 @@
                 
             </ListView>
         </StackPanel>
-        
+        <StackPanel Grid.Row="1" Margin="5">
+            <Button x:Name="readButton" Content="ReadExcel" Click="readButton_Click"/>
+            <Button x:Name="compareButton" Content="Compare" Click="compareButton_Click"/>
+        </StackPanel>
+
     </Grid>
 </Window>

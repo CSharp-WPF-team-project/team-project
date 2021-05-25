@@ -53,7 +53,7 @@ namespace ExcelSave
                 for(int i = 0; i<beverageView.Items.Count;i++)
                 {
                     beverageData b_Data = beverageData.GetInstance().ElementAt(i);
-                    workSheet.Cells[2 + i, 1] =b_Data.kind;
+                    workSheet.Cells[2 + i, 1] = b_Data.kind;
                     workSheet.Cells[2 + i, 2] = b_Data.name;
                     workSheet.Cells[2 + i, 3] = b_Data.price;
                 }
@@ -87,6 +87,54 @@ namespace ExcelSave
                 throw ex; 
             }
             finally { GC.Collect(); }
+        }
+
+        private void readButton_Click(object sender, RoutedEventArgs e)
+        {
+            ReadExcel();
+        }
+
+        public void ReadExcel()
+        {
+            Excel.Application excelApp = null;
+            Excel.Workbook wb = null;
+            Excel.Worksheet ws = null;
+
+            try
+            {
+                excelApp = new Excel.Application();
+
+                //엑셀 파일 열기
+                string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                string path = System.IO.Path.Combine(desktopPath, "Excel.xlsx");
+                wb = excelApp.Workbooks.Open(path);
+                //첫 번째 Worksheet
+                ws = wb.Worksheets.get_Item(1) as Excel.Worksheet;
+                //현재 Worksheet에서 일부 범위만 선택 → 속도를 위해
+                Excel.Range rng = ws.Range[ws.Cells[1, 1], ws.Cells[4, 9]];
+                //Range 데이타를 배열 (One-based array)로
+                object[,] data = rng.Value;
+
+                //excelData에 기록.
+                for (int r = 2; r <= data.GetLength(0); r++)
+                {
+                    excelData.GetE_Data().Add(new excelData() { Ekind = data[r, 1].ToString(), Ename = data[r, 2].ToString(), Eprice = Int32.Parse(data[r, 3].ToString()) });
+                }
+
+                wb.Close(true);
+                excelApp.Quit();
+            }
+            finally
+            {
+                ReleaseObject(ws);
+                ReleaseObject(wb);
+                ReleaseObject(excelApp);
+            }
+        }
+
+        private void compareButton_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
