@@ -1,63 +1,63 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace crawling.Model
 {
-    public class DepartmentData
+    public class LmsData3
     {
-        private string d_num;
-        private string d_title;
-        private string d_writer;
-        private string d_rdate;
-        public string D_Num
+        private string lmsSubject3;
+        private string lmsTitle3;
+        private string lmsWriter3;
+        private string lmsRdate3;
+
+        public string LmsSubject3
         {
             get
             {
-                return d_num;
+                return lmsSubject3;
             }
             set
             {
-                d_num = value;
+                lmsSubject3 = value;
             }
         }
-        public string D_Title
+
+        public string LmsTitle3
         {
             get
             {
-                return d_title;
+                return lmsTitle3;
             }
             set
             {
-                d_title = value;
+                lmsTitle3 = value;
             }
         }
-        public string D_Writer
+        public string LmsWriter3
         {
             get
             {
-                return d_writer;
+                return lmsWriter3;
             }
             set
             {
-                d_writer = value;
+                lmsWriter3 = value;
             }
         }
-        public string D_Rdate
+        public string LmsRdate3
         {
             get
             {
-                return d_rdate;
+                return lmsRdate3;
             }
             set
             {
-                d_rdate = value;
+                lmsRdate3 = value;
             }
         }
 
     }
-    
 }

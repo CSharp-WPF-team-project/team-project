@@ -4,10 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:crawling"
+        xmlns:md="clr-namespace:crawling.Model"
         xmlns:vm="clr-namespace:crawling.ViewModel"
         xmlns:cv="clr-namespace:crawling.ViewModel.Converter"
+        xmlns:cm="clr-namespace:crawling.ViewModel.Command"
         mc:Ignorable="d"
         Title="MainWindow" Height="760 " Width="900">
+
     <Window.Resources>
         <cv:LoginConverter x:Key="LoginCVT"/>
         <vm:CrawlingVM x:Key="vm"/>
@@ -23,60 +26,67 @@
 
         </Grid.RowDefinitions>
 
-        <StackPanel 
+        <StackPanel
                      Grid.ColumnSpan="2" Margin="0,0,-0.4,0.4">
 
             <ListView x:Name="Lms2CrawlingData"
-                      ItemsSource="{Binding Source={StaticResource vm},
-                                            Path=L_Data}"
+                       ItemsSource="{Binding Source={StaticResource vm},
+                Path=L_Data1_Main}"
                       Height="90 px"
                       BorderBrush="Gray">
                 <ListView.View>
-                    <GridView>
+                    <GridView AllowsColumnReorder="True">
                         <GridViewColumn Header="강의명" 
-                                        DisplayMemberBinding="{Binding LmsSubject}" 
+                                        DisplayMemberBinding="{Binding Path=LmsSubject}"
                                         Width="200"/>
                         <GridViewColumn Header="제목" 
-                                        DisplayMemberBinding="{Binding LmsTitle}" 
+                                        DisplayMemberBinding="{Binding Path=LmsTitle}"
                                         Width="500 "/>
                         <GridViewColumn Header="작성일" 
-                                        DisplayMemberBinding="{Binding LmsRdate}"
+                                        DisplayMemberBinding="{Binding Path=LmsRdate}"
                                         Width="200"/>
                     </GridView>
                 </ListView.View>
             </ListView>
 
             <ListView x:Name="Lms3CrawlingData"
+                               ItemsSource="{Binding Source={StaticResource vm},
+                Path=L_Data2_Main}"
                       Height="90 px"
                       BorderBrush="Gray">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="강의명" 
-                                        DisplayMemberBinding="{Binding LmsSubject}" 
+                                        DisplayMemberBinding="{Binding LmsSubject2}" 
                                         Width="200"/>
                         <GridViewColumn Header="제목" 
-                                        DisplayMemberBinding="{Binding LmsTitle}" 
-                                        Width="500 "/>
-                        <GridViewColumn Header="작성일" 
-                                        DisplayMemberBinding="{Binding LmsRdate}"
-                                        Width="200"/>
+                                        DisplayMemberBinding="{Binding LmsTitle2}" 
+                                        Width="300 "/>
+                        <GridViewColumn Header="제출일시"
+                                        DisplayMemberBinding="{Binding LmsEndDate2}"
+                                        Width="250"/>
+                        <GridViewColumn Header="작성일"
+                                        DisplayMemberBinding="{Binding LmsRdate2}"
+                                        Width="150"/>
                     </GridView>
                 </ListView.View>
             </ListView>
 
             <ListView x:Name="Lms4CrawlingData"
+                      ItemsSource="{Binding Source={StaticResource vm},
+                Path=L_Data3_Main}"
                       Height="80 px"
                       BorderBrush="Gray">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="강의명" 
-                                        DisplayMemberBinding="{Binding LmsSubject}" 
+                                        DisplayMemberBinding="{Binding LmsSubject3}" 
                                         Width="200"/>
                         <GridViewColumn Header="제목" 
-                                        DisplayMemberBinding="{Binding LmsTitle}" 
+                                        DisplayMemberBinding="{Binding LmsTitle3}" 
                                         Width="500 "/>
                         <GridViewColumn Header="작성일" 
-                                        DisplayMemberBinding="{Binding LmsRdate}"
+                                        DisplayMemberBinding="{Binding LmsRdate3}"
                                         Width="200"/>
                     </GridView>
                 </ListView.View>
@@ -85,6 +95,8 @@
 
 
             <ListView x:Name="DepartmentCrawlingData"
+                       ItemsSource="{Binding Source={StaticResource vm},
+                Path=D_Data_Main}"
                       Height="80px"
                       BorderBrush="Gray"
                       >
@@ -173,10 +185,9 @@
 
             </TextBlock>
 
-            <StackPanel x:Name ="stp" Grid.Row="1" Orientation="Horizontal">
+            <StackPanel Grid.Row="1" Orientation="Horizontal">
                 <CheckBox x:Name="학점21"
-                    Content="21.5학점(대진설O)" Margin="20,0"
-                         IsChecked="{Binding }"/>
+                    Content="21.5학점(대진설O)" Margin="20,0"/>
                 <CheckBox  x:Name="학점18"
                     Content="18.5학점(대진설O)" Margin="20,0"/>
                 <CheckBox x:Name="학점15"
@@ -223,6 +234,8 @@
             </Button>
 
             <Button x:Name="button3"
+                     Command="{Binding Source={StaticResource vm},
+                                     Path=ReportLmsCmd}"
                         Content="강의레포트검색"
                         Height="30px"
                         Margin="30 1 30 1 "             
@@ -236,6 +249,8 @@
 
             <Button x:Name="button4"
                         Content="강의공지검색"
+                         Command="{Binding Source={StaticResource vm},
+                                     Path=NoticeLmsCmd}"
                         Height="30px"
                         Margin="30 3 30 1"             
                         FontSize="20"
@@ -247,6 +262,8 @@
             </Button>
 
             <Button x:Name="button5"
+                      Command="{Binding Source={StaticResource vm},
+                                     Path=DepartmentDataCmd}"
                         Content="학과공지검색"
                         Height="30px"
                         Margin="30 3 30 1 "             
