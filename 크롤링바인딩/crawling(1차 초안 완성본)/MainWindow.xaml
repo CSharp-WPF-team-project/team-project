@@ -4,11 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:crawling"
+        xmlns:vm="clr-namespace:crawling.ViewModel"
+        xmlns:cv="clr-namespace:crawling.ViewModel.Converter"
         mc:Ignorable="d"
         Title="MainWindow" Height="760 " Width="900">
+    <Window.Resources>
+        <cv:LoginConverter x:Key="LoginCVT"/>
+        <vm:CrawlingVM x:Key="vm"/>
+    </Window.Resources>
 
 
-    <Grid>
+    <Grid DataContext="{StaticResource vm}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="521*"/>
             <ColumnDefinition Width="173*"/>
@@ -17,9 +23,12 @@
 
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.ColumnSpan="2" Margin="0,0,-0.4,0.4">
+        <StackPanel 
+                     Grid.ColumnSpan="2" Margin="0,0,-0.4,0.4">
 
             <ListView x:Name="Lms2CrawlingData"
+                      ItemsSource="{Binding Source={StaticResource vm},
+                                            Path=L_Data}"
                       Height="90 px"
                       BorderBrush="Gray">
                 <ListView.View>
@@ -43,17 +52,14 @@
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="강의명" 
-                                        DisplayMemberBinding="{Binding LmsSubject2}" 
+                                        DisplayMemberBinding="{Binding LmsSubject}" 
                                         Width="200"/>
                         <GridViewColumn Header="제목" 
-                                        DisplayMemberBinding="{Binding LmsTitle2}" 
-                                        Width="300 "/>
-                        <GridViewColumn Header="제출일시"
-                                        DisplayMemberBinding="{Binding LmsEndDate2}"
-                                        Width="250"/> 
-                        <GridViewColumn Header="작성일"
-                                        DisplayMemberBinding="{Binding LmsRdate2}"
-                                        Width="150"/>
+                                        DisplayMemberBinding="{Binding LmsTitle}" 
+                                        Width="500 "/>
+                        <GridViewColumn Header="작성일" 
+                                        DisplayMemberBinding="{Binding LmsRdate}"
+                                        Width="200"/>
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -64,13 +70,13 @@
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="강의명" 
-                                        DisplayMemberBinding="{Binding LmsSubject3}" 
+                                        DisplayMemberBinding="{Binding LmsSubject}" 
                                         Width="200"/>
                         <GridViewColumn Header="제목" 
-                                        DisplayMemberBinding="{Binding LmsTitle3}" 
-                                        Width="500"/>
+                                        DisplayMemberBinding="{Binding LmsTitle}" 
+                                        Width="500 "/>
                         <GridViewColumn Header="작성일" 
-                                        DisplayMemberBinding="{Binding LmsRdate3}"
+                                        DisplayMemberBinding="{Binding LmsRdate}"
                                         Width="200"/>
                     </GridView>
                 </ListView.View>
@@ -102,7 +108,6 @@
 
             <!--로그인-->
             <TextBox x:Name="ID"
-                      Text="{Binding LoginID, UpdateSourceTrigger=PropertyChanged}"
                          Height="30px"
                          Width="200px"
                          Margin="10px 80px 10px 10px"
@@ -135,7 +140,6 @@
             <!--password-->
 
             <TextBox x:Name="Passwd"
-                     Text="{Binding LoginPasswd, UpdateSourceTrigger=PropertyChanged}"
                          Height="30px"
                          Width="200px"
                          Margin="10px 40px 10px 10px"
@@ -172,7 +176,7 @@
             <StackPanel x:Name ="stp" Grid.Row="1" Orientation="Horizontal">
                 <CheckBox x:Name="학점21"
                     Content="21.5학점(대진설O)" Margin="20,0"
-                         />
+                         IsChecked="{Binding }"/>
                 <CheckBox  x:Name="학점18"
                     Content="18.5학점(대진설O)" Margin="20,0"/>
                 <CheckBox x:Name="학점15"
@@ -182,6 +186,8 @@
             <!--Sign in 버튼-->
 
             <Button x:Name="button1"
+                        Command="{Binding Source={StaticResource vm},
+                                          Path=LoginLmsCmd}"
                         Content="lms로그인"
                         Height="30px"
                         Margin="30 3 30 1"             
@@ -190,10 +196,21 @@
                         Background="#1F4787"
                         Opacity="0.9"
                         Foreground="White">
+                <Button.CommandParameter>
+                    <MultiBinding Converter="{StaticResource LoginCVT}">
+                        <Binding ElementName="ID"
+                                 Path="Text"/>
+                        <Binding ElementName="Passwd"
+                                 Path="Text"/>
+                        
+                    </MultiBinding>
+                </Button.CommandParameter>
 
             </Button>
 
             <Button x:Name="button2"
+                    Command="{Binding Source={StaticResource vm},
+                                          Path=DataLmsCmd}"
                         Content="강의자료검색"
                         Height="30px"
                         Margin="30 3 30 1"             

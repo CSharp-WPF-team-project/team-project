@@ -16,7 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-using crawling.Classes;
+using crawling.Model;
 //Selenium Library
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -32,19 +32,13 @@ namespace crawling
 	public partial class MainWindow : Window
 	{
 		List<DepartmentData> D_Data = new List<DepartmentData>();
-		List<LmsData1> L_Data1 = new List<LmsData1>();
-		List<LmsData2> L_Data2 = new List<LmsData2>();
-		List<LmsData3> L_Data3 = new List<LmsData3>();
-
+		List<LmsData> L_Data = new List<LmsData>();
 		protected ChromeDriverService _driverService = null;
 		protected ChromeOptions _options = null;
 		protected ChromeDriver _driver = null;
 
 		int countBtn1 = 0; // 처음 실행이 아님을 확인
 		int countBtn2 = 0; // 처음 실행이 아님을 확인
-		int countBtn3 = 0; // 처음 실행이 아님을 확인
-		int countBtn4 = 0; // 처음 실행이 아님을 확인
-		int countBtn5 = 0; // 처음 실행이 아님을 확인
 
 		static string id;
 		static string pw;
@@ -54,8 +48,8 @@ namespace crawling
 		{
 			InitializeComponent();
 
-			button1.Click += button1_Initialized;
-			button2.Click += button2_Initialized;
+			//button1.Click += button1_Initialized;
+			//button2.Click += button2_Initialized;
 			button3.Click += button3_Initialized;
 			button4.Click += button4_Initialized;
 			button5.Click += button5_Initialized;
@@ -67,7 +61,7 @@ namespace crawling
 		    _options.AddArgument("headless");
 			_options.AddArgument("disable-gpu");
 
-			this.DataContext = new LoginViewModel();
+			this.DataContext = new LoginModel();
 
 		}
 
@@ -76,7 +70,7 @@ namespace crawling
 		public void button1_Initialized(object sender, EventArgs e)
 
 		{
-			var viewModel = this.DataContext as LoginViewModel;
+			var viewModel = this.DataContext as LoginModel;
 
 			_driver = new ChromeDriver(_driverService, _options);
 
@@ -116,9 +110,9 @@ namespace crawling
 		// ------------------강의자료 긁어오기--------------------------
 		public void button2_Initialized(object sender, EventArgs e)
 		{
-			if (countBtn2 != 0)
+			if (countBtn1 != 0)
 			{
-				L_Data1.Clear();
+				L_Data.Clear();
 			}
 			foreach (CheckBox cbx in stp.Children.OfType<CheckBox>())
 			{
@@ -143,7 +137,7 @@ namespace crawling
 		{
 			var task2 = Task.Run(() => DataCrawling());
 			await task2;
-			Lms2CrawlingData.ItemsSource = L_Data1;
+			Lms2CrawlingData.ItemsSource = L_Data;
 
 		}
 
@@ -228,7 +222,7 @@ namespace crawling
 		{
 			if (_driver.FindElementByXPath("//*[@id='borderB']/tbody[2]/tr").Text == "해당하는 자료 정보가 없습니다.")
 			{
-				L_Data1.Add(new LmsData1()
+				L_Data.Add(new LmsData()
 				{
 					LmsSubject = _driver.FindElementByXPath("//*[@id='center']/div/div[1]/div[1]/div[1]").Text.Substring(9),
 					LmsTitle = "업로드된 자료가 없습니다."
@@ -237,7 +231,7 @@ namespace crawling
 			}
 			else
 			{
-				L_Data1.Add(new LmsData1()
+				L_Data.Add(new LmsData()
 				{
 					LmsSubject = _driver.FindElementByXPath("//*[@id='center']/div/div[1]/div[1]/div[1]").Text.Substring(9),
 					LmsTitle = _driver.FindElementByXPath("//*[@id='borderB']/tbody[2]/tr[1]/td[2]").Text,
@@ -251,9 +245,9 @@ namespace crawling
 
 		public void button3_Initialized(object sender, EventArgs e)
 		{
-			if (countBtn3 != 0)
+			if (countBtn1 != 0)
 			{
-				L_Data2.Clear();
+				L_Data.Clear();
 			}
 			foreach (CheckBox cbx in stp.Children.OfType<CheckBox>())
 			{
@@ -279,7 +273,7 @@ namespace crawling
 		{
 			var task3 = Task.Run(() => ReportCrawling());
 			await task3;
-			Lms3CrawlingData.ItemsSource = L_Data2;
+			Lms3CrawlingData.ItemsSource = L_Data;
 
 		}
 
@@ -364,21 +358,21 @@ namespace crawling
 		{
 			if(_driver.FindElementByXPath("//*[@id='borderB']/tbody/tr[2]").Text == "해당하는 레포트 정보가 없습니다.")
             {
-				L_Data2.Add(new LmsData2()
+				L_Data.Add(new LmsData()
 				{
-					LmsSubject2 = _driver.FindElementByXPath("//*[@id='center']/div/div[1]/div[1]/div[1]").Text.Substring(9),
-					LmsTitle2 = "업로드된 레포트가 없습니다."
+					LmsSubject = _driver.FindElementByXPath("//*[@id='center']/div/div[1]/div[1]/div[1]").Text.Substring(9),
+					LmsTitle = "업로드된 레포트가 없습니다."
 				});
 				return;
 			}
             else
             {
-				L_Data2.Add(new LmsData2()
+				L_Data.Add(new LmsData()
 				{
-					LmsSubject2 = _driver.FindElementByXPath("//*[@id='center']/div/div[1]/div[1]/div[1]").Text.Substring(9),
-					LmsEndDate2 = _driver.FindElementByXPath("//*[@id='borderB']/tbody/tr[2]/td[3]").Text,
-					LmsTitle2 = _driver.FindElementByXPath("//*[@id='borderB']/tbody/tr[2]/td[2]").Text,
-					LmsRdate2 = _driver.FindElementByXPath("//*[@id='borderB']/tbody/tr[2]/td[6]").Text
+					LmsSubject = _driver.FindElementByXPath("//*[@id='center']/div/div[1]/div[1]/div[1]").Text.Substring(9),
+					LmsTitle = _driver.FindElementByXPath("//*[@id='borderB']/tbody/tr[2]/td[2]").Text,
+					LmsRdate = _driver.FindElementByXPath("//*[@id='borderB']/tbody/tr[2]/td[6]").Text
+
 				});
 			}
 			/*
@@ -396,9 +390,9 @@ namespace crawling
 		// ------------------강의공지 긁어오기--------------------------
 		public void button4_Initialized(object sender, EventArgs e)
 		{
-			if (countBtn4 != 0)
+			if (countBtn1 != 0)
 			{
-				L_Data3.Clear();
+				L_Data.Clear();
 			}
 			foreach (CheckBox cbx in stp.Children.OfType<CheckBox>())
 			{
@@ -424,7 +418,7 @@ namespace crawling
         {
 			var task4 = Task.Run(() => NoticeCrawling());
 			await task4;
-			Lms4CrawlingData.ItemsSource = L_Data3;
+			Lms4CrawlingData.ItemsSource = L_Data;
 
 		}
 
@@ -508,19 +502,19 @@ namespace crawling
 
 			if (_driver.FindElementByXPath("//*[@id='board']/tbody/tr[2]").Text == "2021-1학기 " + _driver.FindElementByXPath("//*[@id='gname']").Text.Substring(9) + "강의에게 공지할 내용이 없습니다.")
             {
-				L_Data3.Add(new LmsData3()
+				L_Data.Add(new LmsData()
 				{
-					LmsSubject3 = _driver.FindElementByXPath("//*[@id='gname']").Text.Substring(9),
-					LmsTitle3 = "업로드된 공지가 없습니다."
+					LmsSubject = _driver.FindElementByXPath("//*[@id='gname']").Text.Substring(9),
+					LmsTitle = "업로드된 공지가 없습니다."
 				});
 			}
             else
             {
-				L_Data3.Add(new LmsData3()
+				L_Data.Add(new LmsData()
 				{
-					LmsSubject3 = _driver.FindElementByXPath("//*[@id='gname']").Text.Substring(9),
-					LmsTitle3 = _driver.FindElementByXPath("//*[@id='board']/tbody/tr[2]/td[2]").Text,
-					LmsRdate3 = _driver.FindElementByXPath("//*[@id='board']/tbody/tr[2]/td[3]").Text,
+					LmsSubject = _driver.FindElementByXPath("//*[@id='gname']").Text.Substring(9),
+					LmsTitle = _driver.FindElementByXPath("//*[@id='board']/tbody/tr[2]/td[2]").Text,
+					LmsRdate = _driver.FindElementByXPath("//*[@id='board']/tbody/tr[2]/td[3]").Text,
 
 				});
 			}
@@ -530,7 +524,7 @@ namespace crawling
 		// ------------------학과공지 긁어오기--------------------------
 		private void button5_Initialized(object sender, EventArgs e)
 		{
-			if (countBtn5 != 0)
+			if (countBtn2 != 0)
 			{
 				D_Data.Clear();
 			}

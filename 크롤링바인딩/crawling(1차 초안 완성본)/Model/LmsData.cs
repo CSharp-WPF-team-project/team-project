@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace crawling.Classes
+namespace crawling.Model
 {
     public class LmsData
     {
@@ -12,7 +12,6 @@ namespace crawling.Classes
         private string lmsTitle;
         private string lmsWriter;
         private string lmsRdate;
-        private string lmsEndDate;
 
         public string LmsSubject
         {
@@ -57,17 +56,6 @@ namespace crawling.Classes
             set
             {
                 lmsRdate = value;
-            }
-        }
-        public string LmsEndData
-        {
-            get
-            {
-                return lmsEndDate;
-            }
-            set
-            {
-                lmsEndDate = value;
             }
         }
 
