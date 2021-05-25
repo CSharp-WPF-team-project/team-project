@@ -151,8 +151,8 @@ namespace crawling
 			var task2 = Task.Run(() => DataCrawling());
 			await task2;
 			Lms2CrawlingData.ItemsSource = L_Data;
+			readExcel(); //반드시 save보다 read를 먼저 해야한다!!!!!!!
 			saveAsExcel();
-			readExcel(); //강의 자료만 Test 해보기!!
 		}
 
 		public void DataCrawling()
