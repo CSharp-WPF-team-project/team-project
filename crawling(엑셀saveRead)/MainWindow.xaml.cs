@@ -239,7 +239,8 @@ namespace crawling
 				L_Data.Add(new LmsData()
 				{
 					LmsSubject = _driver.FindElementByXPath("//*[@id='center']/div/div[1]/div[1]/div[1]").Text.Substring(9),
-					LmsTitle = "업로드된 자료가 없습니다."
+					LmsTitle = "업로드된 자료가 없습니다.",
+					LmsRdate ="nothing"
 				});
 				return;
 			}
@@ -713,14 +714,15 @@ namespace crawling
                 //첫 번째 Worksheet
                 ws = wb.Worksheets.get_Item(1) as Excel.Worksheet;
                 //현재 Worksheet에서 일부 범위만 선택 → 속도를 위해
-                Excel.Range rng = ws.Range[ws.Cells[1, 1], ws.Cells[4, 9]];
-                //Range 데이타를 배열 (One-based array)로
-                object[,] data = rng.Value;
+                Excel.Range rng = ws.Range[ws.Cells[1, 1], ws.Cells[3, 7]];
+				//Range 데이타를 배열 (One-based array)로
+				object [,] data = rng.Value;
+
 
                 //excelData에 기록.
-                for (int r = 2; r <= data.GetLength(0)+2; r++)
+                for (int r = 2; r <=data.GetLength(1); r++)
                 {
-                    excelData.GetE_Data().Add(new excelData() { ELmsSubject = data[r, 1].ToString(), ELmsTitle = data[r, 2].ToString(), ELmsRdata = data[r, 3].ToString() });
+					excelData.GetE_Data().Add(new excelData() { ELmsSubject = data[r, 1].ToString(), ELmsTitle = data[r, 2].ToString(), ELmsRdata = data[r, 3].ToString() });
                 }
 
                 wb.Close(true);
