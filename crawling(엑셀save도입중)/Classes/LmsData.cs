@@ -13,6 +13,8 @@ namespace crawling.Classes
         private string lmsWriter;
         private string lmsRdate;
 
+     
+
         public string LmsSubject
         {
             get
@@ -24,7 +26,6 @@ namespace crawling.Classes
                 lmsSubject = value;
             }
         }
-
         public string LmsTitle
         {
             get

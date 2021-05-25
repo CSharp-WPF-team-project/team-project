@@ -70,6 +70,7 @@
     </ApplicationDefinition>
     <Compile Include="Classes\CheckViewModel.cs" />
     <Compile Include="Classes\DepartmentData.cs" />
+    <Compile Include="Classes\excelData.cs" />
     <Compile Include="Classes\LmsData.cs" />
     <Compile Include="Classes\LoginViewModel.cs" />
     <Compile Include="Settings.cs" />

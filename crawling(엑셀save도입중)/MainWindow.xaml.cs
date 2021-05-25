@@ -152,6 +152,7 @@ namespace crawling
 			await task2;
 			Lms2CrawlingData.ItemsSource = L_Data;
 			saveAsExcel();
+			readExcel(); //강의 자료만 Test 해보기!!
 		}
 
 		public void DataCrawling()
@@ -694,7 +695,45 @@ namespace crawling
 				ReleaseObject(excelApp);
 			}
 		}
-		static void ReleaseObject(object obj)
+        //엑셀 파일 읽어오기 -강의 자료에 대해서만 Test
+        public void readExcel()
+        {
+            Excel.Application excelApp = null;
+            Excel.Workbook wb = null;
+            Excel.Worksheet ws = null;
+
+            try
+            {
+                excelApp = new Excel.Application();
+
+                //엑셀 파일 열기
+                string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                string path = System.IO.Path.Combine(desktopPath, "강의자료.xlsx");
+                wb = excelApp.Workbooks.Open(path);
+                //첫 번째 Worksheet
+                ws = wb.Worksheets.get_Item(1) as Excel.Worksheet;
+                //현재 Worksheet에서 일부 범위만 선택 → 속도를 위해
+                Excel.Range rng = ws.Range[ws.Cells[1, 1], ws.Cells[4, 9]];
+                //Range 데이타를 배열 (One-based array)로
+                object[,] data = rng.Value;
+
+                //excelData에 기록.
+                for (int r = 2; r <= data.GetLength(0)+2; r++)
+                {
+                    excelData.GetE_Data().Add(new excelData() { ELmsSubject = data[r, 1].ToString(), ELmsTitle = data[r, 2].ToString(), ELmsRdata = data[r, 3].ToString() });
+                }
+
+                wb.Close(true);
+                excelApp.Quit();
+            }
+            finally
+            {
+                ReleaseObject(ws);
+                ReleaseObject(wb);
+                ReleaseObject(excelApp);
+            }
+        }
+        static void ReleaseObject(object obj)
 		{
 			try
 			{
@@ -712,7 +751,34 @@ namespace crawling
 			finally { GC.Collect(); }
 		}
 
+		//강의자료의 제목 부분 값 비교하기(새 크롤링 데이터와 excel에 기록된 것 비교)
+		public void compareData()
+        {
+			//해당 과목 Subject 이름을 넣어줌.
+			List<string> CompareList = new List<string>();
 
+			for(int i = 0; i<=L_Data.Count;i++)
+            {
+				var lData_Title = L_Data.ElementAt(i).LmsTitle;
+				var eData_Title = excelData.GetE_Data().ElementAt(i).ELmsTitle;
 
-	}
+				if(lData_Title!=eData_Title)
+                {
+					CompareList.Add(lData_Title);
+					MessageBox.Show(L_Data.ElementAt(i).LmsSubject + "의 내용이 다릅니다. (업로드 되었습니다.)");
+                }
+				else
+                {
+					CompareList.Add(lData_Title);
+					MessageBox.Show(L_Data.ElementAt(i).LmsSubject + "의 내용이 같습니다.(업로드 되지 않았습니다.)");
+                }
+            }
+
+        }
+
+        private void button6_Click(object sender, RoutedEventArgs e)
+        {
+			compareData();
+        }
+    }
 }
