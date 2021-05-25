@@ -1,81 +1,68 @@
-﻿using OpenQA.Selenium.Chrome;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using System.Windows;
-using crawling.Model;
-using System.Windows.Controls;
-
 //Selenium Library
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
-
+using OpenQA.Selenium.Chrome;
+using System.Windows;
+using crawling.Model;
 
 namespace crawling.ViewModel.Command
 {
-	class DataLmsCmd : ICommand
-	{
-		protected ChromeDriverService _driverService = null;
-		protected ChromeOptions _options = null;
-		protected ChromeDriver _driver = null;
+    public class ReportLmsCmd : ICommand
+    {
+        int countBtn3 = 0; // 처음 실행이 아님을 확인
+
+        protected ChromeDriverService _driverService = null;
+        protected ChromeOptions _options = null;
+        protected ChromeDriver _driver = null;
+
+        int grade = 15;
+
+        public CrawlingVM VM { get; set; }
+        public ReportLmsCmd(CrawlingVM vm)
+        {
+            VM = vm;
+        }
 
 
-		public event EventHandler CanExecuteChanged;
+        public event EventHandler CanExecuteChanged;
 
-		public CrawlingVM VM { get; set; }
+        public bool CanExecute(object parameter)
+        {
+            return true;
+        }
 
-		public Grade GD { get; set; }
-
-		public DataLmsCmd(CrawlingVM vm)
-		{
-			VM = vm;
-		}
-
-		public bool CanExecute(object parameter)
-		{
-			return true;
-		}
-
-		public void Execute(object parameter)
-		{
-
-			if (countBtn1 != 0)
+        public void Execute(object parameter)
+        {
+			if (countBtn3 != 0)
 			{
-				VM.L_Data.Clear();
+				VM.L_Data2.Clear();
 			}
-			foreach (CheckBox cbx in stp.Children.OfType<CheckBox>())
-			{
-
-				if (cbx.Content.ToString() == "21.5학점(대진설O)")
-				{
-					grade = 21;
-				}
-				if (cbx.Content.ToString() == "18.5학점(대진설O)")
-				{
-					grade = 18;
-				}
-				if (cbx.Content.ToString() == "15.5학점(대진설O)")
-				{
-					grade = 15;
-				}
-			}
-			Start2();
-			countBtn1++;
+			Start3();
+			countBtn3++;
 		}
-		private async void Start2()
+		private async void Start3()
 		{
-			var task2 = Task.Run(() => DataCrawling());
-			await task2;
+			var task3 = Task.Run(() => ReportCrawling());
+			await task3;
+			VM.get2();
 
 		}
 
-		public void DataCrawling()
+		public void ReportCrawling()
 		{
+			_driverService = ChromeDriverService.CreateDefaultService();
+			_driverService.HideCommandPromptWindow = true;
+			_options = new ChromeOptions();
+			_options.AddArgument("headless");
+			_options.AddArgument("disable-gpu");
 			_driver = new ChromeDriver(_driverService, _options);
+
 
 			_driver.Navigate().GoToUrl("https://ieilms.jbnu.ac.kr/"); // 웹 사이트에 접속합니다.
 
@@ -102,7 +89,7 @@ namespace crawling.ViewModel.Command
 				return;
 			}
 
-			element = _driver.FindElementByXPath("//*[@id='nav']/li[3]/a");
+			element = _driver.FindElementByXPath("//*[@id='nav']/li[4]/a");
 			element.Click();
 
 			if (grade == 21)
@@ -116,7 +103,7 @@ namespace crawling.ViewModel.Command
 					string BASE_value = url;
 					element = _driver.FindElementByXPath(BASE_value);
 					element.Click();
-					TextUpLoad2();
+					TextUpLoad3();
 				}
 			}
 			if (grade == 18)
@@ -130,7 +117,7 @@ namespace crawling.ViewModel.Command
 					string BASE_value = url;
 					element = _driver.FindElementByXPath(BASE_value);
 					element.Click();
-					TextUpLoad2();
+					TextUpLoad3();
 				}
 			}
 			if (grade == 15)
@@ -144,34 +131,33 @@ namespace crawling.ViewModel.Command
 					string BASE_value = url;
 					element = _driver.FindElementByXPath(BASE_value);
 					element.Click();
-					TextUpLoad2();
+					TextUpLoad3();
 				}
 			}
 			_driver.Close();
 		}
 
-		public void TextUpLoad2()
+		public void TextUpLoad3()
 		{
-			if (_driver.FindElementByXPath("//*[@id='borderB']/tbody[2]/tr").Text == "해당하는 자료 정보가 없습니다.")
+			if (_driver.FindElementByXPath("//*[@id='borderB']/tbody/tr[2]").Text == "해당하는 레포트 정보가 없습니다.")
 			{
-				VM.L_Data.Add(new LmsData()
+				VM.L_Data2.Add(new LmsData2()
 				{
-					LmsSubject = _driver.FindElementByXPath("//*[@id='center']/div/div[1]/div[1]/div[1]").Text.Substring(9),
-					LmsTitle = "업로드된 자료가 없습니다."
+					LmsSubject2 = _driver.FindElementByXPath("//*[@id='center']/div/div[1]/div[1]/div[1]").Text.Substring(9),
+					LmsTitle2 = "업로드된 레포트가 없습니다."
 				});
 				return;
 			}
 			else
 			{
-				VM.L_Data.Add(new LmsData()
+				VM.L_Data2.Add(new LmsData2()
 				{
-					LmsSubject = _driver.FindElementByXPath("//*[@id='center']/div/div[1]/div[1]/div[1]").Text.Substring(9),
-					LmsTitle = _driver.FindElementByXPath("//*[@id='borderB']/tbody[2]/tr[1]/td[2]").Text,
-					LmsRdate = _driver.FindElementByXPath("//*[@id='borderB']/tbody[2]/tr[1]/td[4]").Text,
-
+					LmsSubject2 = _driver.FindElementByXPath("//*[@id='center']/div/div[1]/div[1]/div[1]").Text.Substring(9),
+					LmsEndDate2 = _driver.FindElementByXPath("//*[@id='borderB']/tbody/tr[2]/td[3]").Text,
+					LmsTitle2 = _driver.FindElementByXPath("//*[@id='borderB']/tbody/tr[2]/td[2]").Text,
+					LmsRdate2 = _driver.FindElementByXPath("//*[@id='borderB']/tbody/tr[2]/td[6]").Text
 				});
 			}
 		}
-
-	}
+    }
 }

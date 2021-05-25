@@ -70,11 +70,16 @@
     </ApplicationDefinition>
     <Compile Include="Model\DepartmentData.cs" />
     <Compile Include="Model\Grade.cs" />
-    <Compile Include="Model\LmsData.cs" />
+    <Compile Include="Model\LmsData1.cs" />
+    <Compile Include="Model\LmsData2.cs" />
+    <Compile Include="Model\LmsData3.cs" />
     <Compile Include="Model\LoginModel.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="ViewModel\Command\DataLmsCmd.cs" />
+    <Compile Include="ViewModel\Command\DepartmentDataCmd.cs" />
     <Compile Include="ViewModel\Command\LoginLmsCmd.cs" />
+    <Compile Include="ViewModel\Command\NoticeLmsCmd.cs" />
+    <Compile Include="ViewModel\Command\ReportLmsCmd.cs" />
     <Compile Include="ViewModel\Converter\LoginConverter.cs" />
     <Compile Include="ViewModel\CrawlingVM.cs" />
     <Page Include="MainWindow.xaml">

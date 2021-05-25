@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace crawling.Model
 {
-    public class LmsData
+    public class LmsData1 : INotifyPropertyChanged
     {
         private string lmsSubject;
         private string lmsTitle;
@@ -22,6 +23,7 @@ namespace crawling.Model
             set
             {
                 lmsSubject = value;
+                OnPropertyChanged("LmsSubject");
             }
         }
 
@@ -34,6 +36,7 @@ namespace crawling.Model
             set
             {
                 lmsTitle = value;
+                OnPropertyChanged("LmsTitle");
             }
         }
         public string LmsWriter
@@ -45,6 +48,7 @@ namespace crawling.Model
             set
             {
                 lmsWriter = value;
+                OnPropertyChanged("LmsWriter");
             }
         }
         public string LmsRdate
@@ -56,8 +60,18 @@ namespace crawling.Model
             set
             {
                 lmsRdate = value;
+                OnPropertyChanged("LmsRdate");
             }
         }
+        
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
 }

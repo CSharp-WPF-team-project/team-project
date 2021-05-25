@@ -7,55 +7,65 @@ using System.Threading.Tasks;
 
 namespace crawling.Model
 {
-    class Grade : INotifyPropertyChanged
+    public class DepartmentData : INotifyPropertyChanged
     {
-        private string grade21;
-        private string grade18;
-        private string grade15;
-        public string Grade21
+        private string d_num;
+        private string d_title;
+        private string d_writer;
+        private string d_rdate;
+        public string D_Num
         {
             get
             {
-                return grade21;
+                return d_num;
             }
             set
             {
-                grade21 = value;
-                OnPropertyUpdate("Grade21");
+                d_num = value;
             }
         }
-        public string Grade18
+        public string D_Title
         {
             get
             {
-                return grade18;
+                return d_title;
             }
             set
             {
-                grade18 = value;
-                OnPropertyUpdate("Grade18");
+                d_title = value;
             }
         }
-        public string Grade15
+        public string D_Writer
         {
             get
             {
-                return grade15;
+                return d_writer;
             }
             set
             {
-                grade15 = value;
-                OnPropertyUpdate("Grade15");
+                d_writer = value;
             }
         }
-
+        public string D_Rdate
+        {
+            get
+            {
+                return d_rdate;
+            }
+            set
+            {
+                d_rdate = value;
+            }
+        }
         public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyUpdate(string propertyName)
+        private void OnPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
     }
+    
 }

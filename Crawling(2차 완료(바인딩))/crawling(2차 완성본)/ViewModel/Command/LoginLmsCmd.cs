@@ -14,7 +14,7 @@ using OpenQA.Selenium.Support.UI;
 
 namespace crawling.ViewModel.Command
 {
-    class LoginLmsCmd : ICommand
+    public class LoginLmsCmd : ICommand
     {
 
 		protected ChromeDriverService _driverService = null;
@@ -38,15 +38,11 @@ namespace crawling.ViewModel.Command
 		
         public void Execute(object parameter)
         {
-
 			_driverService = ChromeDriverService.CreateDefaultService();
-			//_driverService.HideCommandPromptWindow = true;
-
+			_driverService.HideCommandPromptWindow = true;
 			_options = new ChromeOptions();
-			//_options.AddArgument("headless");
+			_options.AddArgument("headless");
 			_options.AddArgument("disable-gpu");
-
-
 			_driver = new ChromeDriver(_driverService, _options);
 
 			_driver.Navigate().GoToUrl("https://ieilms.jbnu.ac.kr/"); // 웹 사이트에 접속합니다.
