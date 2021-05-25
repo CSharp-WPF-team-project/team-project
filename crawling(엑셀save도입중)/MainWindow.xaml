@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:crawling"
         mc:Ignorable="d"
-        Title="MainWindow" Height="760 " Width="900">
+        Title="MainWindow" Height="800 " Width="900">
 
 
     <Grid>
@@ -20,7 +20,7 @@
         <StackPanel Grid.ColumnSpan="2" Margin="0,0,-0.4,0.4">
 
             <ListView x:Name="Lms2CrawlingData"
-                      Height="90 px"
+                      Height="100 px"
                       BorderBrush="Gray">
                 <ListView.View>
                     <GridView>
@@ -38,7 +38,7 @@
             </ListView>
 
             <ListView x:Name="Lms3CrawlingData"
-                      Height="90 px"
+                      Height="100 px"
                       BorderBrush="Gray">
                 <ListView.View>
                     <GridView>
@@ -56,7 +56,7 @@
             </ListView>
 
             <ListView x:Name="Lms4CrawlingData"
-                      Height="80 px"
+                      Height="100 px"
                       BorderBrush="Gray">
                 <ListView.View>
                     <GridView>
@@ -76,7 +76,7 @@
 
 
             <ListView x:Name="DepartmentCrawlingData"
-                      Height="80px"
+                      Height="100px"
                       BorderBrush="Gray"
                       >
                 <ListView.View>
@@ -102,7 +102,7 @@
                       Text="{Binding LoginID, UpdateSourceTrigger=PropertyChanged}"
                          Height="30px"
                          Width="200px"
-                         Margin="10px 80px 10px 10px"
+                         Margin="10, 20"
                          BorderBrush="Gray"
                          BorderThickness="1px"
                          VerticalContentAlignment="Center"
@@ -135,7 +135,7 @@
                      Text="{Binding LoginPasswd, UpdateSourceTrigger=PropertyChanged}"
                          Height="30px"
                          Width="200px"
-                         Margin="10px 40px 10px 10px"
+                         Margin="10, 20"
                          BorderBrush="Gray"
                          BorderThickness="1px"
                          VerticalContentAlignment="Center"
@@ -236,6 +236,16 @@
                         Opacity="0.9"
                         Foreground="White">
 
+            </Button>
+            <Button x:Name="button6"
+                    Content="강의자료 비교+MessageBox"
+                    Height="30px"
+                    Margin="30 3 30 1"
+                    FontWeight="Black"
+                    Background="#1F4787"
+                    Opacity="0.9"
+                    Foreground="White"
+                    Click="button6_Click">
             </Button>
 
         </StackPanel>

@@ -18,7 +18,7 @@ namespace ExcelSave.Classes
         public int Eprice { get; set; }
 
 
-        //리스트뷰에 들어갈 데이터를 저장하는 객체(사용 : 바인딩될 데이터를 저장할 변수만)
+        //저장하는 객체(사용 : 바인딩될 데이터를 저장할 변수만)
         private static List<excelData> E_Data;
         //인스턴스 얻어오기
         public static List<excelData> GetE_Data()
