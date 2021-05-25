@@ -1,19 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Windows.Navigation;
+﻿using System.Windows;
 
-namespace Notice
+namespace Notice.View
 {
     public partial class First : Window
     {
@@ -39,22 +26,22 @@ namespace Notice
         {
             if (sender == HomeItem) 
             {
-                var home = new Pages.Home();
+                var home = new View.Home();
                 pageControl.NavigationService.Navigate(home);
             }
             if (sender == CalenadarItem)
             {
-                var calenadar = new Pages.Calendar();
+                var calenadar = new View.Calendar();
                 pageControl.NavigationService.Navigate(calenadar);
             }
             if (sender == NoticeItem)
             {
-                var notice = new Pages.Notice();
+                var notice = new View.Notice();
                 pageControl.NavigationService.Navigate(notice);
             }
             if (sender == BindingItem)
             {
-                var binding = new Pages.Binding();
+                var binding = new View.Binding();
                 pageControl.NavigationService.Navigate(binding);
             }
             if (sender == SignOutItem)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Notice.Classes
 {
-    class DepartmentData
+    public class DepartmentData
     {
         private string d_num;
         private string d_title;

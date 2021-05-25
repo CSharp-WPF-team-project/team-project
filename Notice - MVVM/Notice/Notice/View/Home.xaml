@@ -1,15 +1,19 @@
-﻿<Page x:Class="Notice.Pages.Home"
+﻿<Page x:Class="Notice.View.Home"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Notice.Pages"
+      xmlns:local="clr-namespace:Notice.View"
+      xmlns:vm="clr-namespace:Notice.ViewModel"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="655" d:DesignWidth="897" Margin="5"
       Title="Home">
 
-    <Grid Background="White">
+    <Page.Resources>
+        <vm:ViewModel x:Key="vm"/>
+    </Page.Resources>
+    <Grid Background="White" DataContext="{StaticResource vm}">
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
             <RowDefinition/>
@@ -41,7 +45,7 @@
                     <Button Content="Searching" 
                             Width="100" Height="30" HorizontalAlignment="Right"
                             Margin="50,0"
-                            Click="Button_Click"/>
+                            Command="{Binding Path=departmentDataButtonCommand}"/>
                     <TextBlock Text="학과 공지" FontSize="25"
                                Margin="20,15,200,15" VerticalAlignment="Center"
                                FontFamily="/Fonts/AppleSDGothicNeoR.ttf #AppleSDGothicNeoR00" Foreground="#619196"/>
