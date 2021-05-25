@@ -92,6 +92,7 @@ namespace ExcelSave
         private void readButton_Click(object sender, RoutedEventArgs e)
         {
             ReadExcel();
+            MessageBox.Show("read 끝!");
         }
 
         public void ReadExcel()
@@ -134,7 +135,24 @@ namespace ExcelSave
 
         private void compareButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            List<string> compareList = new List<string>();
+            for(int i = 0; i<=beverageData.GetInstance().Count;i++)
+            {
+                var bData_Name = beverageData.GetInstance().ElementAt(i).name;
+                var eDate_EName = excelData.GetE_Data().ElementAt(i).Ename;
+
+                if(bData_Name!= eDate_EName)
+                {
+                    compareList.Add(bData_Name);
+                    MessageBox.Show(compareList.ElementAt(i) + "의 내용이 다릅니다!");
+                }
+                else
+                {
+                    compareList.Add(bData_Name);
+                    MessageBox.Show(compareList.ElementAt(i) + "이 같음! Test message");
+                }
+            }
+
         }
     }
 }
