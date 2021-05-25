@@ -714,7 +714,7 @@ namespace crawling
                 //첫 번째 Worksheet
                 ws = wb.Worksheets.get_Item(1) as Excel.Worksheet;
                 //현재 Worksheet에서 일부 범위만 선택 → 속도를 위해
-                Excel.Range rng = ws.Range[ws.Cells[1, 1], ws.Cells[3, 7]];
+                Excel.Range rng = ws.Range[ws.Cells[1, 1], ws.Cells[7, 7]];
 				//Range 데이타를 배열 (One-based array)로
 				object [,] data = rng.Value;
 
@@ -759,7 +759,7 @@ namespace crawling
 			//해당 과목 Subject 이름을 넣어줌.
 			List<string> CompareList = new List<string>();
 
-			for(int i = 0; i<=L_Data.Count;i++)
+			for(int i = 0; i<L_Data.Count;i++)
             {
 				var lData_Title = L_Data.ElementAt(i).LmsTitle;
 				var eData_Title = excelData.GetE_Data().ElementAt(i).ELmsTitle;
