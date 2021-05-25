@@ -12,6 +12,10 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 
 
+/// <summary>
+/// 제출일시 추가한 내역들까지 옮겨야 함.
+/// </summary>
+
 namespace crawling.ViewModel
 {
     class CrawlingVM
