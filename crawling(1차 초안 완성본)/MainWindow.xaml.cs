@@ -370,9 +370,9 @@ namespace crawling
 				L_Data.Add(new LmsData()
 				{
 					LmsSubject = _driver.FindElementByXPath("//*[@id='center']/div/div[1]/div[1]/div[1]").Text.Substring(9),
+					LmsEndData = _driver.FindElementByXPath("//*[@id='borderB']/tbody/tr[2]/td[3]").Text,
 					LmsTitle = _driver.FindElementByXPath("//*[@id='borderB']/tbody/tr[2]/td[2]").Text,
 					LmsRdate = _driver.FindElementByXPath("//*[@id='borderB']/tbody/tr[2]/td[6]").Text
-
 				});
 			}
 			/*

@@ -47,10 +47,13 @@
                                         Width="200"/>
                         <GridViewColumn Header="제목" 
                                         DisplayMemberBinding="{Binding LmsTitle}" 
-                                        Width="500 "/>
-                        <GridViewColumn Header="작성일" 
+                                        Width="300 "/>
+                        <GridViewColumn Header="제출일시"
+                                        DisplayMemberBinding="{Binding LmsEndData}"
+                                        Width="250"/> 
+                        <GridViewColumn Header="작성일"
                                         DisplayMemberBinding="{Binding LmsRdate}"
-                                        Width="200"/>
+                                        Width="150"/>
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -65,7 +68,7 @@
                                         Width="200"/>
                         <GridViewColumn Header="제목" 
                                         DisplayMemberBinding="{Binding LmsTitle}" 
-                                        Width="500 "/>
+                                        Width="500"/>
                         <GridViewColumn Header="작성일" 
                                         DisplayMemberBinding="{Binding LmsRdate}"
                                         Width="200"/>

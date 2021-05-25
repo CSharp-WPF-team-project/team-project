@@ -12,6 +12,7 @@ namespace crawling.Classes
         private string lmsTitle;
         private string lmsWriter;
         private string lmsRdate;
+        private string lmsEndDate;
 
         public string LmsSubject
         {
@@ -56,6 +57,17 @@ namespace crawling.Classes
             set
             {
                 lmsRdate = value;
+            }
+        }
+        public string LmsEndData
+        {
+            get
+            {
+                return lmsEndDate;
+            }
+            set
+            {
+                lmsEndDate = value;
             }
         }
 
