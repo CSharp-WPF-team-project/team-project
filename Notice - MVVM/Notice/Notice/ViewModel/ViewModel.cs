@@ -1,4 +1,5 @@
 ﻿using Notice.Classes;
+using Notice.Model;
 using Notice.ViewModel.Command;
 using Notice.ViewModel.Command.FirstPageCommand;
 using Notice.ViewModel.Command.HomePageCommand;
@@ -17,12 +18,13 @@ namespace Notice.ViewModel
         /// <summary>
         /// HomePageCommand
         /// </summary>
-        public List<DepartmentData> D_Data { get; set; 
-        }public DepartmentDataButtonCommand departmentDataButtonCommand { get; set; }
+        public List<DepartmentData> D_Data { get; set; } 
+        public DepartmentDataButtonCommand departmentDataButtonCommand { get; set; }
 
         /// <summary>
         /// LoginPageCommand
         /// </summary>
+        public MainWindowIDInformation mainWindowIDInformation { get; set; }
         public exitButtonCommand exitButtonCommand { get; set; }
         public signinButtonCommand loginButtonCommand { get; set; }
 
@@ -36,10 +38,12 @@ namespace Notice.ViewModel
 
             D_Data = new List<DepartmentData>();
 
+            mainWindowIDInformation = new MainWindowIDInformation();
             exitButtonCommand = new exitButtonCommand();
             loginButtonCommand = new signinButtonCommand();
+
             departmentDataButtonCommand = new DepartmentDataButtonCommand(this);
-            openAndCloseButton = new OpenAndCloseButton();
+            openAndCloseButton = new OpenAndCloseButton(this);
 
 
         }

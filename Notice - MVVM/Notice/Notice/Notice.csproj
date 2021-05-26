@@ -73,6 +73,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\MainWindowIDInformation.cs" />
     <Compile Include="ViewModel\Command\FirstPageCommand\OpenAndCloseButton.cs" />
     <Compile Include="ViewModel\Command\HomePageCommand\DepartmentDataButtonCommand.cs" />
     <Compile Include="ViewModel\Command\LoginPageCommand\exitButtonCommand.cs" />
@@ -166,7 +167,6 @@
     <Resource Include="View\Images\naverMail.PNG" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\" />
     <Folder Include="ViewModel\Converter\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

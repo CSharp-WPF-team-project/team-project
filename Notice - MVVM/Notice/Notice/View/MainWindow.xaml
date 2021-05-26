@@ -45,12 +45,14 @@
                 <Image Source="Images/전북대.png" Width="150" Height="150"/>
             </Border>
             <!--Log In부분-->
-            <StackPanel Grid.Row="1" >
+            <StackPanel Grid.Row="1">
                 <Label Content="JB calendar" Foreground="#004771" FontSize="30"  Grid.Row="1" Height="70"/>
                 <TextBox x:Name="userID" Margin="60,30" 
-                         materialDesign:HintAssist.Hint="ID.." Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="25"/>
+                         materialDesign:HintAssist.Hint="ID.." Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="25"
+                         Text="{Binding Path=mainWindowIDInformation}"/>
                 <PasswordBox x:Name="userPW" Margin="60,-25" 
-                            materialDesign:HintAssist.Hint="Password.. " Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontSize="25" Cursor="IBeam"/>
+                            materialDesign:HintAssist.Hint="Password.. " Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontSize="25" Cursor="IBeam"
+                            Text="{Binding Path=mainWindowIDInformation}"/>
                 <!--Sign In 버튼-->
                 <Button Content="Sign In" Width="170" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
                         Margin="0,60" Height="40" Foreground="White" Cursor="Hand" Background="#91CCF1" BorderBrush="{x:Null}"
