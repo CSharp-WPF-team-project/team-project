@@ -1,5 +1,6 @@
 ﻿using Notice.Classes;
 using Notice.ViewModel.Command;
+using Notice.ViewModel.Command.FirstPageCommand;
 using Notice.ViewModel.Command.HomePageCommand;
 using Notice.ViewModel.Command.LoginPageCommand;
 using System;
@@ -13,11 +14,22 @@ namespace Notice.ViewModel
 {
     public class ViewModel
     {
-        public List<DepartmentData> D_Data { get; set; }
+        /// <summary>
+        /// HomePageCommand
+        /// </summary>
+        public List<DepartmentData> D_Data { get; set; 
+        }public DepartmentDataButtonCommand departmentDataButtonCommand { get; set; }
+
+        /// <summary>
+        /// LoginPageCommand
+        /// </summary>
         public exitButtonCommand exitButtonCommand { get; set; }
         public signinButtonCommand loginButtonCommand { get; set; }
 
-        public DepartmentDataButtonCommand departmentDataButtonCommand { get; set; }
+        /// <summary>
+        /// FirstPageCommnad
+        /// </summary>
+        public OpenAndCloseButton openAndCloseButton { get; set; }
 
         public ViewModel()
         {
@@ -27,7 +39,7 @@ namespace Notice.ViewModel
             exitButtonCommand = new exitButtonCommand();
             loginButtonCommand = new signinButtonCommand();
             departmentDataButtonCommand = new DepartmentDataButtonCommand(this);
-
+            openAndCloseButton = new OpenAndCloseButton();
 
 
         }

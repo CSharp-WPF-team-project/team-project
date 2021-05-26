@@ -73,6 +73,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\Command\FirstPageCommand\OpenAndCloseButton.cs" />
     <Compile Include="ViewModel\Command\HomePageCommand\DepartmentDataButtonCommand.cs" />
     <Compile Include="ViewModel\Command\LoginPageCommand\exitButtonCommand.cs" />
     <Compile Include="ViewModel\Command\LoginPageCommand\signinButtonCommand.cs" />

@@ -4,10 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Notice.View"
+        xmlns:vm="clr-namespace:Notice.ViewModel"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="First" Height="670" Width="965" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen" FontFamily="Segoe UI Emoji">
     <Window.Resources>
+        <vm:ViewModel x:Key="vm"/>
         <!--Menu창 Open & Close 효과-->
         <Storyboard x:Key="MenuOpen">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
@@ -45,8 +47,8 @@
             <BeginStoryboard Storyboard="{StaticResource PageControlSizeUp}"/>
         </EventTrigger>
     </Window.Triggers>
-    
-    <Grid>
+
+    <Grid DataContext="{StaticResource vm}">
         <!--왼쪽 메뉴 부분-->
         <Grid x:Name="GridMenu" Width="60" HorizontalAlignment="Left" Background="DimGray">
             <StackPanel>
@@ -54,12 +56,12 @@
                 <Grid Height="150" Background="White">
                     <!--버튼 닫힐 때-->
                     <Button x:Name="CloseMenuButton" Width="60" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Right" Visibility="Collapsed"
-                            Click="CloseMenuButton_Click">
+                            Command="{Binding Path=openAndCloseButton}">
                         <materialDesign:PackIcon Kind="ArrowLeft" Foreground="Black" Width="45" Height="33" HorizontalAlignment="Center"/>
                     </Button>
                     <!--버튼 열릴 때-->
                     <Button x:Name="OpenMenuButton" Width="60" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Right"
-                            Click="OpenMenuButton_Click">
+                            Command="{Binding Path=openAndCloseButton}">
                         <materialDesign:PackIcon Kind="Menu" Foreground="Black" Width="45" Height="33" HorizontalAlignment="Center"/>
                     </Button>
                 </Grid>
