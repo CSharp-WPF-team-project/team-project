@@ -31,6 +31,7 @@ namespace crawling.ViewModel.Command
 
 		public Grade GD { get; set; }
 
+
 		public DataLmsCmd(CrawlingVM vm)
 		{
 			VM = vm;

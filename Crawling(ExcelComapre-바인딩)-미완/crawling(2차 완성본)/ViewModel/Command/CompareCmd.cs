@@ -12,7 +12,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 
 namespace crawling.ViewModel.Command
 {
-    class CompareCmd : ICommand
+    public class CompareCmd : ICommand
     {
         static Excel.Application excelApp = null;
         static Excel.Workbook workBook = null;

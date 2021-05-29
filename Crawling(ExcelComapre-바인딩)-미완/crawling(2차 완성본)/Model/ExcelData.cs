@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace crawling.Model
 {
-    class ExcelData
+    public class ExcelData
     {
         public string ELmsSubject { get; set; }
         public string ELmsTitle { get; set; }

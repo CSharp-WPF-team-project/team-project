@@ -9,9 +9,8 @@ namespace crawling.Model
 {
     public class Grade : INotifyPropertyChanged
     {
-        private string gradeNumber;
-      
-        public string GradeNumber
+        private int gradeNumber;
+        public int GradeNumber
         {
             get
             {

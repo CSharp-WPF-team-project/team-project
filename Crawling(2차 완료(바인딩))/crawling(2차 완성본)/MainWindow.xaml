@@ -186,11 +186,12 @@
             </TextBlock>
 
             <StackPanel Grid.Row="1" Orientation="Horizontal">
-                <CheckBox x:Name="학점21"
-                    Content="21.5학점(대진설O)" Margin="20,0"/>
-                <CheckBox  x:Name="학점18"
+                <RadioButton x:Name="학점21"
+                    Content="21.5학점(대진설O)" Margin="20,0"
+                             Command="{Binding Source={StaticResource vm}, Path=RadioButtonCmd}"/>
+                <RadioButton  x:Name="학점18"
                     Content="18.5학점(대진설O)" Margin="20,0"/>
-                <CheckBox x:Name="학점15"
+                <RadioButton x:Name="학점15"
                     Content="15.5학점(대진설O)" Margin="20,0"/>
             </StackPanel>
 

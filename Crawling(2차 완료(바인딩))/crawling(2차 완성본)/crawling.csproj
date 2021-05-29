@@ -79,6 +79,7 @@
     <Compile Include="ViewModel\Command\DepartmentDataCmd.cs" />
     <Compile Include="ViewModel\Command\LoginLmsCmd.cs" />
     <Compile Include="ViewModel\Command\NoticeLmsCmd.cs" />
+    <Compile Include="ViewModel\Command\RadioButtonCmd.cs" />
     <Compile Include="ViewModel\Command\ReportLmsCmd.cs" />
     <Compile Include="ViewModel\Converter\LoginConverter.cs" />
     <Compile Include="ViewModel\CrawlingVM.cs" />

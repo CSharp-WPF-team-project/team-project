@@ -38,6 +38,7 @@ namespace crawling.ViewModel
         public NoticeLmsCmd NoticeLmsCmd { get; set; }
 
         public DepartmentDataCmd DepartmentDataCmd { get; set; }
+        public CompareCmd CompareCmd { get; set; }
 
 
         public CrawlingVM()
