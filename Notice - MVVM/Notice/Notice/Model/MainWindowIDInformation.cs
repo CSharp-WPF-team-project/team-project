@@ -6,7 +6,9 @@ namespace Notice.Model
     {
         //ID정보 저장
         private string userID;
-   
+        private string userPW;
+
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnPropertyChanged(string propertyName)
@@ -27,5 +29,17 @@ namespace Notice.Model
             }
         }
 
+        public string UserPW
+        {
+            get
+            {
+                return userPW;
+            }
+            set
+            {
+                userPW = value;
+                OnPropertyChanged("UserPW");
+            }
+        }
     }
 }

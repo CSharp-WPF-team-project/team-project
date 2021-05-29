@@ -31,8 +31,12 @@ namespace Notice.ViewModel
         /// <summary>
         /// FirstPageCommnad
         /// </summary>
-        public OpenAndCloseButton openAndCloseButton { get; set; }
+        public listViewSelected listViewSelected { get; set; }
 
+        /// <summary>
+        /// BindingPageCommand
+        /// </summary>
+        public BindingButton bindingButton { get; set; }
         public ViewModel()
         {
 
@@ -41,9 +45,10 @@ namespace Notice.ViewModel
             mainWindowIDInformation = new MainWindowIDInformation();
             exitButtonCommand = new exitButtonCommand();
             loginButtonCommand = new signinButtonCommand();
-
+            bindingButton = new BindingButton();
+           
             departmentDataButtonCommand = new DepartmentDataButtonCommand(this);
-            openAndCloseButton = new OpenAndCloseButton(this);
+            listViewSelected = new listViewSelected();
 
 
         }

@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Notice.View" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:local="clr-namespace:Notice.View" 
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:vm="clr-namespace:Notice.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" Height="670" Width="965" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen" FontFamily="/Fonts/Montserrat-SemiBold.ttf #Montserrat SemiBold">
@@ -52,7 +54,9 @@
                          Text="{Binding Path=mainWindowIDInformation}"/>
                 <PasswordBox x:Name="userPW" Margin="60,-25" 
                             materialDesign:HintAssist.Hint="Password.. " Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontSize="25" Cursor="IBeam"
-                            Text="{Binding Path=mainWindowIDInformation}"/>
+                            >
+       
+                </PasswordBox>
                 <!--Sign In 버튼-->
                 <Button Content="Sign In" Width="170" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
                         Margin="0,60" Height="40" Foreground="White" Cursor="Hand" Background="#91CCF1" BorderBrush="{x:Null}"

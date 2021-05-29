@@ -74,10 +74,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\MainWindowIDInformation.cs" />
-    <Compile Include="ViewModel\Command\FirstPageCommand\OpenAndCloseButton.cs" />
+    <Compile Include="ViewModel\Command\FirstPageCommand\listViewSelected.cs" />
     <Compile Include="ViewModel\Command\HomePageCommand\DepartmentDataButtonCommand.cs" />
     <Compile Include="ViewModel\Command\LoginPageCommand\exitButtonCommand.cs" />
     <Compile Include="ViewModel\Command\LoginPageCommand\signinButtonCommand.cs" />
+    <Compile Include="ViewModel\Command\Binding\BindingButton.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -167,6 +168,7 @@
     <Resource Include="View\Images\naverMail.PNG" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ViewModel\Command\Calendar\" />
     <Folder Include="ViewModel\Converter\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

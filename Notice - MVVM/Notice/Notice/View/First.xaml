@@ -56,14 +56,12 @@
                 <Grid Height="150" Background="White">
                     <!--버튼 닫힐 때-->
                     <Button x:Name="CloseMenuButton" Width="60" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Right" Visibility="Collapsed"
-                            Command="{Binding Path=openAndCloseButton}"
-                            CommandParameter="{Binding ElementName=CloseMenuButton, Path=Name}">
+                            Click="CloseMenuButton_Click">
                         <materialDesign:PackIcon Kind="ArrowLeft" Foreground="Black" Width="45" Height="33" HorizontalAlignment="Center"/>
                     </Button>
                     <!--버튼 열릴 때-->
                     <Button x:Name="OpenMenuButton" Width="60" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Right"
-                            Command="{Binding Path=openAndCloseButton}"
-                            CommandParameter="{Binding ElementName=CloseMenuButton, Path=Name}">
+                            Click="OpenMenuButton_Click">
                         <materialDesign:PackIcon Kind="Menu" Foreground="Black" Width="45" Height="33" HorizontalAlignment="Center"/>
                     </Button>
                 </Grid>
