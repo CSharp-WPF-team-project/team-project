@@ -51,14 +51,11 @@ namespace Notice.ViewModel.Command.HomePageCommand
         private void SubjectCrawling()
         {
             _driverService = ChromeDriverService.CreateDefaultService();
-            _driverService.HideCommandPromptWindow = true;
+           // _driverService.HideCommandPromptWindow = true;
 
             _options = new ChromeOptions();
-            _options.AddArgument("headless");
+            //_options.AddArgument("headless");
             _options.AddArgument("disable-gpu");
-            _driver = new ChromeDriver(_driverService, _options);
-
-
             _driver = new ChromeDriver(_driverService, _options);
 
             _driver.Navigate().GoToUrl("https://cse.jbnu.ac.kr/cse/3586/subview.do"); // 웹 사이트에 접속합니다.

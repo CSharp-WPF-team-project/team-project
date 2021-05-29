@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Notice.Classes
 {
-    public class DepartmentData
+    public class DepartmentData : INotifyPropertyChanged
     {
         private string d_num;
         private string d_title;
@@ -21,6 +22,7 @@ namespace Notice.Classes
             set
             {
                 d_num = value;
+                OnPropertyUpdate("D_Num");
             }
         }
         public string D_Title
@@ -32,6 +34,7 @@ namespace Notice.Classes
             set
             {
                 d_title = value;
+                OnPropertyUpdate("D_Title");
             }
         }
         public string D_Writer
@@ -43,6 +46,7 @@ namespace Notice.Classes
             set
             {
                 d_writer = value;
+                OnPropertyUpdate("D_Writer");
             }
         }
         public string D_Rdate
@@ -54,6 +58,16 @@ namespace Notice.Classes
             set
             {
                 d_rdate = value;
+                OnPropertyUpdate("D_Rdate");
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyUpdate(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
     }
