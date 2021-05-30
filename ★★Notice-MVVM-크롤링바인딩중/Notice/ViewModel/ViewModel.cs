@@ -39,7 +39,9 @@ namespace Notice.ViewModel
         /// </summary>
         public BindingButton bindingButton { get; set; }
 
-        //Notice Page Command
+        ///<summary>
+        /// Notice Page Command
+        /// </summary>
         public List<LmsData1> L_Data1 { get; set; }
         public ObservableCollection<LmsData1> L_Data1_Main { get; set; }
         public LmsData1Command lmsData1Command { get; set; }
