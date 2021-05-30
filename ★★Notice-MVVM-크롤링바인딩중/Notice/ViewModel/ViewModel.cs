@@ -38,6 +38,12 @@ namespace Notice.ViewModel
         /// BindingPageCommand
         /// </summary>
         public BindingButton bindingButton { get; set; }
+
+        //Notice Page Command
+        public List<LmsData1> L_Data1 { get; set; }
+        public ObservableCollection<LmsData1> L_Data1_Main { get; set; }
+        public LmsData1Command lmsData1Command { get; set; }
+
         public ViewModel()
         {
 
@@ -56,7 +62,18 @@ namespace Notice.ViewModel
             departmentDataButtonCommand = new DepartmentDataButtonCommand(this);
             listViewSelected = new listViewSelected();
 
+            L_Data1 = new List<LmsData1>();
+            L_Data1_Main = new ObservableCollection<LmsData1>();
 
+
+        }
+
+        public void get1()
+        {
+            for (int i = 0; i < L_Data1.Count(); i++)
+            {
+                L_Data1_Main.Add(L_Data1[i]);
+            }
         }
 
         public void get4()

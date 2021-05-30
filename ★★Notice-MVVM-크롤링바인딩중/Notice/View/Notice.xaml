@@ -5,9 +5,14 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Notice.View"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:vm ="clr-namespace:Notice.ViewModel"
       mc:Ignorable="d" 
       d:DesignHeight="655" d:DesignWidth="897" Margin="5"
       Title="Notice" Background="White">
+
+    <Page.Resources>
+        <vm:ViewModel x:Key="vm"/>
+    </Page.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -100,7 +105,8 @@
                                FontSize="25" VerticalAlignment="Center" Margin="20,0"
                                Foreground="#619196" FontFamily="Fonts/KoPubWorld Dotum Bold.ttf #KoPubWorld돋움체 Bold"/>
                     <Button Content="Searching" 
-                            Width="100" HorizontalAlignment="Right" Margin="20,0"/>
+                            Width="100" HorizontalAlignment="Right" Margin="20,0"
+                            Command="{Binding Source=vm, Path=LmsData1Command }"/>
                     <ListView Grid.Row="1" Margin="20,5">
 
                     </ListView>
