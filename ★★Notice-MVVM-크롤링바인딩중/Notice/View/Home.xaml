@@ -13,6 +13,7 @@
     <Page.Resources>
         <vm:ViewModel x:Key="vm"/>
     </Page.Resources>
+    
     <Grid Background="White" DataContext="{StaticResource vm}">
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>

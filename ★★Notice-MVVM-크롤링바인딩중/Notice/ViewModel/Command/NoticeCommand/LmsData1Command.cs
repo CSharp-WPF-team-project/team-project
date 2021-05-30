@@ -28,9 +28,6 @@ namespace Notice.ViewModel.Command
 			VM = vm;
 		}
 
-
-
-
 		//ICommand 인터페이스 구현
 		public event EventHandler CanExecuteChanged;
 
@@ -162,5 +159,10 @@ namespace Notice.ViewModel.Command
 				});
 			}
 		}
+
+		public void saveExcel()
+        {
+
+        }
 	}
 }

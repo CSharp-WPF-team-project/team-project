@@ -106,8 +106,9 @@
                                Foreground="#619196" FontFamily="Fonts/KoPubWorld Dotum Bold.ttf #KoPubWorld돋움체 Bold"/>
                     <Button Content="Searching" 
                             Width="100" HorizontalAlignment="Right" Margin="20,0"
-                            Command="{Binding Source=vm, Path=LmsData1Command }"/>
-                    <ListView Grid.Row="1" Margin="20,5">
+                            Command="{Binding Path=LmsData1Command }"/>
+                    <ListView Grid.Row="1" Margin="20,5"
+                              ItemsSource="{Binding Source={StaticResource vm},Path=L_Data1_Main}">
 
                     </ListView>
                 </Grid>
