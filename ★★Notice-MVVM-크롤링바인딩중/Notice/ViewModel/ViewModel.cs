@@ -39,9 +39,17 @@ namespace Notice.ViewModel
         /// </summary>
         public BindingButton bindingButton { get; set; }
 
+<<<<<<< Updated upstream
         ///<summary>
         /// Notice Page Command
         /// </summary>
+=======
+        /// </summary>
+        //Notice Page Command
+        /// </summary>
+         
+        public Grade grade { get; set; }
+>>>>>>> Stashed changes
         public List<LmsData1> L_Data1 { get; set; }
         public ObservableCollection<LmsData1> L_Data1_Main { get; set; }
         public LmsData1Command lmsData1Command { get; set; }
@@ -64,6 +72,7 @@ namespace Notice.ViewModel
             departmentDataButtonCommand = new DepartmentDataButtonCommand(this);
             listViewSelected = new listViewSelected();
 
+            grade = new Grade();
             L_Data1 = new List<LmsData1>();
             L_Data1_Main = new ObservableCollection<LmsData1>();
             lmsData1Command = new LmsData1Command(this);

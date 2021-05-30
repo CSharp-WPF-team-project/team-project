@@ -16,7 +16,6 @@ namespace Notice.ViewModel.Command
     public class LmsData1Command : ICommand
     {
 		int countBtn2 = 0;
-		int grade = 21; //Test
 
 		protected ChromeDriverService _driverService = null;
 		protected ChromeOptions _options = null;
@@ -57,9 +56,9 @@ namespace Notice.ViewModel.Command
 		public void DataCrawling()
 		{
 			_driverService = ChromeDriverService.CreateDefaultService();
-			_driverService.HideCommandPromptWindow = true;
+			//_driverService.HideCommandPromptWindow = true;
 			_options = new ChromeOptions();
-			_options.AddArgument("headless");
+			//_options.AddArgument("headless");
 			_options.AddArgument("disable-gpu");
 			_driver = new ChromeDriver(_driverService, _options);
 
@@ -92,7 +91,7 @@ namespace Notice.ViewModel.Command
 			element = _driver.FindElementByXPath("//*[@id='nav']/li[3]/a");
 			element.Click();
 
-			if (grade == 21)
+			if (VM.grade.GradeNumber == 21)
 			{
 				for (int i = 2; i < 10; i++)
 				{
@@ -106,7 +105,7 @@ namespace Notice.ViewModel.Command
 					TextUpLoad2();
 				}
 			}
-			if (grade == 18)
+			if (VM.grade.GradeNumber == 18)
 			{
 				for (int i = 2; i < 9; i++)
 				{
@@ -120,7 +119,7 @@ namespace Notice.ViewModel.Command
 					TextUpLoad2();
 				}
 			}
-			if (grade == 15)
+			if (VM.grade.GradeNumber == 15)
 			{
 				for (int i = 2; i < 8; i++)
 				{

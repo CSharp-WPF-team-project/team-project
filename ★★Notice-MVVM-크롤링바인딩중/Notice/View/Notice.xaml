@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:Notice.View"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:vm ="clr-namespace:Notice.ViewModel"
+      xmlns:md ="clr-namespace:Notice.Model"
       mc:Ignorable="d" 
       d:DesignHeight="655" d:DesignWidth="897" Margin="5"
       Title="Notice" Background="White">
@@ -34,7 +35,7 @@
         </Grid>
         
         <!--학점체크박스-->
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
+        <StackPanel x:Name ="stp" Grid.Row="1" Orientation="Horizontal">
             <CheckBox Content="21.5학점(대진설O)" Margin="20,0"/>
             <CheckBox Content="18.5학점(대진설O)" Margin="20,0"/>
             <CheckBox Content="15.5학점(대진설O)" Margin="20,0"/>
@@ -104,7 +105,11 @@
                     <TextBlock Text="강의 자료" 
                                FontSize="25" VerticalAlignment="Center" Margin="20,0"
                                Foreground="#619196" FontFamily="Fonts/KoPubWorld Dotum Bold.ttf #KoPubWorld돋움체 Bold"/>
+<<<<<<< Updated upstream
                     <Button Content="Searching"
+=======
+                    <Button x:Name="Searching" Content="Searching" 
+>>>>>>> Stashed changes
                             Width="100" HorizontalAlignment="Right" Margin="20,0"
                             Command="{Binding Path= lmsData1Command}"/>
                     <ListView Grid.Row="1" Margin="20,5"

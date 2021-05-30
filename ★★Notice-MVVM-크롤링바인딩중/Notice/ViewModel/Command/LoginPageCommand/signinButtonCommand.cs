@@ -73,7 +73,8 @@ namespace Notice.ViewModel.Command.LoginPageCommand
 				View.MainWindow mainWindow = new View.MainWindow();
 				mainWindow.Close();
 				first.pageControl.NavigationService.Navigate(home);
-				
+
+
 
 				_driver.Close();
 			}
