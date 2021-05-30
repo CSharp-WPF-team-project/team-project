@@ -64,6 +64,8 @@ namespace Notice.ViewModel
 
             L_Data1 = new List<LmsData1>();
             L_Data1_Main = new ObservableCollection<LmsData1>();
+            lmsData1Command = new LmsData1Command(this);
+
 
 
         }

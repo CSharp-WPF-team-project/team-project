@@ -23,7 +23,7 @@ namespace Notice.ViewModel.Command
 		protected ChromeDriver _driver = null;
 
 		public ViewModel VM { get; set; }
-		LmsData1Command(ViewModel vm)
+		public LmsData1Command(ViewModel vm)
 		{
 			VM = vm;
 		}
