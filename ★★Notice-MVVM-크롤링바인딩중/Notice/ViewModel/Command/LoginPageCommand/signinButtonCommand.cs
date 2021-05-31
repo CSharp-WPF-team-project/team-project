@@ -71,7 +71,7 @@ namespace Notice.ViewModel.Command.LoginPageCommand
 				first.Show();
 				//음... 안닫히네
 				View.MainWindow mainWindow = new View.MainWindow();
-				mainWindow.Close();
+				// 교수님 코드 VM.mainWindowRef.Close();
 				first.pageControl.NavigationService.Navigate(home);
 
 

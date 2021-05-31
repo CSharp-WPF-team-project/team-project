@@ -1,4 +1,5 @@
 ﻿using Notice.Model;
+using Notice.View;
 using Notice.ViewModel.Command;
 using Notice.ViewModel.Command.FirstPageCommand;
 using Notice.ViewModel.Command.HomePageCommand;
@@ -20,7 +21,6 @@ namespace Notice.ViewModel
         public List<DepartmentData> D_Data { get; set; }
         public ObservableCollection<DepartmentData> D_Data_Main { get; set; }
         public DepartmentDataButtonCommand departmentDataButtonCommand { get; set; }
-
 
         /// <summary>
         /// LoginPageCommand
@@ -49,6 +49,7 @@ namespace Notice.ViewModel
         public List<LmsData1> L_Data1 { get; set; }
         public ObservableCollection<LmsData1> L_Data1_Main { get; set; }
         public LmsData1Command lmsData1Command { get; set; }
+
 
         public ViewModel()
         {
