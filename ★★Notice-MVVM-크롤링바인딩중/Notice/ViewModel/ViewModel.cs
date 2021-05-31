@@ -39,17 +39,13 @@ namespace Notice.ViewModel
         /// </summary>
         public BindingButton bindingButton { get; set; }
 
-<<<<<<< Updated upstream
-        ///<summary>
-        /// Notice Page Command
+
         /// </summary>
-=======
-        /// </summary>
-        //Notice Page Command
+        ///Notice Page Command
         /// </summary>
          
         public Grade grade { get; set; }
->>>>>>> Stashed changes
+
         public List<LmsData1> L_Data1 { get; set; }
         public ObservableCollection<LmsData1> L_Data1_Main { get; set; }
         public LmsData1Command lmsData1Command { get; set; }
@@ -96,5 +92,11 @@ namespace Notice.ViewModel
                 D_Data_Main.Add(D_Data[i]);
             }
         }
+
+        //List 개수 얻기
+        public int getCount1() { return L_Data1.Count(); }
+
+        //List 접근하기
+        public List<LmsData1> getList1() { return L_Data1; }
     }
 }

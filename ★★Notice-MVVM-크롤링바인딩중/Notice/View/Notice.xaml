@@ -33,7 +33,7 @@
             <TextBlock Grid.Column="1" Text="Home" FontSize="35" Foreground="#619196" FontFamily="Fonts/KoPubWorld Dotum Bold.ttf #KoPubWorld돋움체 Bold" 
                                VerticalAlignment="Center" Margin="5"/>
         </Grid>
-        
+
         <!--학점체크박스-->
         <StackPanel x:Name ="stp" Grid.Row="1" Orientation="Horizontal">
             <CheckBox Content="21.5학점(대진설O)" Margin="20,0"/>
@@ -47,7 +47,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            
+
             <!--수강과목-->
             <Border BorderBrush="#d7d7d7" BorderThickness="3" CornerRadius="15" 
                     Margin="10,5">
@@ -66,7 +66,7 @@
                     </ListView>
                 </Grid>
             </Border>
-            
+
             <!--수강과목-->
             <Border Grid.Column="1" BorderBrush="#d7d7d7" BorderThickness="3" CornerRadius="15" 
                     Margin="10,5">
@@ -86,7 +86,7 @@
                 </Grid>
             </Border>
         </Grid>
-        
+
         <!--하단-->
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
@@ -105,13 +105,9 @@
                     <TextBlock Text="강의 자료" 
                                FontSize="25" VerticalAlignment="Center" Margin="20,0"
                                Foreground="#619196" FontFamily="Fonts/KoPubWorld Dotum Bold.ttf #KoPubWorld돋움체 Bold"/>
-<<<<<<< Updated upstream
-                    <Button Content="Searching"
-=======
-                    <Button x:Name="Searching" Content="Searching" 
->>>>>>> Stashed changes
-                            Width="100" HorizontalAlignment="Right" Margin="20,0"
-                            Command="{Binding Path= lmsData1Command}"/>
+                    <Button Content="Searching" 
+                            Width="100" HorizontalAlignment="Right" Margin="0,12,20,0"
+                            Command="{Binding Path= lmsData1Command}" VerticalAlignment="Top"/>
                     <ListView Grid.Row="1" Margin="20,5"
                               ItemsSource="{Binding Source={StaticResource vm},Path=L_Data1_Main}">
                         <ListView.View>
