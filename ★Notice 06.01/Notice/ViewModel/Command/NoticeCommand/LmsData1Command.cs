@@ -62,6 +62,7 @@ namespace Notice.ViewModel.Command
             if (countExcel == 0) { saveExcel(); countExcel++; }
 			else
             {
+				VM.E_Data.Clear();
 				readExcel();
 				compareData();
 				saveExcel();
@@ -158,7 +159,8 @@ namespace Notice.ViewModel.Command
 				VM.L_Data1.Add(new LmsData1()
 				{
 					LmsSubject = _driver.FindElementByXPath("//*[@id='center']/div/div[1]/div[1]/div[1]").Text.Substring(9),
-					LmsTitle = "업로드된 자료가 없습니다."
+					LmsTitle = "업로드된 자료가 없습니다.",
+					LmsRdate = "No!"
 				});
 				return;
 			}
@@ -224,7 +226,7 @@ namespace Notice.ViewModel.Command
 				//excelData에 기록.
 				for (int r = 2; r <= data.GetLength(1); r++)
 				{
-					ExcelData.GetE_Data().Add(new ExcelData() { ELmsSubject = data[r, 1].ToString(), ELmsTitle = data[r, 2].ToString(), ELmsRdata = data[r, 3].ToString() });
+					VM.E_Data.Add(new ExcelData() { ELmsSubject = data[r, 1].ToString(), ELmsTitle = data[r, 2].ToString(), ELmsRdata = data[r, 3].ToString() });
 				}
 
 				workBook.Close(true);
@@ -259,7 +261,7 @@ namespace Notice.ViewModel.Command
 			for (int i = 0; i < VM.getCount1(); i++)
 			{
 				var lmsData1_Title = VM.getList1().ElementAt(i).LmsTitle;
-				var excelData_Title = ExcelData.GetE_Data().ElementAt(i).ELmsTitle;
+				var excelData_Title = VM.E_Data.ElementAt(i).ELmsTitle;
 
 				if (lmsData1_Title != excelData_Title)
 				{

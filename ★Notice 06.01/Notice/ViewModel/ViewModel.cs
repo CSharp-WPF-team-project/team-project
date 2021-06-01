@@ -51,7 +51,7 @@ namespace Notice.ViewModel
         public List<LmsData1> L_Data1 { get; set; }
         public ObservableCollection<LmsData1> L_Data1_Main { get; set; }
         public LmsData1Command lmsData1Command { get; set; }
-
+        public List<ExcelData> E_Data { get; set; }
         
         public ViewModel()
         {
@@ -77,6 +77,7 @@ namespace Notice.ViewModel
             L_Data1 = new List<LmsData1>();
             L_Data1_Main = new ObservableCollection<LmsData1>();
             lmsData1Command = new LmsData1Command(this);
+            E_Data = new List<ExcelData>();
 
 
 
@@ -103,5 +104,6 @@ namespace Notice.ViewModel
 
         //List 접근하기
         public List<LmsData1> getList1() { return L_Data1; }
+
     }
 }
