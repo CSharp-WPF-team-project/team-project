@@ -220,7 +220,7 @@ namespace Notice.ViewModel.Command
 				string path = System.IO.Path.Combine(desktopPath, "강의자료.xlsx");
 				workBook = excelApp.Workbooks.Open(path);
 				workSheet = workBook.Worksheets.get_Item(1) as Excel.Worksheet;
-				Excel.Range rng = workSheet.Range[workSheet.Cells[1, 1], workSheet.Cells[7, 7]];
+				Excel.Range rng = workSheet.Range[workSheet.Cells[1, 1], workSheet.Cells[9, 9]];
 				//Range 데이타를 배열 (One-based array)로
 				object[,] data = rng.Value;
 
