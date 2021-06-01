@@ -24,6 +24,12 @@ namespace Notice.View
         //ListViewItem 클릭시 Page 전환 기능 
         private void ListViewItem_Selected(object sender, RoutedEventArgs e)
         {
+            if(sender==LoginItem)
+            {
+                var Login = new View.Login();
+                pageControl.NavigationService.Navigate(Login);
+            }
+
             if (sender == HomeItem) 
             {
                 var home = new View.Home();

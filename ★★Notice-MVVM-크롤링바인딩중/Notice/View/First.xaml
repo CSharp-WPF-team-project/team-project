@@ -68,6 +68,12 @@
 
                 <!--ListView로 상세 메뉴들 넣기-->
                 <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Foreground="Beige">
+                    <ListViewItem x:Name="LoginItem" Height="60" Selected="ListViewItem_Selected">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Login" Height="40" Width="40" VerticalAlignment="Center"/>
+                            <TextBlock Text="Login" VerticalAlignment="Center" Margin="20, 10" FontSize="20"/>
+                        </StackPanel>
+                    </ListViewItem>
                     <ListViewItem x:Name="HomeItem" Height="60" Selected="ListViewItem_Selected" >
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Home" Height="40" Width="40" VerticalAlignment="Center"/>
