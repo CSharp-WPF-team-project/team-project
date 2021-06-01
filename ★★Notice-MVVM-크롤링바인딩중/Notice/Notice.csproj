@@ -86,9 +86,6 @@
     <Compile Include="ViewModel\Command\NoticeCommand\LmsData1Command.cs" />
     <Compile Include="ViewModel\Converter\LoginConverter.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
-    <Compile Include="View\Login.xaml.cs">
-      <DependentUpon>Login.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -112,10 +109,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Home.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
