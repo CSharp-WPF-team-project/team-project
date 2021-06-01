@@ -18,6 +18,7 @@ namespace Notice.ViewModel.Command
     public class LmsData1Command : ICommand
     {
 		int countBtn2 = 0;
+		int countExcel = 0;
 
 		protected ChromeDriverService _driverService = null;
 		protected ChromeOptions _options = null;
@@ -58,13 +59,13 @@ namespace Notice.ViewModel.Command
 			var task2 = Task.Run(() => DataCrawling());
 			await task2;
 			VM.get1();
-            //if (countBtn2 == 0) { saveExcel(); }
-			/*else
+            if (countExcel == 0) { saveExcel(); countExcel++; }
+			else
             {
 				readExcel();
 				compareData();
 				saveExcel();
-            }*/
+            }
 		}
 
 		public void DataCrawling()
