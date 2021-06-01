@@ -18,7 +18,6 @@ namespace Notice.ViewModel.Command
     public class LmsData1Command : ICommand
     {
 		int countBtn2 = 0;
-		int grade = 21; //Test
 
 		protected ChromeDriverService _driverService = null;
 		protected ChromeOptions _options = null;
@@ -28,6 +27,7 @@ namespace Notice.ViewModel.Command
 		static Excel.Workbook workBook = null;
 		static Excel.Worksheet workSheet = null;
 
+		int grade = 15;
 		public ViewModel VM { get; set; }
 		public LmsData1Command(ViewModel vm)
 		{
@@ -105,13 +105,13 @@ namespace Notice.ViewModel.Command
 			element = _driver.FindElementByXPath("//*[@id='nav']/li[3]/a");
 			element.Click();
 
-			if (VM.grade.GradeNumber == 21)
+			if (grade == 21)
 			{
 				for (int i = 2; i < 10; i++)
 				{
 					element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
 					element.Click();
-					string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
+					string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[2]/td[2]/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
 					string url = string.Format(BASE_Path, i);
 					string BASE_value = url;
 					element = _driver.FindElementByXPath(BASE_value);
@@ -119,13 +119,13 @@ namespace Notice.ViewModel.Command
 					TextUpLoad2();
 				}
 			}
-			if (VM.grade.GradeNumber == 18)
+			if (grade == 18)
 			{
 				for (int i = 2; i < 9; i++)
 				{
 					element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
 					element.Click();
-					string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
+					string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[2]/td[2]/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
 					string url = string.Format(BASE_Path, i);
 					string BASE_value = url;
 					element = _driver.FindElementByXPath(BASE_value);
@@ -133,13 +133,13 @@ namespace Notice.ViewModel.Command
 					TextUpLoad2();
 				}
 			}
-			if (VM.grade.GradeNumber == 15)
+			if (grade == 15)
 			{
 				for (int i = 2; i < 8; i++)
 				{
 					element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
 					element.Click();
-					string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
+					string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[2]/td[2]/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
 					string url = string.Format(BASE_Path, i);
 					string BASE_value = url;
 					element = _driver.FindElementByXPath(BASE_value);

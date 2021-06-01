@@ -52,7 +52,7 @@ namespace Notice.ViewModel
         public ObservableCollection<LmsData1> L_Data1_Main { get; set; }
         public LmsData1Command lmsData1Command { get; set; }
 
-
+        
         public ViewModel()
         {
 

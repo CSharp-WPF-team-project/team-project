@@ -36,9 +36,9 @@ namespace Notice.ViewModel.Command.LoginPageCommand
         public void Execute(object parameter)
         {
 			_driverService = ChromeDriverService.CreateDefaultService();
-			_driverService.HideCommandPromptWindow = true;
+			//_driverService.HideCommandPromptWindow = true;
 			_options = new ChromeOptions();
-			_options.AddArgument("headless");
+			//_options.AddArgument("headless");
 			_options.AddArgument("disable-gpu");
 			_driver = new ChromeDriver(_driverService, _options);
 
@@ -65,7 +65,9 @@ namespace Notice.ViewModel.Command.LoginPageCommand
 				element = _driver.FindElementByXPath("//*[@id='nav']/li[10]/a");
 				element.Click();
 
+				MessageBox.Show("성공");
 
+				/*
 				First first = new First();
 				View.Home home = new View.Home();
 				first.Show();
@@ -73,6 +75,7 @@ namespace Notice.ViewModel.Command.LoginPageCommand
 				View.MainWindow mainWindow = new View.MainWindow();
 				// 교수님 코드 VM.mainWindowRef.Close();
 				first.pageControl.NavigationService.Navigate(home);
+				*/
 
 
 

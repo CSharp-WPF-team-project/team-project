@@ -7,11 +7,11 @@
         xmlns:local="clr-namespace:Notice.View" 
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:vm="clr-namespace:Notice.ViewModel"
+        xmlns:md="clr-namespace:Notice.Model"
         xmlns:cv="clr-namespace:Notice.ViewModel.Converter"
         mc:Ignorable="d"
         Title="MainWindow" Height="670" Width="965" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen" FontFamily="/Fonts/Montserrat-SemiBold.ttf #Montserrat SemiBold">
     <Window.Resources>
-        <cv:LoginConverter x:Key="LoginCVT"/>
         <vm:ViewModel x:Key="vm"/>
     </Window.Resources>
     <Grid DataContext="{StaticResource vm}">

@@ -6,12 +6,14 @@
       xmlns:local="clr-namespace:Notice.View"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:vm ="clr-namespace:Notice.ViewModel"
+      xmlns:cv="clr-namespace:Notice.ViewModel.Converter"
       xmlns:md ="clr-namespace:Notice.Model"
       mc:Ignorable="d" 
       d:DesignHeight="655" d:DesignWidth="897" Margin="5"
       Title="Notice" Background="White">
 
     <Page.Resources>
+        <cv:LoginConverter x:Key="LoginCVT"/>
         <vm:ViewModel x:Key="vm"/>
     </Page.Resources>
 
@@ -51,8 +53,21 @@
                     <TextBlock Text="학생정보" 
                                FontSize="25" VerticalAlignment="Center" Margin="20,0"
                                Foreground="#619196" FontFamily="Fonts/KoPubWorld Dotum Bold.ttf #KoPubWorld돋움체 Bold"/>
-                    <Button Content="Check" 
-                            Width="100" HorizontalAlignment="Right" Margin="20,0"/>
+                    <Button x:Name="click" 
+                        Content="Check" 
+                            Width="100" HorizontalAlignment="Right" Margin="20,0"
+                    Command="{Binding Path=loginButtonCommand}">
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource LoginCVT}">
+                                <Binding ElementName="userID"
+                                 Path="Text"/>
+                                <Binding ElementName="userPW"
+                                 Path="Text"/>
+
+                            </MultiBinding>
+                        </Button.CommandParameter>
+
+                    </Button>
 
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
@@ -68,9 +83,15 @@
                         </StackPanel>
                         <StackPanel Grid.Column="1" Margin="10">
                             <!--checkBox 수정 필요-->
-                            <RadioButton Content="학점21.5(전진설포함)"/>
-                            <RadioButton Content="학점21.5(전진설포함)"/>
-                            <RadioButton Content="학점21.5(전진설포함)"/>
+                            <GroupBox Header="학점 선택(전진설 포함)" VerticalAlignment="Top" Height="120">
+                                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                                    <StackPanel x:Name="StackPanelGroup1" VerticalAlignment="Top">
+                                        <CheckBox Content="21.5학점"/>
+                                        <CheckBox Content="18.5학점"/>
+                                        <CheckBox Content="15.5학점"/>
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </GroupBox>
                         </StackPanel>
                     </Grid>
 
