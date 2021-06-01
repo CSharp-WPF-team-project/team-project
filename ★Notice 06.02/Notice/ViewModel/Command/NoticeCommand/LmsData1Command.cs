@@ -220,21 +220,9 @@ namespace Notice.ViewModel.Command
 				string path = System.IO.Path.Combine(desktopPath, "강의자료.xlsx");
 				workBook = excelApp.Workbooks.Open(path);
 				workSheet = workBook.Worksheets.get_Item(1) as Excel.Worksheet;
-				if(grade==15)
-                {
-					Excel.Range rng = workSheet.Range[workSheet.Cells[1, 1], workSheet.Cells[7, 7]];
-					object[,] data = rng.Value;
-				}
-				if(grade==18)
-                {
-					Excel.Range rng = workSheet.Range[workSheet.Cells[1, 1], workSheet.Cells[8, 8]];
-					object[,] data = rng.Value;
-				}
-				if(grade==21)
-                {
-					Excel.Range rng = workSheet.Range[workSheet.Cells[1, 1], workSheet.Cells[9, 9]];
-					object[,] data = rng.Value;
-				}
+
+				Excel.Range rng = workSheet.Range[workSheet.Cells[1, 1], workSheet.Cells[9, 9]];
+				object[,] data = rng.Value;
 
 				//excelData에 기록.
 				for (int r = 2; r <= data.GetLength(1); r++)
