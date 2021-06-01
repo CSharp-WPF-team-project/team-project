@@ -28,7 +28,7 @@ namespace Notice.ViewModel.Command
 		static Excel.Workbook workBook = null;
 		static Excel.Worksheet workSheet = null;
 
-		int grade = 15;
+		int grade = 21;
 		public ViewModel VM { get; set; }
 		public LmsData1Command(ViewModel vm)
 		{
@@ -47,6 +47,7 @@ namespace Notice.ViewModel.Command
 		{
 			if (countBtn2 != 0)
 			{
+				VM.L_Data1_Main.Clear();
 				VM.L_Data1.Clear();
 			}
 			Start2();
@@ -189,7 +190,7 @@ namespace Notice.ViewModel.Command
 
 				workSheet.Cells[1, 1] = "강의명";
 				workSheet.Cells[1, 2] = "제 목";
-				workSheet.Cells[1, 3] = "작성얼";
+				workSheet.Cells[1, 3] = "작성일";
 
 				for (int i = 0; i < VM.getCount1(); i++)
 				{

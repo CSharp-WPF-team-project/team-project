@@ -81,17 +81,22 @@
                             <TextBox x:Name="userPW" Margin="20,0" 
                                          materialDesign:HintAssist.Hint="Password.. " Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="20" Cursor="IBeam"/>
                         </StackPanel>
-                        <StackPanel Grid.Column="1" Margin="10">
+                        <StackPanel
+                            Grid.Column="1" Margin="10">
                             <!--checkBox 수정 필요-->
-                            <GroupBox Header="학점 선택(전진설 포함)" VerticalAlignment="Top" Height="120">
-                                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                                    <StackPanel x:Name="StackPanelGroup1" VerticalAlignment="Top">
-                                        <CheckBox Content="21.5학점"/>
-                                        <CheckBox Content="18.5학점"/>
-                                        <CheckBox Content="15.5학점"/>
-                                    </StackPanel>
-                                </ScrollViewer>
-                            </GroupBox>
+                            <StackPanel>
+                                <CheckBox x:Name="학점21"
+                                    Content="21.5학점(대진설O)" Margin="20,0"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <CheckBox x:Name="학점18"
+                                    Content="18.5학점(대진설O)" Margin="20,0"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <CheckBox x:Name="학점15"
+                                     Content="15.5학점(대진설O)" Margin="20,0"/>
+                            </StackPanel>
+
                         </StackPanel>
                     </Grid>
 
@@ -103,16 +108,30 @@
                     Margin="10,5">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="55"/>
+                        <RowDefinition Height="50"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <TextBlock Text="공지사항" 
                                FontSize="25" VerticalAlignment="Center" Margin="20,0"
                                Foreground="#619196" FontFamily="Fonts/KoPubWorld Dotum Bold.ttf #KoPubWorld돋움체 Bold"/>
                     <Button Content="Searching" 
-                            Width="100" HorizontalAlignment="Right" Margin="20,0"/>
-                    <ListView Grid.Row="1" Margin="20,5">
-
+                            Width="100" HorizontalAlignment="Right" Margin="20,0"
+                            Command="{Binding Path= lmsData3Command}" VerticalAlignment="Top"/>
+                    <ListView Grid.Row="1" Margin="3,5"
+                          ItemsSource="{Binding Source={StaticResource vm},Path=L_Data3_Main}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="과목" 
+                                                    DisplayMemberBinding="{Binding LmsSubject3}" 
+                                                    Width="100"/>
+                                <GridViewColumn Header="제목" 
+                                                    DisplayMemberBinding="{Binding LmsTitle3}" 
+                                                    Width="190"/>
+                                <GridViewColumn Header="작성일" 
+                                                    DisplayMemberBinding="{Binding LmsRdate}"
+                                                    Width="110"/>
+                            </GridView>
+                        </ListView.View>
                     </ListView>
                 </Grid>
             </Border>
@@ -130,7 +149,7 @@
                     Margin="10,5">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="55"/>
+                        <RowDefinition Height="50"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <TextBlock Text="강의 자료" 
@@ -139,7 +158,7 @@
                     <Button Content="Searching" 
                             Width="100" HorizontalAlignment="Right" Margin="0,12,20,0"
                             Command="{Binding Path= lmsData1Command}" VerticalAlignment="Top"/>
-                    <ListView Grid.Row="1" Margin="20,5"
+                    <ListView Grid.Row="1" Margin="3,5"
                               ItemsSource="{Binding Source={StaticResource vm},Path=L_Data1_Main}">
                         <ListView.View>
                             <GridView>
@@ -164,16 +183,33 @@
                     Margin="10,5">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="55"/>
+                        <RowDefinition Height="50"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <TextBlock Text="강의 레포트" 
                                FontSize="25" VerticalAlignment="Center" Margin="20,0"
                                Foreground="#619196" FontFamily="Fonts/KoPubWorld Dotum Bold.ttf #KoPubWorld돋움체 Bold"/>
                     <Button Content="Searching" 
-                            Width="100" HorizontalAlignment="Right" Margin="20,0"/>
-                    <ListView Grid.Row="1" Margin="20,5">
-
+                            Width="100" HorizontalAlignment="Right" 
+                             Command="{Binding Path= lmsData2Command}" Margin="20,0"/>
+                    <ListView Grid.Row="1" Margin="3,5"
+                               ItemsSource="{Binding Source={StaticResource vm},Path=L_Data2_Main}">
+                        <ListView.View>
+                            <GridView> 
+                                <GridViewColumn Header="과목" 
+                                        DisplayMemberBinding="{Binding LmsSubject2}" 
+                                        Width="90"/>
+                                <GridViewColumn Header="제목" 
+                                        DisplayMemberBinding="{Binding LmsTitle2}" 
+                                        Width="90 "/>
+                                <GridViewColumn Header="제출일시"
+                                        DisplayMemberBinding="{Binding LmsEndDate2}"
+                                        Width="115"/>
+                                <GridViewColumn Header="작성일"
+                                        DisplayMemberBinding="{Binding LmsRdate2}"
+                                        Width="110"/>
+                            </GridView>
+                        </ListView.View>
                     </ListView>
                 </Grid>
             </Border>

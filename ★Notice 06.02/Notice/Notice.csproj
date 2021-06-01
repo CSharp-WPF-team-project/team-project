@@ -78,6 +78,8 @@
     <Compile Include="Model\Grade.cs" />
     <Compile Include="Model\Grade21.cs" />
     <Compile Include="Model\LmsData1.cs" />
+    <Compile Include="Model\LmsData2.cs" />
+    <Compile Include="Model\LmsData3.cs" />
     <Compile Include="Model\MainWindowIDInformation.cs" />
     <Compile Include="ViewModel\Command\FirstPageCommand\listViewSelected.cs" />
     <Compile Include="ViewModel\Command\HomePageCommand\DepartmentDataButtonCommand.cs" />
@@ -86,6 +88,8 @@
     <Compile Include="ViewModel\Command\Binding\BindingButton.cs" />
     <Compile Include="ViewModel\Command\LoginPageCommand\StartBtnCmd.cs" />
     <Compile Include="ViewModel\Command\NoticeCommand\LmsData1Command.cs" />
+    <Compile Include="ViewModel\Command\NoticeCommand\LmsData2Command.cs" />
+    <Compile Include="ViewModel\Command\NoticeCommand\LmsData3Command.cs" />
     <Compile Include="ViewModel\Converter\LoginConverter.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
     <Compile Include="View\MainWindow.xaml.cs">

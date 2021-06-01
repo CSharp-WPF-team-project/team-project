@@ -17,10 +17,11 @@ namespace Notice.View
 		{
 			
 			InitializeComponent();
-			click.Click += button1_Initialized;
+			//click.Click += button1_Initialized;
 
 		}
 		
+		/*
 		public void button1_Initialized(object sender, EventArgs e)
 		{
 			
@@ -49,6 +50,7 @@ namespace Notice.View
 				}
 			}
 		}
+		*/
 
 	}
 }

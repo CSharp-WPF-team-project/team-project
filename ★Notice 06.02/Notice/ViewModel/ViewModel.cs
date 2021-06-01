@@ -4,6 +4,7 @@ using Notice.ViewModel.Command;
 using Notice.ViewModel.Command.FirstPageCommand;
 using Notice.ViewModel.Command.HomePageCommand;
 using Notice.ViewModel.Command.LoginPageCommand;
+using Notice.ViewModel.Command.NoticeCommand;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -49,8 +50,14 @@ namespace Notice.ViewModel
         public Grade grade { get; set; }
 
         public List<LmsData1> L_Data1 { get; set; }
+        public List<LmsData2> L_Data2 { get; set; }
+        public List<LmsData3> L_Data3 { get; set; }
         public ObservableCollection<LmsData1> L_Data1_Main { get; set; }
+        public ObservableCollection<LmsData2> L_Data2_Main { get; set; }
+        public ObservableCollection<LmsData3> L_Data3_Main { get; set; }
         public LmsData1Command lmsData1Command { get; set; }
+        public LmsData2Command lmsData2Command { get; set; }
+        public LmsData3Command lmsData3Command { get; set; }
         public List<ExcelData> E_Data { get; set; }
         
         public ViewModel()
@@ -74,9 +81,19 @@ namespace Notice.ViewModel
             listViewSelected = new listViewSelected();
 
             grade = new Grade();
+
             L_Data1 = new List<LmsData1>();
             L_Data1_Main = new ObservableCollection<LmsData1>();
+
+            L_Data2 = new List<LmsData2>();
+            L_Data2_Main = new ObservableCollection<LmsData2>();
+
+            L_Data3 = new List<LmsData3>();
+            L_Data3_Main = new ObservableCollection<LmsData3>();
+
             lmsData1Command = new LmsData1Command(this);
+            lmsData2Command = new LmsData2Command(this);
+            lmsData3Command = new LmsData3Command(this);
             E_Data = new List<ExcelData>();
 
 
@@ -90,7 +107,20 @@ namespace Notice.ViewModel
                 L_Data1_Main.Add(L_Data1[i]);
             }
         }
-
+        public void get2()
+        {
+            for (int i = 0; i < L_Data2.Count(); i++)
+            {
+                L_Data2_Main.Add(L_Data2[i]);
+            }
+        }
+        public void get3()
+        {
+            for (int i = 0; i < L_Data3.Count(); i++)
+            {
+                L_Data3_Main.Add(L_Data3[i]);
+            }
+        }
         public void get4()
         {
             for (int i = 0; i < D_Data.Count(); i++)
