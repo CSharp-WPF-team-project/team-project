@@ -59,6 +59,7 @@ namespace Notice.ViewModel
         public LmsData2Command lmsData2Command { get; set; }
         public LmsData3Command lmsData3Command { get; set; }
         public List<ExcelData> E_Data { get; set; }
+        public List<ExcelData2> E_Data2 { get; set; }
         
         public ViewModel()
         {
@@ -94,8 +95,9 @@ namespace Notice.ViewModel
             lmsData1Command = new LmsData1Command(this);
             lmsData2Command = new LmsData2Command(this);
             lmsData3Command = new LmsData3Command(this);
+            
             E_Data = new List<ExcelData>();
-
+            E_Data2 = new List<ExcelData2>();
 
 
         }
@@ -131,9 +133,11 @@ namespace Notice.ViewModel
 
         //List 개수 얻기
         public int getCount1() { return L_Data1.Count(); }
+        public int getCount3() { return L_Data2.Count(); }
 
         //List 접근하기
         public List<LmsData1> getList1() { return L_Data1; }
+        public List<LmsData2> getList2() { return L_Data2; }
 
     }
 }

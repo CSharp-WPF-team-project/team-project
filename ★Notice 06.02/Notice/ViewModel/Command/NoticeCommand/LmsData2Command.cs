@@ -19,12 +19,17 @@ namespace Notice.ViewModel.Command.NoticeCommand
     public class LmsData2Command : ICommand
 	{
 		int countBtn3 = 0; // 처음 실행이 아님을 확인
+		int countExcel = 0;
 
 		protected ChromeDriverService _driverService = null;
 		protected ChromeOptions _options = null;
 		protected ChromeDriver _driver = null;
 
-		int grade = 15;
+		static Excel.Application excelApp = null;
+		static Excel.Workbook workBook = null;
+		static Excel.Worksheet workSheet = null;
+
+		int grade = 21;
 
 		public ViewModel VM { get; set; }
 		public LmsData2Command(ViewModel vm)
@@ -55,6 +60,14 @@ namespace Notice.ViewModel.Command.NoticeCommand
 			var task3 = Task.Run(() => ReportCrawling());
 			await task3;
 			VM.get2();
+            if (countExcel == 0) { saveExcel(); countExcel++; }
+			else
+            {
+				VM.E_Data2.Clear();
+				readExcel();
+				compareData();
+				saveExcel();
+            }
 
 		}
 
@@ -148,8 +161,10 @@ namespace Notice.ViewModel.Command.NoticeCommand
 				VM.L_Data2.Add(new LmsData2()
 				{
 					LmsSubject2 = _driver.FindElementByXPath("//*[@id='center']/div/div[1]/div[1]/div[1]").Text.Substring(9),
-					LmsTitle2 = "업로드된 레포트가 없습니다."
-				});
+					LmsTitle2 = "업로드된 레포트가 없습니다.",
+					LmsRdate2 = "-",
+					LmsEndDate2 = "-"
+				}) ;
 				return;
 			}
 			else
@@ -161,6 +176,107 @@ namespace Notice.ViewModel.Command.NoticeCommand
 					LmsTitle2 = _driver.FindElementByXPath("//*[@id='borderB']/tbody/tr[2]/td[2]").Text,
 					LmsRdate2 = _driver.FindElementByXPath("//*[@id='borderB']/tbody/tr[2]/td[6]").Text
 				});
+			}
+		}
+
+		public void saveExcel()
+		{
+			try
+			{
+				string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+				string path2 = System.IO.Path.Combine(desktopPath, "레포트.xlsx");
+
+				excelApp = new Excel.Application();
+				workBook = excelApp.Workbooks.Add();
+				workSheet = workBook.Worksheets.get_Item(1) as Excel.Worksheet;
+
+				workSheet.Cells[1, 1] = "과 목";
+				workSheet.Cells[1, 2] = "제 목";
+				workSheet.Cells[1, 3] = "제출일시";
+				workSheet.Cells[1, 4] = "작성일";
+
+				for (int i = 0; i < VM.getCount3(); i++)
+				{
+					workSheet.Cells[2 + i, 1] = VM.getList2().ElementAt(i).LmsSubject2;
+					workSheet.Cells[2 + i, 2] = VM.getList2().ElementAt(i).LmsTitle2;
+					workSheet.Cells[2 + i, 3] = VM.getList2().ElementAt(i).LmsEndDate2;
+					workSheet.Cells[2 + i, 4] = VM.getList2().ElementAt(i).LmsRdate2;
+				}
+				workSheet.Columns.AutoFit();
+				workSheet.SaveAs(path2, Excel.XlFileFormat.xlWorkbookDefault);
+				workBook.Close(true);
+				excelApp.Quit();
+			}
+			finally
+			{
+				ReleaseObject(workSheet);
+				ReleaseObject(workBook);
+				ReleaseObject(excelApp);
+			}
+		}
+		public void readExcel()
+		{
+			try
+			{
+				excelApp = new Excel.Application();
+
+				string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+				string path = System.IO.Path.Combine(desktopPath, "레포트.xlsx");
+				workBook = excelApp.Workbooks.Open(path);
+				workSheet = workBook.Worksheets.get_Item(1) as Excel.Worksheet;
+
+				Excel.Range rng = workSheet.Range[workSheet.Cells[1, 1], workSheet.Cells[9, 9]];
+				object[,] data = rng.Value;
+
+				//excelData에 기록.
+				for (int r = 2; r <= data.GetLength(1); r++)
+				{
+					VM.E_Data2.Add(new ExcelData2() {  ELmsSubject2= data[r, 1].ToString(), ELmsTitle2 = data[r, 2].ToString(), ELmsEnddate2 = data[r, 3].ToString(), ELmsRdate2=data[r,4].ToString() });
+				}
+
+				workBook.Close(true);
+				excelApp.Quit();
+			}
+			finally
+			{
+				ReleaseObject(workSheet);
+				ReleaseObject(workBook);
+				ReleaseObject(excelApp);
+			}
+		}
+		static void ReleaseObject(object obj)
+		{
+			try
+			{
+				if (obj != null)
+				{
+					Marshal.ReleaseComObject(obj);
+					obj = null;
+				}
+			}
+			catch (Exception ex)
+			{
+				obj = null;
+				throw ex;
+			}
+			finally { GC.Collect(); }
+		}
+
+		public void compareData()
+		{
+			for (int i = 0; i < VM.getCount3(); i++)
+			{
+				var lmsData1_Title = VM.getList2().ElementAt(i).LmsTitle2;
+				var excelData_Title = VM.E_Data2.ElementAt(i).ELmsTitle2;
+
+				if (lmsData1_Title != excelData_Title)
+				{
+					MessageBox.Show(VM.getList2().ElementAt(i).LmsSubject2 + "의 내용이 다릅니다.(마지막 비교와 비교해서 새 과제(레포트)가 업로드 되었습니다.)");
+				}
+				else
+				{
+					MessageBox.Show(VM.getList2().ElementAt(i).LmsSubject2 + "의 내용이 같습니다.(새 과제(레포트)가 업로드 되지 않았습니다.)");
+				}
 			}
 		}
 	}
