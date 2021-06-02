@@ -104,6 +104,7 @@ namespace Notice.ViewModel
 
         public void get1()
         {
+            L_Data1_Main.Clear();
             for (int i = 0; i < L_Data1.Count(); i++)
             {
                 L_Data1_Main.Add(L_Data1[i]);
@@ -111,6 +112,7 @@ namespace Notice.ViewModel
         }
         public void get2()
         {
+            L_Data2_Main.Clear();
             for (int i = 0; i < L_Data2.Count(); i++)
             {
                 L_Data2_Main.Add(L_Data2[i]);
@@ -118,6 +120,7 @@ namespace Notice.ViewModel
         }
         public void get3()
         {
+            L_Data3_Main.Clear();
             for (int i = 0; i < L_Data3.Count(); i++)
             {
                 L_Data3_Main.Add(L_Data3[i]);

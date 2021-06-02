@@ -28,7 +28,6 @@ namespace Notice.ViewModel.Command
 		static Excel.Workbook workBook = null;
 		static Excel.Worksheet workSheet = null;
 
-		int grade = 21;
 		public ViewModel VM { get; set; }
 		public LmsData1Command(ViewModel vm)
 		{
@@ -50,6 +49,12 @@ namespace Notice.ViewModel.Command
 				VM.L_Data1_Main.Clear();
 				VM.L_Data1.Clear();
 			}
+			VM.L_Data1.Add(new LmsData1()
+			{
+				LmsTitle = "데이터 로딩중"
+			});
+			VM.get1();
+			VM.L_Data1.Clear();
 			Start2();
 			countBtn2++;
 		}
@@ -108,9 +113,8 @@ namespace Notice.ViewModel.Command
 			element = _driver.FindElementByXPath("//*[@id='nav']/li[3]/a");
 			element.Click();
 
-			if (grade == 21)
-			{
-				for (int i = 2; i < 10; i++)
+	
+				for (int i = 2; i <= _driver.FindElements(By.XPath("//*[@id='treeboxtab']/div/table/tbody/tr[2]/td[2]/table/tbody/tr")).Count; i++)
 				{
 					element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
 					element.Click();
@@ -121,35 +125,6 @@ namespace Notice.ViewModel.Command
 					element.Click();
 					TextUpLoad2();
 				}
-			}
-			if (grade == 18)
-			{
-				for (int i = 2; i < 9; i++)
-				{
-					element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
-					element.Click();
-					string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[2]/td[2]/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
-					string url = string.Format(BASE_Path, i);
-					string BASE_value = url;
-					element = _driver.FindElementByXPath(BASE_value);
-					element.Click();
-					TextUpLoad2();
-				}
-			}
-			if (grade == 15)
-			{
-				for (int i = 2; i < 8; i++)
-				{
-					element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
-					element.Click();
-					string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[2]/td[2]/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
-					string url = string.Format(BASE_Path, i);
-					string BASE_value = url;
-					element = _driver.FindElementByXPath(BASE_value);
-					element.Click();
-					TextUpLoad2();
-				}
-			}
 			_driver.Close();
 		}
 

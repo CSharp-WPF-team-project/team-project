@@ -25,7 +25,6 @@ namespace Notice.ViewModel.Command.NoticeCommand
 		protected ChromeOptions _options = null;
 		protected ChromeDriver _driver = null;
 
-		int grade = 15;
 
 		public event EventHandler CanExecuteChanged;
 
@@ -48,7 +47,12 @@ namespace Notice.ViewModel.Command.NoticeCommand
 				VM.L_Data3_Main.Clear();
 				VM.L_Data3.Clear();
 			}
-
+			VM.L_Data3.Add(new LmsData3()
+			{
+				LmsTitle3 = "데이터 로딩중"
+			});
+			VM.get3();
+			VM.L_Data3.Clear();
 			Start4();
 			countBtn4++;
 		}
@@ -65,8 +69,8 @@ namespace Notice.ViewModel.Command.NoticeCommand
 			_driverService = ChromeDriverService.CreateDefaultService();
 			_driverService.HideCommandPromptWindow = true;
 			_options = new ChromeOptions();
-			_options.AddArgument("headless");
-			_options.AddArgument("disable-gpu");
+			//_options.AddArgument("headless");
+			//_options.AddArgument("disable-gpu");
 			_driver = new ChromeDriver(_driverService, _options);
 
 			_driver.Navigate().GoToUrl("https://ieilms.jbnu.ac.kr/"); // 웹 사이트에 접속합니다.
@@ -96,11 +100,10 @@ namespace Notice.ViewModel.Command.NoticeCommand
 
 			element = _driver.FindElementByXPath("//*[@id='nav']/li[10]/a");
 			element.Click();
-
-			if (grade == 21)
-			{
-				for (int i = 2; i < 10; i++)
-				{
+            try
+            {
+				for (int i=2; i< _driver.FindElements(By.XPath("//*[@id='treebox']/div/table/tbody/tr")).Count; i++)
+                {
 					string BASE_Path = "//*[@id='treebox']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
 					string url = string.Format(BASE_Path, i);
 					string BASE_value = url;
@@ -109,33 +112,10 @@ namespace Notice.ViewModel.Command.NoticeCommand
 					Thread.Sleep(300);
 					TextUpLoad4();
 				}
-			}
-			if (grade == 18)
-			{
-				for (int i = 2; i < 9; i++)
-				{
-					string BASE_Path = "//*[@id='treebox']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
-					string url = string.Format(BASE_Path, i);
-					string BASE_value = url;
-					element = _driver.FindElementByXPath(BASE_value);
-					element.Click();
-					Thread.Sleep(300);
-					TextUpLoad4();
-				}
-			}
-			if (grade == 15)
-			{
-				for (int i = 2; i < 8; i++)
-				{
-					string BASE_Path = "//*[@id='treebox']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
-					string url = string.Format(BASE_Path, i);
-					string BASE_value = url;
-					element = _driver.FindElementByXPath(BASE_value);
-					element.Click();
-					Thread.Sleep(300);
-					TextUpLoad4();
-				}
-			}
+			}catch(Exception ex)
+            {
+				return;
+            }
 			_driver.Close();
 		}
 

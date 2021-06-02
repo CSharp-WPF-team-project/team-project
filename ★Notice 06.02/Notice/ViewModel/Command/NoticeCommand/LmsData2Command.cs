@@ -29,8 +29,6 @@ namespace Notice.ViewModel.Command.NoticeCommand
 		static Excel.Workbook workBook = null;
 		static Excel.Worksheet workSheet = null;
 
-		int grade = 21;
-
 		public ViewModel VM { get; set; }
 		public LmsData2Command(ViewModel vm)
 		{
@@ -52,6 +50,12 @@ namespace Notice.ViewModel.Command.NoticeCommand
 				VM.L_Data2_Main.Clear();
 				VM.L_Data2.Clear();
 			}
+			VM.L_Data2.Add(new LmsData2()
+			{
+				LmsTitle2 = "데이터 로딩중"
+			});
+			VM.get2();
+			VM.L_Data2.Clear();
 			Start3();
 			countBtn3++;
 		}
@@ -109,10 +113,11 @@ namespace Notice.ViewModel.Command.NoticeCommand
 			element = _driver.FindElementByXPath("//*[@id='nav']/li[4]/a");
 			element.Click();
 
-			if (grade == 21)
-			{
-				for (int i = 2; i < 10; i++)
+            try
+            {
+				for (int i = 2; i <= _driver.FindElements(By.XPath("//*[@id='treeboxtab']/div/table/tbody/tr")).Count; i++)
 				{
+
 					element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
 					element.Click();
 					string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
@@ -122,35 +127,10 @@ namespace Notice.ViewModel.Command.NoticeCommand
 					element.Click();
 					TextUpLoad3();
 				}
-			}
-			if (grade == 18)
-			{
-				for (int i = 2; i < 9; i++)
-				{
-					element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
-					element.Click();
-					string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
-					string url = string.Format(BASE_Path, i);
-					string BASE_value = url;
-					element = _driver.FindElementByXPath(BASE_value);
-					element.Click();
-					TextUpLoad3();
-				}
-			}
-			if (grade == 15)
-			{
-				for (int i = 2; i < 8; i++)
-				{
-					element = _driver.FindElementByXPath("//*[@id='center']/div/div[2]/div/div[3]/a/span");
-					element.Click();
-					string BASE_Path = "//*[@id='treeboxtab']/div/table/tbody/tr[{0}]/td[2]/table/tbody/tr/td[4]/span";
-					string url = string.Format(BASE_Path, i);
-					string BASE_value = url;
-					element = _driver.FindElementByXPath(BASE_value);
-					element.Click();
-					TextUpLoad3();
-				}
-			}
+			}catch(Exception)
+            {
+				return;
+            }
 			_driver.Close();
 		}
 
