@@ -10,6 +10,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System.Windows;
+using System.Diagnostics;
 
 namespace Notice.ViewModel.Command.LoginPageCommand
 {
@@ -66,7 +67,6 @@ namespace Notice.ViewModel.Command.LoginPageCommand
 				element.Click();
 
 				MessageBox.Show("성공");
-
 				/*
 				First first = new First();
 				View.Home home = new View.Home();

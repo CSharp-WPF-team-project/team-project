@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,14 @@ namespace Notice.ViewModel.Command
 
         public void Execute(object parameter)
         {
+            Process[] processList = Process.GetProcessesByName("chromedriver");
+            for (int i = processList.Length - 1; i >= 0; i--)
+            {
+                // processList[i].CloseMainWindow();
+                processList[i].Kill();
+                processList[i].Close();
+            }
+
             Application.Current.Shutdown();
         }
     }

@@ -14,6 +14,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 using System.Windows;
 using Notice.Model;
 using System.Threading;
+using System.Diagnostics;
 
 namespace Notice.ViewModel.Command.NoticeCommand
 {

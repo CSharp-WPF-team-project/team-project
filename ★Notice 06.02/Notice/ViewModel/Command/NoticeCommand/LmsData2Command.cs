@@ -13,6 +13,7 @@ using System.Runtime.InteropServices;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Windows;
 using Notice.Model;
+using System.Diagnostics;
 
 namespace Notice.ViewModel.Command.NoticeCommand
 {
@@ -64,7 +65,8 @@ namespace Notice.ViewModel.Command.NoticeCommand
 			var task3 = Task.Run(() => ReportCrawling());
 			await task3;
 			VM.get2();
-            if (countExcel == 0) { saveExcel(); countExcel++; }
+
+			if (countExcel == 0) { saveExcel(); countExcel++; }
 			else
             {
 				VM.E_Data2.Clear();

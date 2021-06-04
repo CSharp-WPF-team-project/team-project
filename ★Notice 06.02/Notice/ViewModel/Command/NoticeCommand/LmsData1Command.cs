@@ -12,6 +12,7 @@ using OpenQA.Selenium.Chrome;
 using System.Windows.Input;
 using System.Runtime.InteropServices;
 using Excel = Microsoft.Office.Interop.Excel;
+using System.Diagnostics;
 
 namespace Notice.ViewModel.Command
 {
@@ -27,7 +28,7 @@ namespace Notice.ViewModel.Command
 		static Excel.Application excelApp = null;
 		static Excel.Workbook workBook = null;
 		static Excel.Worksheet workSheet = null;
-
+		
 		public ViewModel VM { get; set; }
 		public LmsData1Command(ViewModel vm)
 		{
@@ -51,8 +52,9 @@ namespace Notice.ViewModel.Command
 			}
 			VM.L_Data1.Add(new LmsData1()
 			{
+				
 				LmsTitle = "데이터 로딩중"
-			});
+			}) ;
 			VM.get1();
 			VM.L_Data1.Clear();
 			Start2();
@@ -65,7 +67,8 @@ namespace Notice.ViewModel.Command
 			var task2 = Task.Run(() => DataCrawling());
 			await task2;
 			VM.get1();
-            if (countExcel == 0) { saveExcel(); countExcel++; }
+
+			if (countExcel == 0) { saveExcel(); countExcel++; }
 			else
             {
 				VM.E_Data.Clear();

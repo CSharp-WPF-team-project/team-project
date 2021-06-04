@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Diagnostics;
+using System.Windows;
 
 namespace Notice.View
 {
@@ -47,6 +48,13 @@ namespace Notice.View
             }
             if (sender == SignOutItem)
             {
+                Process[] processList = Process.GetProcessesByName("chromedriver");
+                for (int i = processList.Length - 1; i >= 0; i--)
+                {
+                    // processList[i].CloseMainWindow();
+                    processList[i].Kill();
+                    processList[i].Close();
+                }
                 Application.Current.Shutdown();
             }
         }
