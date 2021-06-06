@@ -246,10 +246,7 @@ namespace Notice.ViewModel.Command
 				{
 					MessageBox.Show(VM.getList1().ElementAt(i).LmsSubject + "의 내용이 다릅니다.(업로드 되었습니다.)");
 				}
-				else
-				{
-					MessageBox.Show(VM.getList1().ElementAt(i).LmsSubject + "의 내용이 같습니다.(업로드 되지 않았습니다.)");
-				}
+				//MessageBox를 따로하는 것보다 List로 받아서 한번에 mail이나 카톡도 좋을 것 같습니다.
 			}
 		}
 	}
