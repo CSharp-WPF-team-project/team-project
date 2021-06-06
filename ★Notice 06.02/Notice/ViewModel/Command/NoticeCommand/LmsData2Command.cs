@@ -255,10 +255,6 @@ namespace Notice.ViewModel.Command.NoticeCommand
 				{
 					MessageBox.Show(VM.getList2().ElementAt(i).LmsSubject2 + "의 내용이 다릅니다.(마지막 비교와 비교해서 새 과제(레포트)가 업로드 되었습니다.)");
 				}
-				else
-				{
-					MessageBox.Show(VM.getList2().ElementAt(i).LmsSubject2 + "의 내용이 같습니다.(새 과제(레포트)가 업로드 되지 않았습니다.)");
-				}
 			}
 		}
 	}

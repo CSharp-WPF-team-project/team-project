@@ -75,8 +75,6 @@ namespace Notice.ViewModel
             bindingButton = new BindingButton();
             //Test
             StartBtnCmd = new StartBtnCmd();
-           
-
 
             departmentDataButtonCommand = new DepartmentDataButtonCommand(this);
             listViewSelected = new listViewSelected();

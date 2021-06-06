@@ -10,6 +10,8 @@ namespace Notice.ViewModel.Command.LoginPageCommand
 {
     public class StartBtnCmd : ICommand
     {
+        public ViewModel VM { get; set; }
+
         public event EventHandler CanExecuteChanged;
 
         public bool CanExecute(object parameter)
@@ -22,8 +24,8 @@ namespace Notice.ViewModel.Command.LoginPageCommand
             First first = new First();
             View.Home home = new View.Home();
             first.Show();
-
-            // 교수님 코드 VM.mainWindowRef.Close();
+            
+            
             first.pageControl.NavigationService.Navigate(home);
         }
     }
