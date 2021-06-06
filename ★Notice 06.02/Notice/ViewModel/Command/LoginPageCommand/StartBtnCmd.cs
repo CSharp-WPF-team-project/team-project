@@ -24,7 +24,7 @@ namespace Notice.ViewModel.Command.LoginPageCommand
             First first = new First();
             View.Home home = new View.Home();
             first.Show();
-            
+            ViewModel.mainWindow.Close();
             
             first.pageControl.NavigationService.Navigate(home);
         }

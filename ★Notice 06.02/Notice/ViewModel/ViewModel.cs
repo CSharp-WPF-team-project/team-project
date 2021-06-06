@@ -31,6 +31,7 @@ namespace Notice.ViewModel
         public signinButtonCommand loginButtonCommand { get; set; }
         //Test
         public StartBtnCmd StartBtnCmd { get; set; }
+        public static MainWindow mainWindow = System.Windows.Application.Current.MainWindow as MainWindow;
 
         /// <summary>
         /// FirstPageCommnad
@@ -75,6 +76,7 @@ namespace Notice.ViewModel
             bindingButton = new BindingButton();
             //Test
             StartBtnCmd = new StartBtnCmd();
+            
 
             departmentDataButtonCommand = new DepartmentDataButtonCommand(this);
             listViewSelected = new listViewSelected();
