@@ -2,18 +2,19 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace mySQL_Test.Models
+namespace mysql_test.Models
 {
-    class MyDbContext : DbContext
+    class MyDbContext:DbContext
     {
-        public DbSet<User> Users { get; set; } //User형태의 table을 만든다. users가 table의 이름이 된다.
+        public DbSet<Users> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql(@"Server=127.0.0.1:Database=test:User=root:Password=1234");
+            optionsBuilder.UseMySql(@"Server=120.0.0.1;Database=test;User=root;Password=1234;");
         }
     }
 }
