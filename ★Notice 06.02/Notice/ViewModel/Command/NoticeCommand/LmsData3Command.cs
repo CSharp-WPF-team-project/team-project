@@ -18,10 +18,13 @@ using System.Diagnostics;
 
 namespace Notice.ViewModel.Command.NoticeCommand
 {
+	/// <summary>
+	/// 공지사항
+	/// </summary>
     public class LmsData3Command : ICommand
 	{
 		int countBtn4 = 0; // 처음 실행이 아님을 확인
-
+		 
 		protected ChromeDriverService _driverService = null;
 		protected ChromeOptions _options = null;
 		protected ChromeDriver _driver = null;
@@ -70,8 +73,8 @@ namespace Notice.ViewModel.Command.NoticeCommand
 			_driverService = ChromeDriverService.CreateDefaultService();
 			_driverService.HideCommandPromptWindow = true;
 			_options = new ChromeOptions();
-			//_options.AddArgument("headless");
-			//_options.AddArgument("disable-gpu");
+			_options.AddArgument("headless");
+			_options.AddArgument("disable-gpu");
 			_driver = new ChromeDriver(_driverService, _options);
 
 			_driver.Navigate().GoToUrl("https://ieilms.jbnu.ac.kr/"); // 웹 사이트에 접속합니다.

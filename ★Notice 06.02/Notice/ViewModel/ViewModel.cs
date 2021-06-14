@@ -1,10 +1,12 @@
 ﻿using Notice.Model;
 using Notice.View;
 using Notice.ViewModel.Command;
+using Notice.ViewModel.Command.Binding;
 using Notice.ViewModel.Command.FirstPageCommand;
 using Notice.ViewModel.Command.HomePageCommand;
 using Notice.ViewModel.Command.LoginPageCommand;
 using Notice.ViewModel.Command.NoticeCommand;
+using Notice.ViewModel.KakaoApi;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -42,12 +44,22 @@ namespace Notice.ViewModel
         /// BindingPageCommand
         /// </summary>
         public BindingButton bindingButton { get; set; }
+        public KakaoLogin kakaoLogin { get; set; }
+        public KakaoLogout kakaoLogout { get; set; }
+        public KakaoManager kakaoManager { get; set; }
 
 
         /// </summary>
         ///Notice Page Command
         /// </summary>
-         
+
+        /// <summary>
+        /// KakaoApi
+        /// </summary>
+        public KakaoData kakaoData { get; set; }
+
+
+
         public Grade grade { get; set; }
 
         public List<LmsData1> L_Data1 { get; set; }
@@ -99,6 +111,9 @@ namespace Notice.ViewModel
             E_Data = new List<ExcelData>();
             E_Data2 = new List<ExcelData2>();
 
+            kakaoData = new KakaoData();
+            kakaoManager = new KakaoManager();
+            kakaoLogin = new KakaoLogin();
 
         }
 

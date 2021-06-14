@@ -13,11 +13,16 @@ using System.Windows.Input;
 using System.Runtime.InteropServices;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Diagnostics;
+using System.Timers;
 
 namespace Notice.ViewModel.Command
 {
+	/// <summary>
+	/// 강의 자료
+	/// </summary>
     public class LmsData1Command : ICommand
     {
+		private Timer timer;
 		int countBtn2 = 0;
 		int countExcel = 0;
 
@@ -52,7 +57,6 @@ namespace Notice.ViewModel.Command
 			}
 			VM.L_Data1.Add(new LmsData1()
 			{
-				
 				LmsTitle = "데이터 로딩중"
 			}) ;
 			VM.get1();
@@ -81,9 +85,9 @@ namespace Notice.ViewModel.Command
 		public void DataCrawling()
 		{
 			_driverService = ChromeDriverService.CreateDefaultService();
-			//_driverService.HideCommandPromptWindow = true;
+			_driverService.HideCommandPromptWindow = true;
 			_options = new ChromeOptions();
-			//_options.AddArgument("headless");
+			_options.AddArgument("headless");
 			_options.AddArgument("disable-gpu");
 			_driver = new ChromeDriver(_driverService, _options);
 
@@ -244,7 +248,11 @@ namespace Notice.ViewModel.Command
 
 				if (lmsData1_Title != excelData_Title)
 				{
-					MessageBox.Show(VM.getList1().ElementAt(i).LmsSubject + "의 내용이 다릅니다.(업로드 되었습니다.)");
+                    if (KakaoData.userToken != null)
+                    {
+						VM.kakaoManager.KakaoDefaultSendMessage(VM.getList1().ElementAt(i).LmsSubject + "의 내용이 다릅니다.(업로드 되었습니다.)");
+                    }
+					
 				}
 				//MessageBox를 따로하는 것보다 List로 받아서 한번에 mail이나 카톡도 좋을 것 같습니다.
 			}

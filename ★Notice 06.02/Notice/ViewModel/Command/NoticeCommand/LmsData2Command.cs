@@ -17,6 +17,9 @@ using System.Diagnostics;
 
 namespace Notice.ViewModel.Command.NoticeCommand
 {
+	/// <summary>
+	/// 레포트
+	/// </summary>
     public class LmsData2Command : ICommand
 	{
 		int countBtn3 = 0; // 처음 실행이 아님을 확인
@@ -80,9 +83,9 @@ namespace Notice.ViewModel.Command.NoticeCommand
 		public void ReportCrawling()
 		{
 			_driverService = ChromeDriverService.CreateDefaultService();
-			//_driverService.HideCommandPromptWindow = true;
+			_driverService.HideCommandPromptWindow = true;
 			_options = new ChromeOptions();
-			//_options.AddArgument("headless");
+			_options.AddArgument("headless");
 			_options.AddArgument("disable-gpu");
 			_driver = new ChromeDriver(_driverService, _options);
 
@@ -110,7 +113,7 @@ namespace Notice.ViewModel.Command.NoticeCommand
 			{
 				MessageBox.Show("ID,PW를 확인해주세요.");
 				return;
-			}
+			}  
 
 			element = _driver.FindElementByXPath("//*[@id='nav']/li[4]/a");
 			element.Click();
@@ -253,7 +256,10 @@ namespace Notice.ViewModel.Command.NoticeCommand
 
 				if (lmsData1_Title != excelData_Title)
 				{
-					MessageBox.Show(VM.getList2().ElementAt(i).LmsSubject2 + "의 내용이 다릅니다.(마지막 비교와 비교해서 새 과제(레포트)가 업로드 되었습니다.)");
+					if (KakaoData.userToken != null)
+					{
+						VM.kakaoManager.KakaoDefaultSendMessage(VM.getList2().ElementAt(i).LmsSubject2 + "의 내용이 다릅니다.(마지막 비교와 비교해서 새 과제(레포트)가 업로드 되었습니다.)");
+					}
 				}
 			}
 		}
