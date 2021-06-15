@@ -36,8 +36,15 @@ namespace Notice.ViewModel.Command.HomePageCommand
 		{
 			if (countBtn5 != 0)
 			{
+				VM.D_Data_Main.Clear();
 				VM.D_Data.Clear();
 			}
+			VM.D_Data.Add(new DepartmentData()
+			{
+				D_Title = "            데이터 로딩중"
+			});
+			VM.get4();
+			VM.D_Data.Clear();
 			Start5();
 			countBtn5++;
 		}

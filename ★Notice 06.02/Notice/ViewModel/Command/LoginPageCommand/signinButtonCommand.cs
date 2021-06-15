@@ -37,9 +37,9 @@ namespace Notice.ViewModel.Command.LoginPageCommand
         public void Execute(object parameter)
         {
 			_driverService = ChromeDriverService.CreateDefaultService();
-			//_driverService.HideCommandPromptWindow = true;
+			_driverService.HideCommandPromptWindow = true;
 			_options = new ChromeOptions();
-			//_options.AddArgument("headless");
+			_options.AddArgument("headless");
 			_options.AddArgument("disable-gpu");
 			_driver = new ChromeDriver(_driverService, _options);
 
@@ -66,7 +66,7 @@ namespace Notice.ViewModel.Command.LoginPageCommand
 				element = _driver.FindElementByXPath("//*[@id='nav']/li[10]/a");
 				element.Click();
 
-				MessageBox.Show("성공");
+				MessageBox.Show("로그인 성공 !\n원하시는 메뉴를 선택해주세요.");
 				/*
 				First first = new First();
 				View.Home home = new View.Home();

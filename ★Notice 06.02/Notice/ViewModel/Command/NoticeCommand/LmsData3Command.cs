@@ -102,7 +102,7 @@ namespace Notice.ViewModel.Command.NoticeCommand
 				return;
 			}
 
-			element = _driver.FindElementByXPath("//*[@id='nav']/li[10]/a");
+			element = _driver.FindElementByXPath("//*[@id='nav']/li[11]/a");
 			element.Click();
             try
             {

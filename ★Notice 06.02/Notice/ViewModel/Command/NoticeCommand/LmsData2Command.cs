@@ -115,7 +115,7 @@ namespace Notice.ViewModel.Command.NoticeCommand
 				return;
 			}  
 
-			element = _driver.FindElementByXPath("//*[@id='nav']/li[4]/a");
+			element = _driver.FindElementByXPath("//*[@id='nav']/li[5]/a");
 			element.Click();
 
             try

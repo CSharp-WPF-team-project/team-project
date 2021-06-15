@@ -108,8 +108,6 @@
     <Compile Include="Model\DepartmentData.cs" />
     <Compile Include="Model\ExcelData.cs" />
     <Compile Include="Model\ExcelData2.cs" />
-    <Compile Include="Model\Grade.cs" />
-    <Compile Include="Model\Grade21.cs" />
     <Compile Include="Model\KakaoData.cs" />
     <Compile Include="Model\LmsData1.cs" />
     <Compile Include="Model\LmsData2.cs" />

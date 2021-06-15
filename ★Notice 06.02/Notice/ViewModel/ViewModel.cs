@@ -60,8 +60,6 @@ namespace Notice.ViewModel
 
 
 
-        public Grade grade { get; set; }
-
         public List<LmsData1> L_Data1 { get; set; }
         public List<LmsData2> L_Data2 { get; set; }
         public List<LmsData3> L_Data3 { get; set; }
@@ -92,8 +90,6 @@ namespace Notice.ViewModel
 
             departmentDataButtonCommand = new DepartmentDataButtonCommand(this);
             listViewSelected = new listViewSelected();
-
-            grade = new Grade();
 
             L_Data1 = new List<LmsData1>();
             L_Data1_Main = new ObservableCollection<LmsData1>();
@@ -143,6 +139,7 @@ namespace Notice.ViewModel
         }
         public void get4()
         {
+            D_Data_Main.Clear();
             for (int i = 0; i < D_Data.Count(); i++)
             {
                 D_Data_Main.Add(D_Data[i]);
