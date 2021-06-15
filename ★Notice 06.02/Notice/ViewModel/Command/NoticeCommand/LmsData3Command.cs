@@ -270,6 +270,7 @@ namespace Notice.ViewModel.Command.NoticeCommand
 				{
 					if (KakaoData.userToken != null)
 					{
+						//오류 있음 내용이 전송이 안됨
 						VM.kakaoManager.KakaoDefaultSendMessage(VM.getList3().ElementAt(i).LmsSubject3 + "의 내용이 다릅니다.(마지막 비교와 비교해서 새 공지가 업로드 되었습니다.)");
                     }
                     else

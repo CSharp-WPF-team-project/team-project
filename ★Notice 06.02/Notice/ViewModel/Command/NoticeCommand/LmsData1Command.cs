@@ -52,6 +52,7 @@ namespace Notice.ViewModel.Command
 
 		public void Execute(object parameter)
 		{
+			//누르자마자 처음은 바로 시작하게 바꾸기
 			timer = new Timer();
 			timer.Interval = 1000 * 60; // 한 시간 간격
             timer.Elapsed += Timer_Elapsed;

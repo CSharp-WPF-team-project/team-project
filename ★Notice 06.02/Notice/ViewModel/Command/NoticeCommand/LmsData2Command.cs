@@ -54,6 +54,7 @@ namespace Notice.ViewModel.Command.NoticeCommand
 
 		public void Execute(object parameter)
 		{
+			//누르자마자 처음은 바로 시작하게 바꾸기
 			timer = new Timer();
 			timer.Interval = 1000 * 60;//한 시간
             timer.Elapsed += Timer_Elapsed;
@@ -272,6 +273,7 @@ namespace Notice.ViewModel.Command.NoticeCommand
 
 		public void compareData()
 		{
+			//오류 있음
 			for (int i = 0; i < VM.getCount2(); i++)
 			{
 				var lmsData1_Title = VM.getList2().ElementAt(i).LmsTitle2;
