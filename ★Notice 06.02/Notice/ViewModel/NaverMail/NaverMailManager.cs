@@ -45,7 +45,7 @@ namespace Notice.ViewModel.NaverMail
 				// 메일 제목 인코딩 타입(UTF-8) 선택
 				mailMessage.SubjectEncoding = System.Text.Encoding.UTF8;
 				// 본문
-				mailMessage.Body = "<html><body><h2>" + content + "</h2></body></html>";
+				mailMessage.Body = "<html><body><h2>" + content + "</body></html>";
 				// 본문의 포맷에 따라 선택
 				mailMessage.IsBodyHtml = true;
 				// 본문 인코딩 타입(UTF-8) 선택

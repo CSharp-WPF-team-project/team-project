@@ -7,8 +7,11 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Input;
+using static Notice.ViewModel.Command.NoticeCommand.LmsData2Command;
+using static Notice.ViewModel.ViewModel;
 using Excel = Microsoft.Office.Interop.Excel;
 
 namespace Notice.ViewModel.Command.NoticeCommand
@@ -20,6 +23,8 @@ namespace Notice.ViewModel.Command.NoticeCommand
 	{
 		int countBtn4 = 0; // 처음 실행이 아님을 확인
 		int countExcel = 0;
+
+		private System.Timers.Timer timer;
 
 		protected ChromeDriverService _driverService = null;
 		protected ChromeOptions _options = null;
@@ -45,22 +50,35 @@ namespace Notice.ViewModel.Command.NoticeCommand
 
 		public void Execute(object parameter)
 		{
-
-			if (countBtn4 != 0)
-			{
-				VM.L_Data3_Main.Clear();
-				VM.L_Data3.Clear();
-			}
-			VM.L_Data3.Add(new LmsData3()
-			{
-				LmsTitle3 = "데이터 로딩중"
-			});
-			VM.get3();
-			VM.L_Data3.Clear();
-			Start4();
-			countBtn4++;
+			timer = new System.Timers.Timer();
+			timer.Interval = 1000 * 60;//한 시간
+			timer.Elapsed += Timer_Elapsed;
+			timer.AutoReset = true;
+			timer.Enabled = true;
+			timer.Start();
 		}
-		private async void Start4()
+
+        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+			DispatcherService.Invoke((System.Action)(() =>
+			{
+				if (countBtn4 != 0)
+				{
+					VM.L_Data3_Main.Clear();
+					VM.L_Data3.Clear();
+				}
+				VM.L_Data3.Add(new LmsData3()
+				{
+					LmsTitle3 = "데이터 로딩중"
+				});
+				VM.get3();
+				VM.L_Data3.Clear();
+				Start4();
+				countBtn4++;
+			}));
+		}
+
+        private async void Start4()
 		{
 			var task4 = Task.Run(() => NoticeCrawling());
 			await task4;
@@ -69,7 +87,7 @@ namespace Notice.ViewModel.Command.NoticeCommand
 			if (countExcel == 0) { saveExcel(); countExcel++; }
 			else
 			{
-				VM.E_Data3.Clear();
+				//VM.E_Data3.Clear();
 				readExcel();
 				compareData();
 				saveExcel();
@@ -102,7 +120,7 @@ namespace Notice.ViewModel.Command.NoticeCommand
 				element.Click();
 
 				element = _driver.FindElementByXPath("//*[@id='boardAbox']/form/table/tbody/tr[1]/td[2]");
-				element.Click();
+				element.Click(); 
 			}
 			catch (Exception)
 			{
@@ -139,7 +157,8 @@ namespace Notice.ViewModel.Command.NoticeCommand
 				VM.L_Data3.Add(new LmsData3()
 				{
 					LmsSubject3 = _driver.FindElementByXPath("//*[@id='gname']").Text.Substring(9),
-					LmsTitle3 = "업로드된 공지가 없습니다."
+					LmsTitle3 = "업로드된 공지가 없습니다.",
+					LmsRdate3 = "빔"
 				});
 			}
 			else
@@ -149,7 +168,6 @@ namespace Notice.ViewModel.Command.NoticeCommand
 					LmsSubject3 = _driver.FindElementByXPath("//*[@id='gname']").Text.Substring(9),
 					LmsTitle3 = _driver.FindElementByXPath("//*[@id='board']/tbody/tr[2]/td[2]").Text,
 					LmsRdate3 = _driver.FindElementByXPath("//*[@id='board']/tbody/tr[2]/td[3]").Text,
-
 				});
 			}
 		}
@@ -205,7 +223,10 @@ namespace Notice.ViewModel.Command.NoticeCommand
 				//excelData에 기록.
 				for (int r = 2; r <= data.GetLength(1); r++)
 				{
-					VM.E_Data3.Add(new ExcelData3() { ELmsSubject3 = data[r, 1].ToString(), ELmsTitle3 = data[r, 2].ToString(), ELmsRdate3 = data[r, 3].ToString() });
+					if(data[r,1] != null && data[r, 2] != null && data[r, 3] != null)
+                    {
+						VM.E_Data3.Add(new ExcelData3() { ELmsSubject3 = data[r, 1].ToString(), ELmsTitle3 = data[r, 2].ToString(), ELmsRdate3 = data[r, 3].ToString() });
+					}
 				}
 
 				workBook.Close(true);
@@ -236,9 +257,11 @@ namespace Notice.ViewModel.Command.NoticeCommand
 			finally { GC.Collect(); }
 		}
 
+
+
 		public void compareData()
 		{
-			for (int i = 0; i < VM.getCount2(); i++)
+			for (int i = 0; i < VM.getCount3(); i++)
 			{
 				var lmsData1_Title = VM.getList3().ElementAt(i).LmsTitle3;
 				var excelData_Title = VM.E_Data3.ElementAt(i).ELmsTitle3;

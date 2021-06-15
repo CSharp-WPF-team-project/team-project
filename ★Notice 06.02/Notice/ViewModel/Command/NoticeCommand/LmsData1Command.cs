@@ -14,6 +14,8 @@ using System.Runtime.InteropServices;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Diagnostics;
 using System.Timers;
+using System.Windows.Threading;
+using static Notice.ViewModel.ViewModel;
 
 namespace Notice.ViewModel.Command
 {
@@ -24,7 +26,7 @@ namespace Notice.ViewModel.Command
     {
 		private Timer timer;
 		int countBtn2 = 0;
-		int countExcel = 0;
+		bool countExcel = false;
 
 		protected ChromeDriverService _driverService = null;
 		protected ChromeOptions _options = null;
@@ -50,19 +52,32 @@ namespace Notice.ViewModel.Command
 
 		public void Execute(object parameter)
 		{
-			if (countBtn2 != 0)
+			timer = new Timer();
+			timer.Interval = 1000 * 60; // 한 시간 간격
+            timer.Elapsed += Timer_Elapsed;
+			timer.AutoReset = true;
+			timer.Enabled = true;
+			timer.Start();
+		}
+
+        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+			DispatcherService.Invoke((System.Action)(() =>
 			{
-				VM.L_Data1_Main.Clear();
+				if (countBtn2 != 0)
+				{
+					VM.L_Data1_Main.Clear();
+					VM.L_Data1.Clear();
+				}
+				VM.L_Data1.Add(new LmsData1()
+				{
+					LmsTitle = "데이터 로딩중"
+				});
+				VM.get1();
 				VM.L_Data1.Clear();
-			}
-			VM.L_Data1.Add(new LmsData1()
-			{
-				LmsTitle = "데이터 로딩중"
-			}) ;
-			VM.get1();
-			VM.L_Data1.Clear();
-			Start2();
-			countBtn2++;
+				Start2();
+				countBtn2++;
+			}));
 		}
 
 		//메소드
@@ -72,10 +87,9 @@ namespace Notice.ViewModel.Command
 			await task2;
 			VM.get1();
 
-			if (countExcel == 0) { saveExcel(); countExcel++; }
+			if (!countExcel) { saveExcel(); countExcel = true; }
 			else
             {
-				VM.E_Data.Clear();
 				readExcel();
 				compareData();
 				saveExcel();
@@ -164,7 +178,7 @@ namespace Notice.ViewModel.Command
 			try
 			{
 				string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-				string path2 = System.IO.Path.Combine(desktopPath, "강의자료.xlsx");
+				string path1 = System.IO.Path.Combine(desktopPath, "강의자료.xlsx");
 
 				excelApp = new Excel.Application();
 				workBook = excelApp.Workbooks.Add();
@@ -181,7 +195,7 @@ namespace Notice.ViewModel.Command
 					workSheet.Cells[2 + i, 3] = VM.getList1().ElementAt(i).LmsRdate;
 				}
 				workSheet.Columns.AutoFit();
-				workSheet.SaveAs(path2, Excel.XlFileFormat.xlWorkbookDefault);
+				workSheet.SaveAs(path1, Excel.XlFileFormat.xlWorkbookDefault);
 				workBook.Close(true);
 				excelApp.Quit();
 			}
@@ -209,7 +223,10 @@ namespace Notice.ViewModel.Command
 				//excelData에 기록.
 				for (int r = 2; r <= data.GetLength(1); r++)
 				{
-					VM.E_Data.Add(new ExcelData() { ELmsSubject = data[r, 1].ToString(), ELmsTitle = data[r, 2].ToString(), ELmsRdata = data[r, 3].ToString() });
+					if (data[r, 1]!= null && data[r, 2] != null && data[r, 3] != null)
+                    {
+						VM.E_Data.Add(new ExcelData() { ELmsSubject = data[r, 1].ToString(), ELmsTitle = data[r, 2].ToString(), ELmsRdata = data[r, 3].ToString() });
+                    }
 				}
 
 				workBook.Close(true);
@@ -250,11 +267,12 @@ namespace Notice.ViewModel.Command
 				{
                     if (NaverData.userEmail != null)
                     {
-						VM.naverMailManager.sendMail(VM.getList1().ElementAt(i).LmsSubject + "의 내용이 다릅니다.(업로드 되었습니다.)");
-                    }
+						VM.naverMailManager.sendMail(VM.getList1().ElementAt(i).LmsSubject + "의 강의자료 내용이 다릅니다.(업로드 되었습니다.)"+"</h2><h3><a href="+"https://ieilms.jbnu.ac.kr"+">LMS에서 바로 확인하기</a></h3>");
+
+					}
                     else
                     {
-						MessageBox.Show(VM.getList1().ElementAt(i).LmsSubject + "의 내용이 다릅니다.(업로드 되었습니다.)");
+						MessageBox.Show(VM.getList1().ElementAt(i).LmsSubject + "의 내용이 강의자료 내용이 다릅니다.(업로드 되었습니다.)");
                     }
 					
 				}

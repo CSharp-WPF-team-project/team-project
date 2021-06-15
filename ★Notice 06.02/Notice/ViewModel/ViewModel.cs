@@ -14,6 +14,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Threading;
 
 namespace Notice.ViewModel
 {
@@ -111,6 +113,7 @@ namespace Notice.ViewModel
             
             E_Data = new List<ExcelData>();
             E_Data2 = new List<ExcelData2>();
+            E_Data3 = new List<ExcelData3>();
 
             kakaoData = new KakaoData();
             kakaoManager = new KakaoManager();
@@ -121,37 +124,65 @@ namespace Notice.ViewModel
             naverMailManager = new NaverMailManager();
         }
 
+        public static class DispatcherService
+        {
+            public static void Invoke(Action action)
+            {
+                Dispatcher dispatchObject = Application.Current != null ? Application.Current.Dispatcher : null;
+                if (dispatchObject == null || dispatchObject.CheckAccess())
+                    action();
+                else
+                    dispatchObject.Invoke(action);
+            }
+        }
         public void get1()
         {
-            L_Data1_Main.Clear();
-            for (int i = 0; i < L_Data1.Count(); i++)
+            DispatcherService.Invoke((System.Action)(() =>
             {
-                L_Data1_Main.Add(L_Data1[i]);
-            }
+                L_Data1_Main.Clear();
+                for (int i = 0; i < L_Data1.Count(); i++)
+                {
+                    L_Data1_Main.Add(L_Data1[i]);
+                }
+            }));
+            
+            
         }
         public void get2()
         {
-            L_Data2_Main.Clear();
-            for (int i = 0; i < L_Data2.Count(); i++)
+            DispatcherService.Invoke((System.Action)(() =>
             {
-                L_Data2_Main.Add(L_Data2[i]);
-            }
+                L_Data2_Main.Clear();
+                for (int i = 0; i < L_Data2.Count(); i++)
+                {
+                    L_Data2_Main.Add(L_Data2[i]);
+                }
+            }));
+            
         }
         public void get3()
         {
-            L_Data3_Main.Clear();
-            for (int i = 0; i < L_Data3.Count(); i++)
+            DispatcherService.Invoke((System.Action)(() =>
             {
-                L_Data3_Main.Add(L_Data3[i]);
-            }
+                L_Data3_Main.Clear();
+                for (int i = 0; i < L_Data3.Count(); i++)
+                {
+                    L_Data3_Main.Add(L_Data3[i]);
+                }
+            }));
+
         }
         public void get4()
         {
-            D_Data_Main.Clear();
-            for (int i = 0; i < D_Data.Count(); i++)
+            DispatcherService.Invoke((System.Action)(() =>
             {
-                D_Data_Main.Add(D_Data[i]);
-            }
+                D_Data_Main.Clear();
+                for (int i = 0; i < D_Data.Count(); i++)
+                {
+                    D_Data_Main.Add(D_Data[i]);
+                }
+            }));
+            
         }
 
         //List 개수 얻기

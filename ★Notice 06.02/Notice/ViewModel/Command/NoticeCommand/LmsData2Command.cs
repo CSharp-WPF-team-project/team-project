@@ -14,6 +14,9 @@ using Excel = Microsoft.Office.Interop.Excel;
 using System.Windows;
 using Notice.Model;
 using System.Diagnostics;
+using System.Timers;
+using System.Windows.Threading;
+using static Notice.ViewModel.ViewModel;
 
 namespace Notice.ViewModel.Command.NoticeCommand
 {
@@ -23,7 +26,9 @@ namespace Notice.ViewModel.Command.NoticeCommand
     public class LmsData2Command : ICommand
 	{
 		int countBtn3 = 0; // 처음 실행이 아님을 확인
-		int countExcel = 0;
+		bool countExcel = false;
+
+		private Timer timer;
 
 		protected ChromeDriverService _driverService = null;
 		protected ChromeOptions _options = null;
@@ -49,30 +54,45 @@ namespace Notice.ViewModel.Command.NoticeCommand
 
 		public void Execute(object parameter)
 		{
-			if (countBtn3 != 0)
-			{
-				VM.L_Data2_Main.Clear();
-				VM.L_Data2.Clear();
-			}
-			VM.L_Data2.Add(new LmsData2()
-			{
-				LmsTitle2 = "데이터 로딩중"
-			});
-			VM.get2();
-			VM.L_Data2.Clear();
-			Start3();
-			countBtn3++;
+			timer = new Timer();
+			timer.Interval = 1000 * 60;//한 시간
+            timer.Elapsed += Timer_Elapsed;
+			timer.AutoReset = true;
+			timer.Enabled = true;
+			timer.Start();
 		}
-		private async void Start3()
+
+		private void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+
+			DispatcherService.Invoke((System.Action)(() =>
+			{
+				if (countBtn3 != 0)
+				{
+					VM.L_Data2_Main.Clear();
+					VM.L_Data2.Clear();
+				}
+				VM.L_Data2.Add(new LmsData2()
+				{
+					LmsTitle2 = "데이터 로딩중"
+				});
+				VM.get2();
+				VM.L_Data2.Clear();
+				Start3();
+				countBtn3++;
+			}));
+        }
+
+        private async void Start3()
 		{
 			var task3 = Task.Run(() => ReportCrawling());
 			await task3;
 			VM.get2();
 
-			if (countExcel == 0) { saveExcel(); countExcel++; }
+			if (!countExcel) { saveExcel(); countExcel=true; }
 			else
             {
-				VM.E_Data2.Clear();
+				//VM.E_Data2.Clear();
 				readExcel();
 				compareData();
 				saveExcel();
@@ -216,7 +236,10 @@ namespace Notice.ViewModel.Command.NoticeCommand
 				//excelData에 기록.
 				for (int r = 2; r <= data.GetLength(1); r++)
 				{
-					VM.E_Data2.Add(new ExcelData2() {  ELmsSubject2= data[r, 1].ToString(), ELmsTitle2 = data[r, 2].ToString(), ELmsEnddate2 = data[r, 3].ToString(), ELmsRdate2=data[r,4].ToString() });
+					if (data[r, 1] != null && data[r, 2] != null && data[r, 3] != null && data[r,4]!=null)
+                    {
+						VM.E_Data2.Add(new ExcelData2() {  ELmsSubject2= data[r, 1].ToString(), ELmsTitle2 = data[r, 2].ToString(), ELmsEnddate2 = data[r, 3].ToString(), ELmsRdate2=data[r,4].ToString() });
+                    }
 				}
 
 				workBook.Close(true);
@@ -258,7 +281,7 @@ namespace Notice.ViewModel.Command.NoticeCommand
 				{
 					if (NaverData.userEmail != null)
 					{
-						VM.naverMailManager.sendMail(VM.getList2().ElementAt(i).LmsSubject2 + "의 내용이 다릅니다.(마지막 비교와 비교해서 새 과제(레포트)가 업로드 되었습니다.)");
+						VM.naverMailManager.sendMail(VM.getList2().ElementAt(i).LmsSubject2 + "의 내용이 다릅니다.(마지막 비교와 비교해서 새 과제(레포트)가 업로드 되었습니다.)" + "</h2><h3><a href=" + "https://ieilms.jbnu.ac.kr" + ">LMS에서 바로 확인하기</a></h3>");
                     }
                     else
                     {
