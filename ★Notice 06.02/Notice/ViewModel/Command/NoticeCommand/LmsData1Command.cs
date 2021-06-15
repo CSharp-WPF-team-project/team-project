@@ -52,7 +52,7 @@ namespace Notice.ViewModel.Command
 
 		public void Execute(object parameter)
 		{
-			//누르자마자 처음은 바로 시작하게 바꾸기
+			//누르자마자 처음은 바로 시작하게 바꾸기,
 			timer = new Timer();
 			timer.Interval = 1000 * 60; // 한 시간 간격
             timer.Elapsed += Timer_Elapsed;
@@ -93,6 +93,7 @@ namespace Notice.ViewModel.Command
             {
 				readExcel();
 				compareData();
+				//기존에 ~파일이 있습니다 메시지가 한번 갱신 될때마다 떠서 일일이 눌러줘야 하는 불편함이 있음, 변경된 내용만 바꾸던가 메시지 창이 안뜨고 자동으로 바꾸든가
 				saveExcel();
             }
 		}
