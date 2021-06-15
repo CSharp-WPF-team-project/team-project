@@ -7,6 +7,7 @@ using Notice.ViewModel.Command.HomePageCommand;
 using Notice.ViewModel.Command.LoginPageCommand;
 using Notice.ViewModel.Command.NoticeCommand;
 using Notice.ViewModel.KakaoApi;
+using Notice.ViewModel.NaverMail;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -47,6 +48,8 @@ namespace Notice.ViewModel
         public KakaoLogin kakaoLogin { get; set; }
         public KakaoLogout kakaoLogout { get; set; }
         public KakaoManager kakaoManager { get; set; }
+        
+        public NaverBinding naverBinding { get; set; }
 
 
         /// </summary>
@@ -54,10 +57,11 @@ namespace Notice.ViewModel
         /// </summary>
 
         /// <summary>
-        /// KakaoApi
+        /// KakaoApi, naver
         /// </summary>
         public KakaoData kakaoData { get; set; }
-
+        public NaverData naverData { get; set; }
+        public NaverMailManager naverMailManager { get; set; }
 
 
         public List<LmsData1> L_Data1 { get; set; }
@@ -71,6 +75,7 @@ namespace Notice.ViewModel
         public LmsData3Command lmsData3Command { get; set; }
         public List<ExcelData> E_Data { get; set; }
         public List<ExcelData2> E_Data2 { get; set; }
+        public List<ExcelData3> E_Data3 { get; set; }
         
         public ViewModel()
         {
@@ -111,6 +116,9 @@ namespace Notice.ViewModel
             kakaoManager = new KakaoManager();
             kakaoLogin = new KakaoLogin();
 
+
+            naverBinding = new NaverBinding();
+            naverMailManager = new NaverMailManager();
         }
 
         public void get1()
@@ -148,11 +156,13 @@ namespace Notice.ViewModel
 
         //List 개수 얻기
         public int getCount1() { return L_Data1.Count(); }
-        public int getCount3() { return L_Data2.Count(); }
+        public int getCount2() { return L_Data2.Count(); }
+        public int getCount3() { return L_Data3.Count(); }
 
         //List 접근하기
         public List<LmsData1> getList1() { return L_Data1; }
         public List<LmsData2> getList2() { return L_Data2; }
+        public List<LmsData3> getList3() { return L_Data3; }
 
     }
 }

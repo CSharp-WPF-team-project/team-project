@@ -249,17 +249,21 @@ namespace Notice.ViewModel.Command.NoticeCommand
 
 		public void compareData()
 		{
-			for (int i = 0; i < VM.getCount3(); i++)
+			for (int i = 0; i < VM.getCount2(); i++)
 			{
 				var lmsData1_Title = VM.getList2().ElementAt(i).LmsTitle2;
 				var excelData_Title = VM.E_Data2.ElementAt(i).ELmsTitle2;
 
 				if (lmsData1_Title != excelData_Title)
 				{
-					if (KakaoData.userToken != null)
+					if (NaverData.userEmail != null)
 					{
-						VM.kakaoManager.KakaoDefaultSendMessage(VM.getList2().ElementAt(i).LmsSubject2 + "의 내용이 다릅니다.(마지막 비교와 비교해서 새 과제(레포트)가 업로드 되었습니다.)");
-					}
+						VM.naverMailManager.sendMail(VM.getList2().ElementAt(i).LmsSubject2 + "의 내용이 다릅니다.(마지막 비교와 비교해서 새 과제(레포트)가 업로드 되었습니다.)");
+                    }
+                    else
+                    {
+						MessageBox.Show(VM.getList2().ElementAt(i).LmsSubject2 + "의 내용이 다릅니다.(마지막 비교와 비교해서 새 과제(레포트)가 업로드 되었습니다.)");
+                    }
 				}
 			}
 		}

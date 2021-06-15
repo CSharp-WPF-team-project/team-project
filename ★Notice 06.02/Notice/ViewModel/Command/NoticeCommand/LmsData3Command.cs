@@ -1,33 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using Notice.Model;
 //Selenium 
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Chrome;
-using System.Windows.Input;
+using System;
+using System.Linq;
 using System.Runtime.InteropServices;
-using Excel = Microsoft.Office.Interop.Excel;
-using System.Windows;
-using Notice.Model;
 using System.Threading;
-using System.Diagnostics;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace Notice.ViewModel.Command.NoticeCommand
 {
-	/// <summary>
-	/// 공지사항
-	/// </summary>
+    /// <summary>
+    /// 공지사항
+    /// </summary>
     public class LmsData3Command : ICommand
 	{
 		int countBtn4 = 0; // 처음 실행이 아님을 확인
-		 
+		int countExcel = 0;
+
 		protected ChromeDriverService _driverService = null;
 		protected ChromeOptions _options = null;
 		protected ChromeDriver _driver = null;
+
+		static Excel.Application excelApp = null;
+		static Excel.Workbook workBook = null;
+		static Excel.Worksheet workSheet = null;
 
 
 		public event EventHandler CanExecuteChanged;
@@ -66,6 +66,14 @@ namespace Notice.ViewModel.Command.NoticeCommand
 			await task4;
 			VM.get3();
 
+			if (countExcel == 0) { saveExcel(); countExcel++; }
+			else
+			{
+				VM.E_Data3.Clear();
+				readExcel();
+				compareData();
+				saveExcel();
+			}
 		}
 
 		public void NoticeCrawling()
@@ -145,5 +153,110 @@ namespace Notice.ViewModel.Command.NoticeCommand
 				});
 			}
 		}
+
+		public void saveExcel()
+		{
+			try
+			{
+				string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+				string path3 = System.IO.Path.Combine(desktopPath, "공지사항.xlsx");
+
+				excelApp = new Excel.Application();
+				workBook = excelApp.Workbooks.Add();
+				workSheet = workBook.Worksheets.get_Item(1) as Excel.Worksheet;
+
+				workSheet.Cells[1, 1] = "과 목";
+				workSheet.Cells[1, 2] = "제 목";
+				workSheet.Cells[1, 3] = "작성일";
+
+				for (int i = 0; i < VM.getCount3(); i++)
+				{
+					workSheet.Cells[2 + i, 1] = VM.getList3().ElementAt(i).LmsSubject3;
+					workSheet.Cells[2 + i, 2] = VM.getList3().ElementAt(i).LmsTitle3;
+					workSheet.Cells[2 + i, 3] = VM.getList3().ElementAt(i).LmsRdate3;
+				}
+				workSheet.Columns.AutoFit();
+				workSheet.SaveAs(path3, Excel.XlFileFormat.xlWorkbookDefault);
+				workBook.Close(true);
+				excelApp.Quit();
+			}
+			finally
+			{
+				ReleaseObject(workSheet);
+				ReleaseObject(workBook);
+				ReleaseObject(excelApp);
+			}
+		}
+
+		public void readExcel()
+		{
+			try
+			{
+				excelApp = new Excel.Application();
+
+				string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+				string path = System.IO.Path.Combine(desktopPath, "공지사항.xlsx");
+				workBook = excelApp.Workbooks.Open(path);
+				workSheet = workBook.Worksheets.get_Item(1) as Excel.Worksheet;
+
+				Excel.Range rng = workSheet.Range[workSheet.Cells[1, 1], workSheet.Cells[9, 9]];
+				object[,] data = rng.Value;
+
+				//excelData에 기록.
+				for (int r = 2; r <= data.GetLength(1); r++)
+				{
+					VM.E_Data3.Add(new ExcelData3() { ELmsSubject3 = data[r, 1].ToString(), ELmsTitle3 = data[r, 2].ToString(), ELmsRdate3 = data[r, 3].ToString() });
+				}
+
+				workBook.Close(true);
+				excelApp.Quit();
+			}
+			finally
+			{
+				ReleaseObject(workSheet);
+				ReleaseObject(workBook);
+				ReleaseObject(excelApp);
+			}
+		}
+		static void ReleaseObject(object obj)
+		{
+			try
+			{
+				if (obj != null)
+				{
+					Marshal.ReleaseComObject(obj);
+					obj = null;
+				}
+			}
+			catch (Exception ex)
+			{
+				obj = null;
+				throw ex;
+			}
+			finally { GC.Collect(); }
+		}
+
+		public void compareData()
+		{
+			for (int i = 0; i < VM.getCount2(); i++)
+			{
+				var lmsData1_Title = VM.getList3().ElementAt(i).LmsTitle3;
+				var excelData_Title = VM.E_Data3.ElementAt(i).ELmsTitle3;
+
+				if (lmsData1_Title != excelData_Title)
+				{
+					if (KakaoData.userToken != null)
+					{
+						VM.kakaoManager.KakaoDefaultSendMessage(VM.getList3().ElementAt(i).LmsSubject3 + "의 내용이 다릅니다.(마지막 비교와 비교해서 새 공지가 업로드 되었습니다.)");
+                    }
+                    else
+                    {
+						MessageBox.Show(VM.getList3().ElementAt(i).LmsSubject3 + "의 내용이 다릅니다.(마지막 비교와 비교해서 새 공지가 업로드 되었습니다.)");
+                    }
+					
+				}
+			}
+		}
+		
 	}
 }

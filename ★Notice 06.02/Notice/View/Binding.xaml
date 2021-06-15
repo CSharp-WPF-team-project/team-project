@@ -69,12 +69,24 @@
                             </Grid.RowDefinitions>
                             <Image Grid.Row="0" Source="Images/naverMail.PNG" 
                                    Height="150" Width="150"/>
+                            <TextBlock Grid.Row="0"
+                                       Margin="0,200,0,0"
+                                       Foreground="Gray"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       FontFamily="/Fonts/Montserrat-SemiBold.ttf #Montserrat SemiBold"
+                                       Text="레포트, 강의자료 알림"/>
+
                             <Button Grid.Row="1" Margin="40,0,40,60" Height="40" 
                                     Background="#2DB400" BorderBrush="{x:Null}"
-                                    Content="네이버 메일 연동" FontFamily="/Fonts/Montserrat-SemiBold.ttf #Montserrat SemiBold"/>
-                            <Button Grid.Row="1" Margin="40,90,40,40" Height="40" 
+                                    Content="네이버 메일 연동" FontFamily="/Fonts/Montserrat-SemiBold.ttf #Montserrat SemiBold"
+                                    Command="{Binding Path=naverBinding}"
+                                    CommandParameter="{Binding ElementName=textbox1, Path=Text}"/>
+                            <TextBox x:Name="textbox1" Grid.Row="1" Margin="40,90,40,40" Height="40" 
                                     Background="#2DB400" BorderBrush="{x:Null}"
-                                    Content="네이버 메일 연동해제" FontFamily="/Fonts/Montserrat-SemiBold.ttf #Montserrat SemiBold"/>
+                                     Foreground="Gray"
+                                    FontFamily="/Fonts/Montserrat-SemiBold.ttf #Montserrat SemiBold"
+                                     />
 
                         </Grid>
                     </Border>
@@ -87,7 +99,13 @@
                             </Grid.RowDefinitions>
                             <Image Grid.Row="0" Source="Images\kakaoTalk.PNG"
                                    Height="150" Width="150"/>
-
+                            <TextBlock Grid.Row="0"
+                                       Margin="0,200,0,0"
+                                       Foreground="Gray"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       FontFamily="/Fonts/Montserrat-SemiBold.ttf #Montserrat SemiBold"
+                                       Text="강의 공지 알림"/>
                             <Button Grid.Row="1" Margin="40,0,40,60" Height="40" 
                                     Background="#F7E600" BorderBrush="{x:Null}" Foreground="#3A1D1D"
                                     Content="카카오톡 연동" FontFamily="/Fonts/Montserrat-SemiBold.ttf #Montserrat SemiBold"

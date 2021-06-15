@@ -61,6 +61,9 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dnp, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Test.2.0.1.1\lib\Dnp.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=2.0.0.2422, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.2.0.0\lib\net452\MaterialDesignColors.dll</HintPath>
     </Reference>
@@ -107,12 +110,14 @@
     </ApplicationDefinition>
     <Compile Include="Model\DepartmentData.cs" />
     <Compile Include="Model\ExcelData.cs" />
+    <Compile Include="Model\ExcelData3.cs" />
     <Compile Include="Model\ExcelData2.cs" />
     <Compile Include="Model\KakaoData.cs" />
     <Compile Include="Model\LmsData1.cs" />
     <Compile Include="Model\LmsData2.cs" />
     <Compile Include="Model\LmsData3.cs" />
     <Compile Include="Model\MainWindowIDInformation.cs" />
+    <Compile Include="Model\NaverData.cs" />
     <Compile Include="ViewModel\Command\Binding\KakaoLogout.cs" />
     <Compile Include="ViewModel\Command\Binding\KakaoLogin.cs" />
     <Compile Include="ViewModel\Command\Binding\NaverBinding.cs" />
@@ -128,6 +133,7 @@
     <Compile Include="ViewModel\Command\NoticeCommand\LmsData3Command.cs" />
     <Compile Include="ViewModel\Converter\LoginConverter.cs" />
     <Compile Include="ViewModel\KakaoApi\KakaoManager.cs" />
+    <Compile Include="ViewModel\NaverMail\NaverMailManager.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
     <Compile Include="View\KakaoLoginPage.xaml.cs">
       <DependentUpon>KakaoLoginPage.xaml</DependentUpon>
