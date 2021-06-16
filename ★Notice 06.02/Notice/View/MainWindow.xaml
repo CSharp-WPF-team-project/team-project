@@ -53,8 +53,7 @@
                 <Label Content="JB calendar" Foreground="#004771" FontSize="30"  Grid.Row="1" Height="70"/>
                 
                 <ListView Height="170">
-                    <ListViewItem Content="2021-06-16 업데이트 Ver.1.2"/>
-                    <ListViewItem Content="2021-06-15 업데이트 Ver.1.1"/>
+                    <ListViewItem Content=""/>
                 </ListView>
                 
                 <!--Sign In 버튼-->
