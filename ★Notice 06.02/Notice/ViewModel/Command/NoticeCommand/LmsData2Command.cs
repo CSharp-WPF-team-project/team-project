@@ -88,7 +88,7 @@ namespace Notice.ViewModel.Command.NoticeCommand
 		{
 			var task3 = Task.Run(() => ReportCrawling());
 			await task3;
-			VM.get2();
+			VM.get2(); 
 
 			if (!countExcel) { saveExcel(); countExcel=true; }
 			else
@@ -134,7 +134,7 @@ namespace Notice.ViewModel.Command.NoticeCommand
 			{
 				MessageBox.Show("ID,PW를 확인해주세요.");
 				return;
-			}  
+			}
 
 			element = _driver.FindElementByXPath("//*[@id='nav']/li[5]/a");
 			element.Click();

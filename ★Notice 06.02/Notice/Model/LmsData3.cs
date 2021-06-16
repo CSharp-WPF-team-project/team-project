@@ -11,7 +11,6 @@ namespace Notice.Model
     {
         private string lmsSubject3;
         private string lmsTitle3;
-        private string lmsWriter3;
         private string lmsRdate3;
 
         public string LmsSubject3
@@ -37,18 +36,6 @@ namespace Notice.Model
             {
                 lmsTitle3 = value;
                 OnPropertyChanged("LmsTitle3");
-            }
-        }
-        public string LmsWriter3
-        {
-            get
-            {
-                return lmsWriter3;
-            }
-            set
-            {
-                lmsWriter3 = value;
-                OnPropertyChanged("LmsWriter3");
             }
         }
         public string LmsRdate3

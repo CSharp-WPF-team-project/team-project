@@ -159,7 +159,7 @@ namespace Notice.ViewModel.Command
 				{
 					LmsSubject = _driver.FindElementByXPath("//*[@id='center']/div/div[1]/div[1]/div[1]").Text.Substring(9),
 					LmsTitle = "업로드된 자료가 없습니다.",
-					LmsRdate = "No!"
+					LmsRdate = "-"
 				});
 				return;
 			}
