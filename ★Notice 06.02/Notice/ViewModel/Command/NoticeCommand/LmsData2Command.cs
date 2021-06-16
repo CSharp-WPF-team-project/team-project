@@ -57,17 +57,25 @@ namespace Notice.ViewModel.Command.NoticeCommand
 			//누르자마자 처음은 바로 시작하게 바꾸기
 			timer = new Timer();
 			timer.Interval = 1000 * 60;//한 시간
-            timer.Elapsed += Timer_Elapsed;
+			timer.Elapsed += Timer_Elapsed;
 			timer.AutoReset = true;
 			timer.Enabled = true;
 			timer.Start();
+
+			VM.L_Data2.Add(new LmsData2()
+			{
+				LmsTitle2 = "데이터 로딩중"
+			});
+			VM.get2();
+			VM.L_Data2.Clear();
+			Start3();
+			countBtn3++;
 		}
 
 		private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
 
-			DispatcherService.Invoke((System.Action)(() =>
-			{
+			DispatcherService.Invoke((System.Action)(() =>{
 				if (countBtn3 != 0)
 				{
 					VM.L_Data2_Main.Clear();
@@ -193,6 +201,7 @@ namespace Notice.ViewModel.Command.NoticeCommand
 				string path2 = System.IO.Path.Combine(desktopPath, "레포트.xlsx");
 
 				excelApp = new Excel.Application();
+				excelApp.DisplayAlerts = false;
 				workBook = excelApp.Workbooks.Add();
 				workSheet = workBook.Worksheets.get_Item(1) as Excel.Worksheet;
 

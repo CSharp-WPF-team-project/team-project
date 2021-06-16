@@ -56,6 +56,15 @@ namespace Notice.ViewModel.Command.NoticeCommand
 			timer.AutoReset = true;
 			timer.Enabled = true;
 			timer.Start();
+
+			VM.L_Data3.Add(new LmsData3()
+			{
+				LmsTitle3 = "데이터 로딩중"
+			});
+			VM.get3();
+			VM.L_Data3.Clear();
+			Start4();
+			countBtn4++;
 		}
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
@@ -180,6 +189,7 @@ namespace Notice.ViewModel.Command.NoticeCommand
 				string path3 = System.IO.Path.Combine(desktopPath, "공지사항.xlsx");
 
 				excelApp = new Excel.Application();
+				excelApp.DisplayAlerts = false;
 				workBook = excelApp.Workbooks.Add();
 				workSheet = workBook.Worksheets.get_Item(1) as Excel.Worksheet;
 
