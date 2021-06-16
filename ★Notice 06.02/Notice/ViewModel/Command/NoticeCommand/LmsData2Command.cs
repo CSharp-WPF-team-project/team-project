@@ -26,7 +26,7 @@ namespace Notice.ViewModel.Command.NoticeCommand
     public class LmsData2Command : ICommand
 	{
 		int countBtn3 = 0; // 처음 실행이 아님을 확인
-		bool countExcel = false;
+		int countExcel = 0;
 
 		private Timer timer;
 
@@ -96,9 +96,9 @@ namespace Notice.ViewModel.Command.NoticeCommand
 		{
 			var task3 = Task.Run(() => ReportCrawling());
 			await task3;
-			VM.get2(); 
+			VM.get2();
 
-			if (!countExcel) { saveExcel(); countExcel=true; }
+			if (countExcel==0) { saveExcel(); countExcel++; }
 			else
             {
 				//VM.E_Data2.Clear();
@@ -134,9 +134,12 @@ namespace Notice.ViewModel.Command.NoticeCommand
 
 				element = _driver.FindElementByXPath("//*[@id='loginform']/table/tbody/tr[1]/td[2]/input");
 				element.Click();
-
+				
 				element = _driver.FindElementByXPath("//*[@id='boardAbox']/form/table/tbody/tr[1]/td[2]");
-				element.Click();
+				if (element != null)
+                {
+					element.Click();
+                }
 			}
 			catch (Exception)
 			{
@@ -210,7 +213,7 @@ namespace Notice.ViewModel.Command.NoticeCommand
 				workSheet.Cells[1, 3] = "제출일시";
 				workSheet.Cells[1, 4] = "작성일";
 
-				for (int i = 0; i < VM.getCount3(); i++)
+				for (int i = 0; i < VM.getCount2(); i++)
 				{
 					workSheet.Cells[2 + i, 1] = VM.getList2().ElementAt(i).LmsSubject2;
 					workSheet.Cells[2 + i, 2] = VM.getList2().ElementAt(i).LmsTitle2;
