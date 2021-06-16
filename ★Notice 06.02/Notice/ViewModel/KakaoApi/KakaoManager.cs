@@ -75,11 +75,19 @@ namespace Notice.ViewModel.KakaoApi
       
         public void KakaoDefaultSendMessage(string sendMessageObject)
         {
+            JObject send = new JObject();
+            JObject link = new JObject();
+            send.Add("object_type", "text");
+            send.Add("text", sendMessageObject);
+            link.Add("web_url", "https://developers.kakao.com");
+            link.Add("mobile_web_url", "https://developers.kakao.com");
+            send.Add("link", link);
+            send.Add("button_title", "링크 이동");
             var client = new RestClient(KakaoApiEndPoint.KakaoHostApiUrl);
 
             var request = new RestRequest(KakaoApiEndPoint.KakaoDefaultMessageUrl, Method.POST);
             request.AddHeader("Authorization", "bearer " + KakaoData.accessToken);
-            request.AddParameter("template_object", sendMessageObject);
+            request.AddParameter("template_object", send);
 
             if (client.Execute(request).IsSuccessful)
             {
